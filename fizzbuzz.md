@@ -384,17 +384,25 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz):
 `fizzbuzz` is a function that returns `"fizz"`, `"buzz"`, `"fizzbuzz"` or `n` for any positive integer `n`.
 
 $$
-    fizzbuzz    : \mathbb{N}^+ \to \{fizz, buzz, fizzbuzz\} \cup \mathbb{N}^+
+    fizzbuzz    \dotso \mathbb{N}^+ \to \{fizz, buzz, fizzbuzz\} \cup \mathbb{N}^+
 $$
 $$
     fizzbuzz(n) =
         \begin{cases}
             \text{"fizzbuzz" }  & \text{if } (3|n) \land (5|n) \\
-            \text{"fizz" }      & \text{if } 3|n \\
-            \text{"buzz" }      & \text{if } 5|n \\
+            \text{"fizz" }      & \text{if } (3|n) \land \lnot (5|n) \\
+            \text{"buzz" }      & \text{if } (5|n) \land \lnot (3|n) \\
             n                   & \text{if } \lnot (3|n) \land \lnot (5|n) \\
         \end{cases}
 $$
+
+@@( function fizzbuzz(n)
+        if n % 15 == 0 then return "fizzbuzz" end
+        if n % 3 == 0 then return "fizz" end
+        if n % 5 == 0 then return "buzz" end
+        return n
+    end
+)
 
 ### Requirements
 
@@ -402,6 +410,18 @@ $$
 
 The fizzbuzz program takes one argument that specify the number for fizzbuzz
 values to generate.
+
+@(req "SPEC_OUT: fizzbuzz output on stdout")
+
+The fizzbuzz program emits fizzbuzz values on the standard output.
+Each line contains `n` and `fizzbuzz(n)`.
+
+e.g.:
+
+```
+$ fizzbuzz 6
+@(F.range(6):map(function(n) return F{n, fizzbuzz(n)}:str "\t" end))
+```
 
 @(req "SPEC_FIZZ: fizz when n is a multiple of 3 but not 5")
 
@@ -421,13 +441,7 @@ If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
 ### Examples
 
-@@( function fizzbuzz(n)
-        if n % 15 == 0 then return "fizzbuzz" end
-        if n % 3 == 0 then return "fizz" end
-        if n % 5 == 0 then return "buzz" end
-        return n
-    end
-    return {
+@(  {
         "n  | fizzbuzz(n) | n | fizzbuzz(n) | n | fizzbuzz(n) | n | fizzbuzz(n) ",
         "---|-------------|---|-------------|---|-------------|---|-------------",
     }
@@ -482,6 +496,12 @@ The fizzbuzz list contains @(test_cfg.N) values.
 
 The result of this test is recorded in the `valid_number_of_lines` field of the test result table.
 
+@(req "TEST_OUT: output on stdout" {
+    refs = "SPEC_OUT",
+})
+
+The fizzbuzz list is emitted on stdout.
+
 @(req "TEST_FIZZ: \"fizz\" values" {
     refs = "SPEC_FIZZ",
 })
@@ -529,6 +549,11 @@ The Lua fizzbuzz function returns:
     status = lua_tests.valid_number_of_lines,
 })
 
+@(req.test("RES_LUA_OUT: output on stdout") {
+    refs = "TEST_OUT",
+    status = lua_tests.valid_number_of_lines,
+})
+
 @(req.test("RES_LUA_FIZZ: \"fizz\" values") {
     refs = "TEST_FIZZ",
     status = lua_tests.valid_fizz,
@@ -561,6 +586,11 @@ The C fizzbuzz function returns:
 
 @(req.test("RES_C_API: number of fizzbuzz values") {
     refs = "TEST_API",
+    status = c_tests.valid_number_of_lines,
+})
+
+@(req.test("RES_C_OUT: output on stdout") {
+    refs = "TEST_OUT",
     status = c_tests.valid_number_of_lines,
 })
 
@@ -599,6 +629,11 @@ The Haskell fizzbuzz function returns:
     status = hs_tests.valid_number_of_lines,
 })
 
+@(req.test("RES_HS_OUT: output on stdout") {
+    refs = "TEST_OUT",
+    status = hs_tests.valid_number_of_lines,
+})
+
 @(req.test("RES_HS_FIZZ: \"fizz\" values") {
     refs = "TEST_FIZZ",
     status = hs_tests.valid_fizz,
@@ -620,6 +655,23 @@ The Haskell fizzbuzz function returns:
 })
 
 **Summary**: $(hs_tests.nb_pass) / $(hs_tests.nb) tests passed
+
+### Lua / C / Haskell comparison
+
+@(
+    {
+        "n  | Lua | C | Haskell | Comparison",
+        "---|-----|---|---------|-----------",
+    } .. F.zip {
+        lua_tests.fizzbuzz,
+        c_tests.fizzbuzz,
+        hs_tests.fizzbuzz,
+    }:mapi(function (i, res)
+        local expected = tostring(fizzbuzz(i))
+        local ok = res:all(F.curry(F.op.eq)(expected))
+        return ({i}..res..{ok and "*OK*" or "**FAIL**"}):str "|"
+    end)
+)
 
 ## Coverage matrix
 
