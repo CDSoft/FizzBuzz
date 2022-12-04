@@ -16,7 +16,7 @@ n [label="n" shape=oval]
 
 compute_fizz [label="\"fizz\"\nif n = 0 (mod 3)" shape=box]
 compute_buzz [label="\"buzz\"\nif n = 0 (mod 5)" shape=box]
-concat [label="concat" shape=box]
+combine [label="combine" shape=box]
 select [label="Choose\n\"fizz\", \"buzz\", \"fizzbuzz\"\nor n" shape=box]
 
 fizz [label="\"fizz\" or nil" shape=oval]
@@ -24,13 +24,13 @@ buzz [label="\"buzz\" or nil" shape=oval]
 fizzbuzz [label="\"fizz\", \"buzz\", \"fizzbuzz\"\nor nil" shape=oval]
 fizzbuzz_n [label="\"fizz\", \"buzz\", \"fizzbuzz\"\nor n" shape=oval]
 
-n -> compute_fizz -> fizz -> concat
-n -> compute_buzz -> buzz -> concat
+n -> compute_fizz -> fizz -> combine
+n -> compute_buzz -> buzz -> combine
 n -> select
-concat -> fizzbuzz -> select
+combine -> fizzbuzz -> select
 select -> fizzbuzz_n
 
-{ rank=same; concat, fizzbuzz, select }
+{ rank=same; combine, fizzbuzz, select }
 
 }
 ```
@@ -52,12 +52,12 @@ end
 local fizz = div(3, "fizz")
 local buzz = div(5, "buzz")
 
-local function concat(a, b)
+local function combine(a, b)
     return a and (a..(b or "")) or b
 end
 
 local function fizzbuzz(n)
-    return concat(fizz(n), buzz(n)) or n
+    return combine(fizz(n), buzz(n)) or n
 end
 
 -- }
