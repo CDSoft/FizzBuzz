@@ -33,7 +33,7 @@ int main(int argc, const char *argv[])
 {
     if (argc != 2)
     {
-        fprintf(stderr, "argument expected");
+        fprintf(stderr, "argument expected\n");
         exit(1);
     }
     const int n = atoi(argv[1]);
