@@ -681,6 +681,71 @@ The Haskell fizzbuzz function returns:
 @(req.dot())
 ```
 
+# References
+
+@@( link = F.curry(function(name, url)
+        return F.I{name=name, url=url}"[**$(name)**]($(url)): <$(url)>\n"
+    end)
+)
+
+@(link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz")
+> This document is not about Fizzbuzz. This document is a suggestion to
+> simplify the build process of software projects. Fizzbuzz is just an
+> application example.
+
+@(link "Lua" "https://www.lua.org")
+> Lua is a powerful, efficient, lightweight, embeddable scripting language. It
+> supports procedural programming, object-oriented programming, functional
+> programming, data-driven programming, and data description.
+
+@(link "Lua documentation" "https://www.lua.org/manual/5.4/")
+> The reference manual is the official definition of the Lua language.
+
+@(link "LuaX" "https://github.com/CDSoft/luax")
+> LuaX is a Lua interpretor and REPL based on Lua 5.4.4, augmented with some
+> useful packages. LuaX can also produce standalone executables from Lua
+> scripts.
+
+@(link "UPP" "https://github.com/CDSoft/upp")
+> UPP is a minimalist and generic text preprocessor using Lua macros.
+
+@(link "Pandoc" "https://pandoc.org")
+> Pandoc is a universal document converter. If you need to convert files from
+> one markup format into another, pandoc is your swiss-army knife.
+
+@(link "Pandoc manual" "https://pandoc.org/MANUAL.html")
+> Pandoc User’s Guide
+
+@(link "Pandoc's Markdown" "https://pandoc.org/MANUAL.html#pandocs-markdown")
+> Pandoc understands an extended and slightly revised version of John Gruber’s
+> Markdown syntax. This document explains the syntax, noting differences from
+> original Markdown.
+
+@(link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html")
+> Pandoc has long supported filters, which allow the pandoc abstract syntax
+> tree (AST) to be manipulated between the parsing and the writing phase.
+> Traditional pandoc filters accept a JSON representation of the pandoc AST and
+> produce an altered JSON representation of the AST. They may be written in any
+> programming language, and invoked from pandoc using the `--filter` option.
+>
+> Although traditional filters are very flexible, they have a couple of
+> disadvantages. First, there is some overhead in writing JSON to stdout and
+> reading it from stdin (twice, once on each side of the filter). Second,
+> whether a filter will work will depend on details of the user’s environment.
+> A filter may require an interpreter for a certain programming language to be
+> available, as well as a library for manipulating the pandoc AST in JSON form.
+> One cannot simply provide a filter that can be used by anyone who has a
+> certain version of the pandoc executable.
+>
+> Starting with version 2.0, pandoc makes it possible to write filters in Lua
+> without any external dependencies at all. A Lua interpreter (version 5.3) and
+> a Lua library for creating pandoc filters is built into the pandoc
+> executable. Pandoc data types are marshaled to Lua directly, avoiding the
+> overhead of writing JSON to stdout and reading it from stdin.
+
+@(link "Panda" "https://github.com/CDSoft/panda")
+> Panda is a Pandoc Lua filter that works on internal Pandoc's AST.
+
 # Appendices
 
 This chapter contains the sources of this document.
