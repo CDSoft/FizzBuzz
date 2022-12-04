@@ -40,7 +40,7 @@ example.
 
 Lots of software projects involve various tools, free as well as commercial, to
 build the software, run the tests, produce the documentation, ... These tools
-use different data formats and scripting languages, which makes the project
+use different data formats and scripting languages, which makes the projects
 less scalable and harder to maintain.
 
 Sharing data between configuration files, documentations, tests results can
@@ -369,7 +369,7 @@ plot sin(x) lw 4, cos(x) lw 4
 
 # Fizzbuzz
 
-Fizzbuzz is a concrete exemple of the usage of LuaX/upp/pandoc/panda to specify
+Fizzbuzz is a concrete example of the usage of LuaX/upp/pandoc/panda to specify
 and test a software.
 
 ## Specification

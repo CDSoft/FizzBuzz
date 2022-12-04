@@ -8,6 +8,8 @@ DEPENDENCIES = $(BUILD)/dependencies
 
 .DEFAULT_GOAL := all
 
+ADD_MAKEFILE_TO_DEPENDENCIES = NO
+
 ###########################################################################
 # Help
 ###########################################################################
@@ -47,9 +49,14 @@ help:
 # Targets
 ###########################################################################
 
-## Generate the PDF and HTML documentation and test report
+ifeq ($(ADD_MAKEFILE_TO_DEPENDENCIES),YES)
+MAKEFILEDEP = Makefile
+endif
+
+## Generate the PDF and HTML documentation, test report and slideshow
 all: $(BUILD)/fizzbuzz.html
 all: $(BUILD)/fizzbuzz.pdf
+all: $(BUILD)/fizzbuzz_slideshow.pdf
 
 ## Clean the build directory
 clean:
@@ -236,7 +243,7 @@ export LUA_PATH = $(BUILD)/tests/?.lua;./?.lua
 export REQDB = $(BUILD)/reqdb.lua
 export REQTARGET = fizzbuzz.pdf
 
-$(BUILD)/%.md: %.md $(TEST_RESULTS) Makefile | $(UPP) $(BUILD) $(DEPENDENCIES)
+$(BUILD)/%.md: %.md $(TEST_RESULTS) $(MAKEFILEDEP) | $(UPP) $(BUILD) $(DEPENDENCIES)
 	$(UPP) $(UPP_FLAGS) -MT $@ -MF $(DEPENDENCIES)/$(notdir $@).upp.d $< -o $@
 
 $(BUILD)/%.html: $(BUILD)/%.md | $(PANDA) $(PANDOC) $(PANAM_CSS) $(DEPENDENCIES)
@@ -248,3 +255,23 @@ $(BUILD)/%.pdf: $(BUILD)/%.md | $(PANDA) $(PANDOC) $(PANDOC_LATEX_TEMPLATE) $(DE
 	PANDA_TARGET=$@ \
 	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
 	$(PANDOC) $(PDF_FLAGS) $< -o $@
+
+###########################################################################
+# Slideshow
+###########################################################################
+
+SLIDESHOW_FLAGS = -f markdown
+SLIDESHOW_FLAGS += --lua-filter $(PANDA)
+SLIDESHOW_FLAGS += --embed-resources --standalone
+
+PDF_SLIDESHOW_FLAGS = $(SLIDESHOW_FLAGS)
+PDF_SLIDESHOW_FLAGS += -t beamer
+PDF_SLIDESHOW_FLAGS += -V theme:Madrid -V colortheme:default
+PDF_SLIDESHOW_FLAGS += --slide-level=1
+PDF_SLIDESHOW_FLAGS += --highlight-style tango
+#PDF_SLIDESHOW_FLAGS += --pdf-engine=xelatex
+
+$(BUILD)/%_slideshow.pdf: $(BUILD)/%_slideshow.md | $(PANDA) $(PANDOC) $(DEPENDENCIES)
+	PANDA_TARGET=$@ \
+	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
+	$(PANDOC) $(PDF_SLIDESHOW_FLAGS) $< -o $@
