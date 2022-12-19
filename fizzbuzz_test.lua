@@ -34,7 +34,7 @@ tests.valid_number_of_lines =
 tests.valid_fizz =
     fizzbuzzes
         : filteri(function(i, _) return i%3 == 0 and i%5 ~= 0 end)
-        : all(F.curry(F.op.eq) "fizz")
+        : all(F.partial(F.op.eq, "fizz"))
 
 ---------------------------------------------------------------------------
 -- Multiples of 5 but not 3 are "buzz"
@@ -43,7 +43,7 @@ tests.valid_fizz =
 tests.valid_buzz =
     fizzbuzzes
         : filteri(function(i, _) return i%3 ~= 0 and i%5 == 0 end)
-        : all(F.curry(F.op.eq) "buzz")
+        : all(F.partial(F.op.eq, "buzz"))
 
 ---------------------------------------------------------------------------
 -- Multiples of 3 and 5 are "fizzbuzz"
@@ -52,7 +52,7 @@ tests.valid_buzz =
 tests.valid_fizzbuzz =
     fizzbuzzes
         : filteri(function(i, _) return i%3 == 0 and i%5 == 0 end)
-        : all(F.curry(F.op.eq) "fizzbuzz")
+        : all(F.partial(F.op.eq, "fizzbuzz"))
 
 ---------------------------------------------------------------------------
 -- Non multiples of 3 and 5 are themselves
@@ -74,8 +74,8 @@ local results = tests
     : values()
 
 tests.nb = #results
-tests.nb_pass = #results:filter(F.curry(F.op.eq)(true))
-tests.nb_fail = #results:filter(F.curry(F.op.eq)(false))
+tests.nb_pass = #results:filter(F.partial(F.op.eq, true))
+tests.nb_fail = #results:filter(F.partial(F.op.eq, false))
 
 ---------------------------------------------------------------------------
 -- Format test results
@@ -86,4 +86,4 @@ print("indices", F.show(indices))
 print("fizzbuzzes", F.show(fizzbuzzes))
 print("]]")
 
-print("return", F.show(tests))
+print("return", F.show(tests, {indent = 4}))

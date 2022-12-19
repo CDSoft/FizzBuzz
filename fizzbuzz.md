@@ -668,7 +668,7 @@ The Haskell fizzbuzz function returns:
         hs_tests.fizzbuzz,
     }:mapi(function (i, res)
         local expected = tostring(fizzbuzz(i))
-        local ok = res:all(F.curry(F.op.eq)(expected))
+        local ok = res:all(F.partial(F.op.eq, expected))
         return ({i}..res..{ok and "*OK*" or "**FAIL**"}):str "|"
     end)
 )

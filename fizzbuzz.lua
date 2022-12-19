@@ -43,14 +43,12 @@ local F = require "fun"
 
 -- fizzbuzz {
 
-local function div(d, s)
-    return function(n)
-        return n % d == 0 and s or nil
-    end
+local function div(d, s, n)
+    return n % d == 0 and s or nil
 end
 
-local fizz = div(3, "fizz")
-local buzz = div(5, "buzz")
+local fizz = F.partial(div, 3, "fizz")
+local buzz = F.partial(div, 5, "buzz")
 
 local function combine(a, b)
     return a and (a..(b or "")) or b
