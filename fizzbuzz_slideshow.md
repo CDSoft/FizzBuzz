@@ -32,7 +32,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## Suggested solution
 
-- a **single data format**
+- a **common, simple and powerful data format**
 - and a **reduced set of highly configurable tools**.
 
 # Lua - General programming language
@@ -351,11 +351,11 @@ Pandoc uses Lua scripts:
 ## Based on Pandoc Lua
 
 - based on the Pandoc Lua interpretor
-- LuaX specific functions are not available (yet?)
+- LuaX specific functions are available
 
-## Get XXX
+## Get Panda
 
-<https://github.com/CDSoft/luax>
+<https://github.com/CDSoft/panda>
 
 ::::::::::
 
@@ -554,6 +554,9 @@ plot sin(x) lw 4, cos(x) lw 4
 ## Fizzbuzz
 
 [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz)
+
+[cdelord.fr/fizzbuzz](http://cdelord.fr/fizzbuzz)
+[cdelord.fr/fizzbuzz/fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf)
 
 ## LinkdIn
 
