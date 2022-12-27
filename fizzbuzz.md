@@ -384,7 +384,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz):
 `fizzbuzz` is a function that returns `"fizz"`, `"buzz"`, `"fizzbuzz"` or `n` for any positive integer `n`.
 
 $$
-    fizzbuzz    \dotso \mathbb{N}^+ \to \{fizz, buzz, fizzbuzz\} \cup \mathbb{N}^+
+    fizzbuzz : \mathbb{N}^+ \to \{fizz, buzz, fizzbuzz\} \cup \mathbb{N}^+
 $$
 $$
     fizzbuzz(n) =
