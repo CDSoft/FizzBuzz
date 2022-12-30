@@ -468,6 +468,42 @@ plot sin(x) lw 4, cos(x) lw 4
     ```
 ``````
 
+# MakeX
+
+## `makex.mk`
+
+- single Makefile
+- install LuaX, upp, pandoc, panda, ...
+- meant to be included in a Makefile
+
+## Simple installation
+
+``` sh
+wget http://cdelord.fr/makex/makex.mk
+```
+
+::::::::::::::::::::::::::::: {.columns}
+
+:::::::::: {.column width=48%}
+
+## Simple usage
+
+``` makefile
+include makex.mk
+```
+
+::::::::::
+
+:::::::::: {.column width=48%}
+
+## Get makex
+
+<https://github.com/CDSoft/makex>
+
+::::::::::
+
+:::::::::::::::::::::::::::::
+
 # Fizzbuzz
 
 ::::::::::::::::::::::::::::: {.columns}
@@ -480,7 +516,7 @@ plot sin(x) lw 4, cos(x) lw 4
 - UPP
 - Pandoc
 - Panda
-- with a complete Makefile example
+- with a complete Makefile example using `makex.mk`
 
 ::::::::::
 
