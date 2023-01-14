@@ -146,7 +146,7 @@ LuaX runs on several platforms with no dependency:
 
 LuaX can cross-compile scripts from and to any of these platforms.
 
-LuaX comes with a standard Lua interpretor and provides some libraries (embeded
+LuaX comes with a standard Lua interpretor and provides some libraries (embedded
 in a single executable, no external dependency required):
 
 - [LuaX interactive usage](https://github.com/CDSoft/luax/blob/master/doc/repl.md): improved Lua REPL
@@ -365,6 +365,29 @@ digraph {
 set xrange [-pi:pi]
 set yrange [-1.5:1.5]
 plot sin(x) lw 4, cos(x) lw 4
+```
+
+# MakeX
+
+`makex.mk` is a Makefile. It is intended to be included in any Makefile to
+easily install some tools based on LuaX and Pandoc to pre-process files and
+generate documents, using Lua as a common, simple and powerful scripting
+language.
+
+## Example
+
+Fizzbuzz itself is an example of makex usage.
+
+Easy installation, only `makex.mk` is needed:
+
+``` sh
+wget http://cdelord.fr/makex/makex.md
+```
+
+And easy usage with other Makefiles:
+
+``` makefile
+include makex.mk
 ```
 
 # Fizzbuzz
@@ -798,4 +821,9 @@ This chapter contains the sources of this document.
 ## Makefile
 
 ```{.makefile include=Makefile}
+```
+
+## makex.mk
+
+```{.makefile include=makex.mk}
 ```
