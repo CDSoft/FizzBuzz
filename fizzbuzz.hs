@@ -23,7 +23,6 @@ $$
 @@@-}
 
 import Control.Monad
-import Data.Bool
 import Data.Maybe
 import System.Environment
 
