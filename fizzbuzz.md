@@ -309,20 +309,20 @@ The source code can be documented by adding special marks in comments. The docum
 
 For instance, the following C source contains documentation that can be extracted and included to a Pandoc document.
 
-``````{.c include=foo.c}
+``````{.c include=deep_thought.c}
 
 ``````
 
 To extract the documentation, panda provides a macro to replace a `div` element by the documentation chunks from a file. E.g.:
 
 `````` markdown
-:::{doc=foo.c}
+:::{doc=deep_thought.c}
 :::
 ``````
 
 will be replaced by:
 
-> :::{doc=foo.c}
+> :::{doc=deep_thought.c}
 > :::
 
 **Diagrams**

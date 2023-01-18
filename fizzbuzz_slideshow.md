@@ -365,7 +365,7 @@ Pandoc uses Lua scripts:
 
 ## Documentation extraction from source code
 
-``````{.c include=foo.c}
+``````{.c include=deep_thought.c}
 
 ``````
 
@@ -376,13 +376,13 @@ Pandoc uses Lua scripts:
 The Panda `doc` macro extract documentation (in Markdown) from an external file:
 
 `````` markdown
-:::{doc=foo.c}
+:::{doc=deep_thought.c}
 :::
 ``````
 
 ## This is rendered as
 
-:::{doc=foo.c}
+:::{doc=deep_thought.c}
 :::
 
 # Panda examples
