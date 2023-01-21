@@ -518,13 +518,19 @@ include makex.mk
 - Panda
 - with a complete Makefile example using `makex.mk`
 
+## using Lua tables everywhere
+
+- requirement database (still experimental)
+- tests results
+- test report
+
 ::::::::::
 
 :::::::::: {.column width=48%}
 
 ## to specify
 
-- examples using UPP macros
+- examples using UPP and Panda macros
 - requirement management
 
 ## and test
@@ -532,15 +538,16 @@ include makex.mk
 - test execution
 - test report
 
+## Complete Fizzbuzz example
+
+- [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz)
+- [cdelord.fr/fizzbuzz](http://cdelord.fr/fizzbuzz):
+    - [fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf)
+    - [fizzbuzz.html](http://cdelord.fr/fizzbuzz/fizzbuzz.html)
+
 ::::::::::
 
 :::::::::::::::::::::::::::::
-
-## using Lua tables everywhere
-
-- requirement database (still experimental)
-- tests results
-- test report
 
 # References
 
@@ -549,25 +556,16 @@ include makex.mk
     end)
 )
 
-@(link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz")
-
-@(link "Lua" "https://www.lua.org")
-
-@(link "Lua documentation" "https://www.lua.org/manual/5.4/")
-
-@(link "LuaX" "https://github.com/CDSoft/luax")
-
-@(link "UPP" "https://github.com/CDSoft/upp")
-
-@(link "Pandoc" "https://pandoc.org")
-
-@(link "Pandoc manual" "https://pandoc.org/MANUAL.html")
-
-@(link "Pandoc's Markdown" "https://pandoc.org/MANUAL.html#pandocs-markdown")
-
-@(link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html")
-
-@(link "Panda" "https://github.com/CDSoft/panda")
+- @(link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz")
+- @(link "Lua" "https://www.lua.org")
+    - @(link "Lua documentation" "https://www.lua.org/manual/5.4/")
+- @(link "LuaX" "https://github.com/CDSoft/luax")
+- @(link "UPP" "https://github.com/CDSoft/upp")
+- @(link "Pandoc" "https://pandoc.org")
+    - @(link "Pandoc manual" "https://pandoc.org/MANUAL.html")
+    - @(link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html")
+- @(link "Panda" "https://github.com/CDSoft/panda")
+- @(link "makex" "https://github.com/CDSoft/makex")
 
 # Questions
 
