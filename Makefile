@@ -117,6 +117,17 @@ PDF_FLAGS += --number-sections
 PDF_FLAGS += --highlight-style tango
 PDF_FLAGS += --top-level-division=chapter
 
+LOGO_PDF = $(BUILD)/logo.pdf
+LOGO_HTML = $(BUILD)/logo.svg
+
+$(LOGO_PDF): logo.lua | $(LSVG) $(BUILD)
+	@echo '${MAKEX_COLOR}[LSVG]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
+	@$(LSVG) $^ $@
+
+$(LOGO_HTML): logo.lua | $(LSVG) $(BUILD)
+	@echo '${MAKEX_COLOR}[LSVG]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
+	@$(LSVG) $^ $@
+
 export LUA_PATH = $(BUILD)/tests/?.lua;./?.lua
 export REQDB = $(BUILD)/reqdb.lua
 export REQTARGET = fizzbuzz.pdf
@@ -125,24 +136,27 @@ $(BUILD)/%.md: %.md $(TEST_RESULTS) $(MAKEFILEDEP) | $(UPP) $(BUILD) $(DEPENDENC
 	@echo '${MAKEX_COLOR}[UPP]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
 	@$(UPP) $(UPP_FLAGS) -MT $@ -MF $(DEPENDENCIES)/$(notdir $@).upp.d $< -o $@
 
-$(BUILD)/%.html: $(BUILD)/%.md | $(PANDA) $(DEPENDENCIES)
+$(BUILD)/%.html: $(BUILD)/%.md $(LOGO_HTML) | $(PANDA) $(DEPENDENCIES)
 	@echo '${MAKEX_COLOR}[PANDA]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
 	@PANDA_TARGET=$@ \
 	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
+	LOGO=$(LOGO_HTML) \
 	$(PANDA_HTML) $(HTML_FLAGS) $< -o $@
 
-$(BUILD)/%.pdf: $(BUILD)/%.md | $(PANDA) $(DEPENDENCIES)
+$(BUILD)/%.pdf: $(BUILD)/%.md $(LOGO_PDF) | $(PANDA) $(DEPENDENCIES)
 	@echo '${MAKEX_COLOR}[PANDA]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
 	@PANDA_TARGET=$@ \
 	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
+	LOGO=$(LOGO_PDF) \
 	$(PANDA_PDF) $(PDF_FLAGS) $< -o $@
 
 ###########################################################################
 # Slideshow
 ###########################################################################
 
-$(BUILD)/%_slideshow.pdf: $(BUILD)/%_slideshow.md | $(PANDA) $(DEPENDENCIES)
+$(BUILD)/%_slideshow.pdf: $(BUILD)/%_slideshow.md $(LOGO_PDF) | $(PANDA) $(DEPENDENCIES)
 	@echo '${MAKEX_COLOR}[PANDA]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
 	@PANDA_TARGET=$@ \
 	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
+	LOGO=$(LOGO_PDF) \
 	$(BEAMER) $< -o $@

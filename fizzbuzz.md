@@ -25,16 +25,26 @@ footnotes-disable-backlinks: true
 book: true
 classoption: oneside
 
+titlepage-logo: "{{logo}}"
+logo-width: 60mm
+
 table-use-row-colors: true
 
 code-block-font-size: "\\small"
 ---
+
+```meta
+logo = os.getenv "LOGO"
+background = os.getenv "BACKGROUND"
+```
 
 # Disclaimer
 
 This document is not about Fizzbuzz. This document is a suggestion to simplify
 the build process of software projects. Fizzbuzz is just an application
 example.
+
+![]({{logo}}){width=50%}
 
 # Introduction
 

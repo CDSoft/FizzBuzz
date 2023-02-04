@@ -10,7 +10,16 @@ keywords:
     - Build system
 ---
 
+```meta
+logo = os.getenv "LOGO"
+background = os.getenv "BACKGROUND"
+```
+
 # Disclaimer
+
+::::::::::::::::::::::::::::: {.columns}
+
+:::::::::: {.column width=50%}
 
 This document is not about Fizzbuzz.
 
@@ -18,6 +27,16 @@ This document is a suggestion to simplify the build process of software
 projects.
 
 Fizzbuzz is just an application example.
+
+::::::::::
+
+:::::::::: {.column width=40%}
+
+![]({{logo}}){width=100%}
+
+::::::::::
+
+:::::::::::::::::::::::::::::
 
 # Introduction
 
