@@ -1,8 +1,5 @@
 #!/usr/bin/env luax
 
-local fs = require "fs"
-local F = require "fun"
-
 local result_file = arg[1]
 local N = tonumber(arg[2])
 
