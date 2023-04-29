@@ -160,7 +160,7 @@ LuaX comes with a standard Lua interpretor and provides some libraries (embedded
 in a single executable, no external dependency required):
 
 - [LuaX interactive usage](https://github.com/CDSoft/luax/blob/master/doc/repl.md): improved Lua REPL
-- [fun](https://github.com/CDSoft/luax/blob/master/doc/fun.md): functional programming inspired functions
+- [F](https://github.com/CDSoft/luax/blob/master/doc/F.md): functional programming inspired functions
 - [fs](https://github.com/CDSoft/luax/blob/master/doc/fs.md): file system management
 - [sh](https://github.com/CDSoft/luax/blob/master/doc/sh.md): shell command execution
 - [mathx](https://github.com/CDSoft/luax/blob/master/doc/mathx.md): complete math library for Lua

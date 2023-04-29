@@ -117,7 +117,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## General modules
 
-- `fun`: functional programming
+- `F`: functional programming
 - `fs`: file system
 - `sh`: shell commands
 
@@ -221,7 +221,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 - Lua expression evaluation
 - file inclusion
 - conditional text
-- functional programming (LuaX `fun` module)
+- functional programming (LuaX `F` module)
 - file management (LuaX `fs` module)
 - requirement management (still experimental)
 
