@@ -159,4 +159,4 @@ $(BUILD)/%_slideshow.pdf: $(BUILD)/%_slideshow.md $(LOGO_PDF) | $(PANDA) $(DEPEN
 	@PANDA_TARGET=$@ \
 	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
 	LOGO=$(LOGO_PDF) \
-	$(BEAMER) $< -o $@
+	$(PANDA_BEAMER) $< -o $@
