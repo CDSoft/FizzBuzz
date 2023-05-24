@@ -40,7 +40,7 @@ img:Rect {
 local function ix(i) return w/4 + (256+64)*(i-1) end
 local function iy(i) return 896 + 256*(i-1) end
 
-local names = string.words "LuaX UPP Pandoc Panda ..."
+local names = string.words "LuaX ypp Pandoc Panda ..."
 
 names:mapi(function(i, name)
     img:Text(name) { x = ix(i), y = iy(i) } { fill = "white" }

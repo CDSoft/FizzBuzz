@@ -38,7 +38,7 @@
 #     (see https://github.com/Wandmalfarbe/pandoc-latex-template.git)
 # LETTER
 #     path to a LaTeX template
-#     (see https://github.com/Wandmalfarbe/pandoc-latex-template.git)
+#     (see https://github.com/aaronwolen/pandoc-letter.git)
 # PANAM_CSS
 #     path to a CSS file (see https://benjam.info/panam)
 # PANDOC_MD, PANDA_MD
@@ -65,6 +65,8 @@
 #     path to plantuml.jar
 # DITAA
 #     path to ditaa.jar
+# MERMAID
+#     path to mmdc (Mermaid)
 # GHCUP, GHC, CABAL, STACK
 #     path to the ghcup, ghc, cabal, stack executables
 #     (see https://www.haskell.org/ghcup/)
@@ -91,6 +93,8 @@
 #     install PlantUML
 # makex-install-ditaa
 #     install ditaa
+# makex-install-mermaid
+#     install mermaid
 # makex-install-lsvg
 #     install lsvg
 # makex-install-ghcup
@@ -336,7 +340,7 @@ $(LUAX): | $(MAKEX_CACHE) $(dir $(LUAX))
 	    ) \
 	    && cd $(MAKEX_CACHE)/luax \
 	    && git checkout $(LUAX_VERSION) \
-	    && make install-all PREFIX=$(realpath $(dir $@)/..) \
+	    && make install-all -j PREFIX=$(realpath $(dir $@)/..) \
 	)
 
 makex-install: makex-install-luax
@@ -532,7 +536,7 @@ export PANDA_CACHE ?= $(MAKEX_CACHE)/.panda
 $(dir $(PANDA)) $(PANDA_CACHE):
 	@mkdir -p $@
 
-$(PANDA): | $(PANDOC) $(MAKEX_CACHE) $(dir $(PANDA)) $(PANDA_CACHE)
+$(PANDA): | $(LUAX) $(PANDOC) $(MAKEX_CACHE) $(dir $(PANDA)) $(PANDA_CACHE)
 	@echo "$(MAKEX_COLOR)[MAKEX]$(NORMAL) $(TEXT_COLOR)install Panda$(NORMAL)"
 	@test -f $(@) \
 	|| \
@@ -658,6 +662,28 @@ $(DITAA): | $(dir $(DITAA))
 
 makex-install: makex-install-ditaa
 makex-install-ditaa: $(DITAA)
+
+###########################################################################
+# Mermaid
+###########################################################################
+
+MERMAID_MODULE = @mermaid-js/mermaid-cli
+MERMAID_INSTALL_PATH = $(MAKEX_INSTALL_PATH)/mermaid
+MERMAID = $(MERMAID_INSTALL_PATH)/node_modules/.bin/mmdc
+
+export PATH := $(dir $(MERMAID)):$(PATH)
+
+$(MERMAID): |
+	@echo "$(MAKEX_COLOR)[MAKEX]$(NORMAL) $(TEXT_COLOR)install mermaid$(NORMAL)"
+	@test -f $(@) \
+	|| \
+	(   mkdir -p $(MERMAID_INSTALL_PATH) \
+	    && cd $(MERMAID_INSTALL_PATH) \
+	    && npm install $(MERMAID_MODULE) \
+	)
+
+makex-install: makex-install-mermaid
+makex-install-mermaid: $(MERMAID)
 
 ###########################################################################
 # Panda shortcuts

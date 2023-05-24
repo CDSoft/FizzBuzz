@@ -1,7 +1,7 @@
 ---
 title: Fizz buzz - LuaX demo
-date: @(DATE)
-author: @(AUTHOR)
+date: @DATE
+author: @AUTHOR
 keywords:
     - Lua
     - Script
@@ -191,13 +191,13 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 :::::::::::::::::::::::::::::
 
-# UPP - text preprocessing
+# ypp - text preprocessing
 
 ::::::::::::::::::::::::::::: {.columns}
 
 :::::::::: {.column width=48%}
 
-## UPP
+## ypp
 
 - minimalist and generic text preprocessor
 - Lua/LuaX macros
@@ -205,11 +205,11 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 ## LuaX
 
 - compiled with LuaX
-- all LuaX modules available in UPP macros
+- all LuaX modules available in ypp macros
 
-## How does UPP work?
+## How does ypp work?
 
-- UPP searches for Lua expressions
+- ypp searches for Lua expressions
 - and replaces their sources by their results
 
 ::::::::::
@@ -225,15 +225,15 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 - file management (LuaX `fs` module)
 - requirement management (still experimental)
 
-## Get UPP
+## Get ypp
 
-<https://github.com/CDSoft/upp>
+<https://github.com/CDSoft/ypp>
 
 ::::::::::
 
 :::::::::::::::::::::::::::::
 
-# UPP examples
+# ypp examples
 
 ::::::::::::::::::::::::::::: {.columns}
 
@@ -244,13 +244,14 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 ## File inclusion
 
 ```{.lua}
-@(include "file.md")
+@include "file.md"
 ```
 
 ## Lua definitions
 
 ``````{.lua}
-@@( local foo = 42
+@@[[
+    local foo = 42
     N = foo * 23 + 34
     local function sq(x)
         return x*x
@@ -260,12 +261,13 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
             : map(sq)
             : sum()
     end
-)
+]]
 ``````
 
 ?(true)
 
-@@( local foo = 42
+@@[[
+    local foo = 42
     N = foo * 23 + 34
     local function sq(x)
         return x*x
@@ -275,7 +277,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
             : map(sq)
             : sum()
     end
-)
+]]
 
 ::::::::::
 
@@ -287,8 +289,8 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ``````{.markdown}
 $$
-\sum_{i=1}^{@(N)} i^2 =
-    @(sumsq(N))
+\sum_{i=1}^{@N} i^2 =
+    @sumsq(N)
 $$
 ``````
 
@@ -297,11 +299,9 @@ $$
 ## Example
 
 $$
-\sum_{i=1}^{@(N)} i^2 =
-    @(sumsq(N))
+\sum_{i=1}^{@N} i^2 =
+    @sumsq(N)
 $$
-
-
 
 ::::::::::
 
@@ -492,7 +492,7 @@ plot sin(x) lw 4, cos(x) lw 4
 ## `makex.mk`
 
 - single Makefile
-- install LuaX, upp, pandoc, panda, ...
+- install LuaX, ypp, pandoc, panda, ...
 - meant to be included in a Makefile
 
 ## Simple installation
@@ -532,7 +532,7 @@ include makex.mk
 ## Concrete example of using
 
 - LuaX
-- UPP
+- YPP
 - Pandoc
 - Panda
 - with a complete Makefile example using `makex.mk`
@@ -549,7 +549,7 @@ include makex.mk
 
 ## to specify
 
-- examples using UPP and Panda macros
+- examples using ypp and Panda macros
 - requirement management
 
 ## and test
@@ -570,21 +570,22 @@ include makex.mk
 
 # References
 
-@@( link = F.curry(function(name, url)
+@@[[
+    link = F.curry(function(name, url)
         return F.I{name=name, url=url}"[**$(name)**]($(url)): <$(url)>\n"
     end)
-)
+]]
 
-- @(link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz")
-- @(link "Lua" "https://www.lua.org")
-    - @(link "Lua documentation" "https://www.lua.org/manual/5.4/")
-- @(link "LuaX" "https://github.com/CDSoft/luax")
-- @(link "UPP" "https://github.com/CDSoft/upp")
-- @(link "Pandoc" "https://pandoc.org")
-    - @(link "Pandoc manual" "https://pandoc.org/MANUAL.html")
-    - @(link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html")
-- @(link "Panda" "https://github.com/CDSoft/panda")
-- @(link "makex" "https://github.com/CDSoft/makex")
+- @link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz"
+- @link "Lua" "https://www.lua.org"
+    - @link "Lua documentation" "https://www.lua.org/manual/5.4/"
+- @link "LuaX" "https://github.com/CDSoft/luax"
+- @link "ypp" "https://github.com/CDSoft/ypp"
+- @link "Pandoc" "https://pandoc.org"
+    - @link "Pandoc manual" "https://pandoc.org/MANUAL.html"
+    - @link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html"
+- @link "Panda" "https://github.com/CDSoft/panda"
+- @link "makex" "https://github.com/CDSoft/makex"
 
 # Questions
 

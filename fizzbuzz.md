@@ -1,7 +1,7 @@
 ---
 title: Fizz buzz - LuaX demo
-date: @(DATE)
-author: @(AUTHOR)
+date: @DATE
+author: @AUTHOR
 keywords:
     - Lua
     - Script
@@ -199,23 +199,25 @@ Typical usages are:
 
 The next chapters present some tools written in Lua/LuaX or using Lua as a scripting engine.
 
-# UPP
+# Ypp
 
-UPP is a minimalist and generic text preprocessor using Lua macros.
+Ypp is a minimalist and generic text preprocessor using Lua macros.
 
-UPP is compiled by LuaX, i.e. Lua and LuaX functions and modules are available
+Ypp is compiled by LuaX, i.e. Lua and LuaX functions and modules are available
 in macros.
 
-More information here: <http://cdelord.fr/upp>
+More information here: <http://cdelord.fr/ypp>
 
-UPP is pretty simple. It searches for Lua expressions and replaces macros with their results.
+Ypp is pretty simple. It searches for Lua expressions and replaces macros with their results.
 
 ?(false)
 
-Macro                   Result
------------------------ -------------------------------------------------------------------------
-`$(...)` or `@(...)`    Evaluates the Lua expression `...` and replaces the macro by its result
-`:(...)` or `@@(...)`   Executes the Lua chunk `...` and replaces the macro by its result (if not `nil`{.lua})
+Macro       Result
+----------- -------------------------------------------------------------------------
+`@(...)`    Evaluates the Lua expression `...` and replaces the macro by its result
+`@@(...)`   Executes the Lua chunk `...` and replaces the macro by its result (if not `nil`{.lua})
+
+Some expression do not require parentheses (function calls).
 
 ?(true)
 
@@ -225,7 +227,7 @@ Macro                   Result
 
 ``````{.markdown}
 $$
-\sum_{i=1}^{100} i^2 = @(F.range(100):map(function(x) return x*x end):sum())
+\sum_{i=1}^{100} i^2 = @F.range(100):map(function(x) return x*x end):sum()
 $$
 ``````
 
@@ -234,28 +236,30 @@ $$
 is rendered as
 
 > $$
-> \sum_{i=1}^{100} i^2 = @(F.range(100):map(function(x) return x*x end):sum())
+> \sum_{i=1}^{100} i^2 = @F.range(100):map(function(x) return x*x end):sum()
 > $$
 
 Macros can also define variables reusable later by other macros.
 
 ?(false)
 ``````{.markdown}
-@@( local foo = 42
+@@[[
+    local foo = 42
     N = foo * 23 + 34
     local function sq(x) return x*x end
     function sumsq(n) return F.range(N):map(sq):sum() end
-)
+]]
 ``````
 ?(true)
 
-@@( local foo = 42
+@@[[
+    local foo = 42
     N = foo * 23 + 34
     local function sq(x) return x*x end
     function sumsq(n) return F.range(N):map(sq):sum() end
-)
+]]
 
-defines `N` ($N = @(N)$) which can be read in a Lua expression or with ?(false)`@(N)`?(true)
+defines `N` ($N = @N$) which can be read in a Lua expression or with ?(false)`@N`?(true)
 and `sumsq` which computes the sum of squares.
 
 Then
@@ -264,7 +268,7 @@ Then
 
 ``````{.markdown}
 $$
-\sum_{i=1}^{@(N)} i^2 = @(sumsq(N))
+\sum_{i=1}^{@(N)} i^2 = @sumsq(N)
 $$
 ``````
 
@@ -273,7 +277,7 @@ $$
 becomes
 
 > $$
-> \sum_{i=1}^{@(N)} i^2 = @(sumsq(N))
+> \sum_{i=1}^{@(N)} i^2 = @sumsq(N)
 > $$
 
 # Pandoc
@@ -402,7 +406,7 @@ include makex.mk
 
 # Fizzbuzz
 
-Fizzbuzz is a concrete example of the usage of LuaX/upp/pandoc/panda to specify
+Fizzbuzz is a concrete example of the usage of LuaX/ypp/pandoc/panda to specify
 and test a software.
 
 ## Specification
@@ -439,12 +443,12 @@ $$
 
 ### Requirements
 
-@(req "SPEC_API: fizzbuzz command line argument")
+@req "SPEC_API: fizzbuzz command line argument"
 
 The fizzbuzz program takes one argument that specify the number for fizzbuzz
 values to generate.
 
-@(req "SPEC_OUT: fizzbuzz output on stdout")
+@req "SPEC_OUT: fizzbuzz output on stdout"
 
 The fizzbuzz program emits fizzbuzz values on the standard output.
 Each line contains `n` and `fizzbuzz(n)`.
@@ -453,28 +457,29 @@ e.g.:
 
 ```
 $ fizzbuzz 6
-@(F.range(6):map(function(n) return F{n, fizzbuzz(n)}:str "\t" end))
+@F.range(6):map(function(n) return F{n, fizzbuzz(n)}:str "\t" end)
 ```
 
-@(req "SPEC_FIZZ: fizz when n is a multiple of 3 but not 5")
+@req "SPEC_FIZZ: fizz when n is a multiple of 3 but not 5"
 
 If `n` is a multiple of 3 but not 5, then `fizzbuzz(n)` is `"fizz"`.
 
-@(req "SPEC_BUZZ: buzz when n is a multiple of 5 but not 3")
+@req "SPEC_BUZZ: buzz when n is a multiple of 5 but not 3"
 
 If `n` is a multiple of 5 but not 3, then `fizzbuzz(n)` is `"buzz"`.
 
-@(req "SPEC_FIZZBUZZ: fizzbuzz n is a when multiple of 3 and 5")
+@req "SPEC_FIZZBUZZ: fizzbuzz n is a when multiple of 3 and 5"
 
 If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
-@(req "SPEC_NUM: n when n is a not a multiple of 3 and 5")
+@req "SPEC_NUM: n when n is a not a multiple of 3 and 5"
 
 If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
 ### Examples
 
-@(  {
+@[[
+    {
         "n  | fizzbuzz(n) | n | fizzbuzz(n) | n | fizzbuzz(n) | n | fizzbuzz(n) ",
         "---|-------------|---|-------------|---|-------------|---|-------------",
     }
@@ -487,7 +492,7 @@ If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
             n+15,   fizzbuzz(n+15),
         }:str "|"
     end)
-)
+]]
 
 ## Implementation
 
@@ -516,52 +521,52 @@ This script will later be used to build the test reports.
 
 @@( test_cfg = require "test_config" )
 
-Each fizzbuzz implementation is executed (with @(test_cfg.N) values). The results are
+Each fizzbuzz implementation is executed (with @test_cfg.N values). The results are
 checked by `fizzbuzz_test.lua` and stored in a Lua table.
 
 The fizzbuzz values are recorded in the `fizzbuzz` field of the test result table.
 
-@(req "TEST_API: number of fizzbuzz values" {
+@req "TEST_API: number of fizzbuzz values" {
     refs = "SPEC_API",
-})
+}
 
-The fizzbuzz list contains @(test_cfg.N) values.
+The fizzbuzz list contains @test_cfg.N values.
 
 The result of this test is recorded in the `valid_number_of_lines` field of the test result table.
 
-@(req "TEST_OUT: output on stdout" {
+@req "TEST_OUT: output on stdout" {
     refs = "SPEC_OUT",
-})
+}
 
 The fizzbuzz list is emitted on stdout.
 
-@(req "TEST_FIZZ: \"fizz\" values" {
+@req "TEST_FIZZ: \"fizz\" values" {
     refs = "SPEC_FIZZ",
-})
+}
 
 All multiples of 3 but not 5 are `"fizz"`.
 
 The result of this test is recorded in the `valid_fizz` field of the test result table.
 
-@(req "TEST_BUZZ: \"buzz\" values" {
+@req "TEST_BUZZ: \"buzz\" values" {
     refs = "SPEC_BUZZ",
-})
+}
 
 All multiples of 5 but not 3 are `"buzz"`.
 
 The result of this test is recorded in the `valid_buzz` field of the test result table.
 
-@(req "TEST_FIZZBUZZ: \"fizzbuzz\" values" {
+@req "TEST_FIZZBUZZ: \"fizzbuzz\" values" {
     refs = "SPEC_FIZZBUZZ",
-})
+}
 
 All multiples of 3 and 5 are `"fizzbuzz"`.
 
 The result of this test is recorded in the `valid_fizzbuzz` field of the test result table.
 
-@(req "TEST_NUM: integral values" {
+@req "TEST_NUM: integral values" {
     refs = "SPEC_NUM",
-})
+}
 
 All non multiples of 3 and 5 are themselves.
 
@@ -575,39 +580,39 @@ The result of this test is recorded in the `valid_numbers` field of the test res
 
 The Lua fizzbuzz function returns:
 
-@(F.str(lua_tests.fizzbuzz, ", "))
+@F.str(lua_tests.fizzbuzz, ", ")
 
-@(req.test("RES_LUA_API: number of fizzbuzz values") {
+@req.test "RES_LUA_API: number of fizzbuzz values" {
     refs = "TEST_API",
     status = lua_tests.valid_number_of_lines,
-})
+}
 
-@(req.test("RES_LUA_OUT: output on stdout") {
+@req.test "RES_LUA_OUT: output on stdout" {
     refs = "TEST_OUT",
     status = lua_tests.valid_number_of_lines,
-})
+}
 
-@(req.test("RES_LUA_FIZZ: \"fizz\" values") {
+@req.test "RES_LUA_FIZZ: \"fizz\" values" {
     refs = "TEST_FIZZ",
     status = lua_tests.valid_fizz,
-})
+}
 
-@(req.test("RES_LUA_BUZZ: \"buzz\" values") {
+@req.test "RES_LUA_BUZZ: \"buzz\" values" {
     refs = "TEST_BUZZ",
     status = lua_tests.valid_buzz,
-})
+}
 
-@(req.test("RES_LUA_FIZZBUZZ: \"fizzbuzz\" values") {
+@req.test "RES_LUA_FIZZBUZZ: \"fizzbuzz\" values" {
     refs = "TEST_FIZZBUZZ",
     status = lua_tests.valid_fizzbuzz,
-})
+}
 
-@(req.test("RES_LUA_NUM: integral values") {
+@req.test "RES_LUA_NUM: integral values" {
     refs = "TEST_NUM",
     status = lua_tests.valid_numbers,
-})
+}
 
-**Summary**: $(lua_tests.nb_pass) / $(lua_tests.nb) tests passed
+**Summary**: @lua_tests.nb_pass / @lua_tests.nb tests passed
 
 ### C implementation
 
@@ -615,39 +620,39 @@ The Lua fizzbuzz function returns:
 
 The C fizzbuzz function returns:
 
-@(F.str(c_tests.fizzbuzz, ", "))
+@F.str(c_tests.fizzbuzz, ", ")
 
-@(req.test("RES_C_API: number of fizzbuzz values") {
+@req.test "RES_C_API: number of fizzbuzz values" {
     refs = "TEST_API",
     status = c_tests.valid_number_of_lines,
-})
+}
 
-@(req.test("RES_C_OUT: output on stdout") {
+@req.test "RES_C_OUT: output on stdout" {
     refs = "TEST_OUT",
     status = c_tests.valid_number_of_lines,
-})
+}
 
-@(req.test("RES_C_FIZZ: \"fizz\" values") {
+@req.test "RES_C_FIZZ: \"fizz\" values" {
     refs = "TEST_FIZZ",
     status = c_tests.valid_fizz,
-})
+}
 
-@(req.test("RES_C_BUZZ: \"buzz\" values") {
+@req.test "RES_C_BUZZ: \"buzz\" values" {
     refs = "TEST_BUZZ",
     status = c_tests.valid_buzz,
-})
+}
 
-@(req.test("RES_C_FIZZBUZZ: \"fizzbuzz\" values") {
+@req.test "RES_C_FIZZBUZZ: \"fizzbuzz\" values" {
     refs = "TEST_FIZZBUZZ",
     status = c_tests.valid_fizzbuzz,
-})
+}
 
-@(req.test("RES_C_NUM: integral values") {
+@req.test "RES_C_NUM: integral values" {
     refs = "TEST_NUM",
     status = c_tests.valid_numbers,
-})
+}
 
-**Summary**: $(c_tests.nb_pass) / $(c_tests.nb) tests passed
+**Summary**: @c_tests.nb_pass / @c_tests.nb tests passed
 
 ### Haskell implementation
 
@@ -655,43 +660,43 @@ The C fizzbuzz function returns:
 
 The Haskell fizzbuzz function returns:
 
-@(F.str(hs_tests.fizzbuzz, ", "))
+@F.str(hs_tests.fizzbuzz, ", ")
 
-@(req.test("RES_HS_API: number of fizzbuzz values") {
+@req.test "RES_HS_API: number of fizzbuzz values" {
     refs = "TEST_API",
     status = hs_tests.valid_number_of_lines,
-})
+}
 
-@(req.test("RES_HS_OUT: output on stdout") {
+@req.test "RES_HS_OUT: output on stdout" {
     refs = "TEST_OUT",
     status = hs_tests.valid_number_of_lines,
-})
+}
 
-@(req.test("RES_HS_FIZZ: \"fizz\" values") {
+@req.test "RES_HS_FIZZ: \"fizz\" values" {
     refs = "TEST_FIZZ",
     status = hs_tests.valid_fizz,
-})
+}
 
-@(req.test("RES_HS_BUZZ: \"buzz\" values") {
+@req.test "RES_HS_BUZZ: \"buzz\" values" {
     refs = "TEST_BUZZ",
     status = hs_tests.valid_buzz,
-})
+}
 
-@(req.test("RES_HS_FIZZBUZZ: \"fizzbuzz\" values") {
+@req.test "RES_HS_FIZZBUZZ: \"fizzbuzz\" values" {
     refs = "TEST_FIZZBUZZ",
     status = hs_tests.valid_fizzbuzz,
-})
+}
 
-@(req.test("RES_HS_NUM: integral values") {
+@req.test "RES_HS_NUM: integral values" {
     refs = "TEST_NUM",
     status = hs_tests.valid_numbers,
-})
+}
 
-**Summary**: $(hs_tests.nb_pass) / $(hs_tests.nb) tests passed
+**Summary**: @hs_tests.nb_pass / @hs_tests.nb tests passed
 
 ### Lua / C / Haskell comparison
 
-@(
+@[[
     {
         "n  | Lua | C | Haskell | Comparison",
         "---|-----|---|---------|-----------",
@@ -704,57 +709,58 @@ The Haskell fizzbuzz function returns:
         local ok = res:all(F.partial(F.op.eq, expected))
         return ({i}..res..{ok and "*OK*" or "**FAIL**"}):str "|"
     end)
-)
+]]
 
 ## Coverage matrix
 
-@(req.matrix "g")
+@req.matrix "g"
 
 ```{.dot render="{{dot}}"}
-@(req.dot())
+@req.dot()
 ```
 
 # References
 
-@@( link = F.curry(function(name, url)
+@@[[
+    link = F.curry(function(name, url)
         return F.I{name=name, url=url}"[**$(name)**]($(url)): <$(url)>\n"
     end)
-)
+]]
 
-@(link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz")
+@link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz"
 > This document is not about Fizzbuzz. This document is a suggestion to
 > simplify the build process of software projects. Fizzbuzz is just an
 > application example.
 
-@(link "Lua" "https://www.lua.org")
+@link "Lua" "https://www.lua.org"
 > Lua is a powerful, efficient, lightweight, embeddable scripting language. It
 > supports procedural programming, object-oriented programming, functional
 > programming, data-driven programming, and data description.
 
-@(link "Lua documentation" "https://www.lua.org/manual/5.4/")
+@link "Lua documentation" "https://www.lua.org/manual/5.4/"
 > The reference manual is the official definition of the Lua language.
 
-@(link "LuaX" "https://github.com/CDSoft/luax")
+@link "LuaX" "https://github.com/CDSoft/luax"
 > LuaX is a Lua interpretor and REPL based on Lua 5.4.4, augmented with some
 > useful packages. LuaX can also produce standalone executables from Lua
 > scripts.
 
-@(link "UPP" "https://github.com/CDSoft/upp")
-> UPP is a minimalist and generic text preprocessor using Lua macros.
+@link "ypp" "https://github.com/CDSoft/ypp"
+> Ypp is a minimalist and generic text preprocessor using Lua macros.
 
-@(link "Pandoc" "https://pandoc.org")
+@link "Pandoc" "https://pandoc.org"
 > Pandoc is a universal document converter. If you need to convert files from
 > one markup format into another, pandoc is your swiss-army knife.
 
-@(link "Pandoc manual" "https://pandoc.org/MANUAL.html")
+@link "Pandoc manual" "https://pandoc.org/MANUAL.html"
 > Pandoc User’s Guide
 
-@(link "Pandoc's Markdown" "https://pandoc.org/MANUAL.html#pandocs-markdown")
+@link "Pandoc's Markdown" "https://pandoc.org/MANUAL.html#pandocs-markdown"
 > Pandoc understands an extended and slightly revised version of John Gruber’s
 > Markdown syntax. This document explains the syntax, noting differences from
 > original Markdown.
 
-@(link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html")
+@link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html"
 > Pandoc has long supported filters, which allow the pandoc abstract syntax
 > tree (AST) to be manipulated between the parsing and the writing phase.
 > Traditional pandoc filters accept a JSON representation of the pandoc AST and
@@ -776,7 +782,7 @@ The Haskell fizzbuzz function returns:
 > executable. Pandoc data types are marshaled to Lua directly, avoiding the
 > overhead of writing JSON to stdout and reading it from stdin.
 
-@(link "Panda" "https://github.com/CDSoft/panda")
+@link "Panda" "https://github.com/CDSoft/panda"
 > Panda is a Pandoc Lua filter that works on internal Pandoc's AST.
 
 # Appendices

@@ -1,5 +1,5 @@
 ###########################################################################
-# Load makex rules (luax, upp, panda, ...)
+# Load makex rules (luax, ypp, panda, ...)
 ###########################################################################
 
 include makex.mk
@@ -105,7 +105,7 @@ $(BUILD)/tests/result_%.lua: fizzbuzz_test.lua $(BUILD)/tests/fizzbuzz_%.txt tes
 # Documentation
 ###########################################################################
 
-UPP_FLAGS = -p . -l project_data
+YPP_FLAGS = -p . -l project_data -l req
 
 PANDOC_FLAGS += --table-of-content
 
@@ -132,9 +132,9 @@ export LUA_PATH = $(BUILD)/tests/?.lua;./?.lua
 export REQDB = $(BUILD)/reqdb.lua
 export REQTARGET = fizzbuzz.pdf
 
-$(BUILD)/%.md: %.md $(TEST_RESULTS) $(MAKEFILEDEP) | $(UPP) $(BUILD) $(DEPENDENCIES)
-	@echo '${MAKEX_COLOR}[UPP]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
-	@$(UPP) $(UPP_FLAGS) -MT $@ -MF $(DEPENDENCIES)/$(notdir $@).upp.d $< -o $@
+$(BUILD)/%.md: %.md $(TEST_RESULTS) $(MAKEFILEDEP) | $(YPP) $(BUILD) $(DEPENDENCIES)
+	@echo '${MAKEX_COLOR}[YPP]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
+	@$(YPP) $(YPP_FLAGS) --MD --MT $@ --MF $(DEPENDENCIES)/$(notdir $@).ypp.d $< -o $@
 
 $(BUILD)/%.html: $(BUILD)/%.md $(LOGO_HTML) | $(PANDA) $(DEPENDENCIES)
 	@echo '${MAKEX_COLOR}[PANDA]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
