@@ -268,7 +268,7 @@ Then
 
 ``````{.markdown}
 $$
-\sum_{i=1}^{@(N)} i^2 = @sumsq(N)
+\sum_{i=1}^{@N} i^2 = @sumsq(N)
 $$
 ``````
 
@@ -277,7 +277,7 @@ $$
 becomes
 
 > $$
-> \sum_{i=1}^{@(N)} i^2 = @sumsq(N)
+> \sum_{i=1}^{@N} i^2 = @sumsq(N)
 > $$
 
 # Pandoc
@@ -433,13 +433,14 @@ $$
         \end{cases}
 $$
 
-@@( function fizzbuzz(n)
+@@[[
+    function fizzbuzz(n)
         if n % 15 == 0 then return "fizzbuzz" end
         if n % 3 == 0 then return "fizz" end
         if n % 5 == 0 then return "buzz" end
         return n
     end
-)
+]]
 
 ### Requirements
 
