@@ -177,10 +177,10 @@ TYPST_COMPILATION ?= no
 
 # TYPST_VERSION is a tag or branch name in the
 # typst repository
-TYPST_VERSION ?= v0.3.0
+TYPST_VERSION ?= v0.4.0
 
 # PLANTUML_VERSION is the PlantUML version to install
-PLANTUML_VERSION = 1.2023.6
+PLANTUML_VERSION = 1.2023.8
 
 # DITAA_VERSION is the ditaa version to install
 DITAA_VERSION = 0.11.0
