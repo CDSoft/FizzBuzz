@@ -8,5 +8,6 @@ documentation environment.
 
 # Links
 
-- [cdelord.fr/fizzbuzz/fizzbuzz_slideshow.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz_slideshow.pdf): PDF slideshow
-- [cdelord.fr/fizzbuzz/fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf): PDF demonstration (specification, implementation, tests, test report, documentation generator, ...)
+- [fizzbuzz_slideshow.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz_slideshow.pdf): PDF slideshow
+- [fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf): PDF demonstration (specification, implementation, tests, test report, documentation generator, ...)
+- [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz): Sources
