@@ -129,7 +129,7 @@ YPP_VERSION ?= master
 UPP_VERSION ?= master
 
 # PANDOC_VERSION is the version number of pandoc
-PANDOC_VERSION ?= 3.1.2
+PANDOC_VERSION ?= 3.1.6
 
 # PANDOC_CLI_VERSION is the version number of pandoc-cli
 PANDOC_CLI_VERSION ?= 0.1.1
@@ -177,10 +177,10 @@ TYPST_COMPILATION ?= no
 
 # TYPST_VERSION is a tag or branch name in the
 # typst repository
-TYPST_VERSION ?= v0.4.0
+TYPST_VERSION ?= 0.6.0
 
 # PLANTUML_VERSION is the PlantUML version to install
-PLANTUML_VERSION = 1.2023.8
+PLANTUML_VERSION = 1.2023.9
 
 # DITAA_VERSION is the ditaa version to install
 DITAA_VERSION = 0.11.0
@@ -232,6 +232,11 @@ help: welcome
 	    } \
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
+
+# Helper target to read a makex variable
+.PHONY: query
+query:
+	@echo $($(VAR))
 
 .SECONDARY:
 
@@ -536,7 +541,7 @@ export PANDA_CACHE ?= $(MAKEX_CACHE)/.panda
 $(dir $(PANDA)) $(PANDA_CACHE):
 	@mkdir -p $@
 
-$(PANDA): | $(LUAX) $(PANDOC) $(MAKEX_CACHE) $(dir $(PANDA)) $(PANDA_CACHE)
+$(PANDA): | $(LUAX) $(PANDOC) $(MAKEX_CACHE) $(dir $(PANDA)) $(PANDA_CACHE) $(PLANTUML) $(DITAA)
 	@echo "$(MAKEX_COLOR)[MAKEX]$(NORMAL) $(TEXT_COLOR)install Panda$(NORMAL)"
 	@test -f $(@) \
 	|| \
@@ -546,7 +551,7 @@ $(PANDA): | $(LUAX) $(PANDOC) $(MAKEX_CACHE) $(dir $(PANDA)) $(PANDA_CACHE)
 	    ) \
 	    && cd $(MAKEX_CACHE)/panda \
 	    && git checkout $(PANDA_VERSION) \
-	    && make install-all PREFIX=$(realpath $(dir $@)/..) \
+	    && make install PREFIX=$(realpath $(dir $@)/..) \
 	    && sed -i 's#^pandoc #$(PANDOC) #' $@ \
 	)
 
@@ -566,7 +571,7 @@ $(dir $(TYPST)) $(MAKEX_CACHE)/typst/$(TYPST_VERSION):
 
 ifeq ($(TYPST_COMPILATION),no)
 
-TYPST_URL = https://github.com/typst/typst/releases/download/$(TYPST_VERSION)/$(TYPST_ARCHIVE)
+TYPST_URL = https://github.com/typst/typst/releases/download/v$(TYPST_VERSION)/$(TYPST_ARCHIVE)
 
 ifeq ($(MAKEX_OS)-$(MAKEX_ARCH),Linux-x86_64)
 TYPST_ARCHIVE = typst-x86_64-unknown-linux-musl.tar.xz
@@ -594,7 +599,7 @@ $(TYPST): | $(MAKEX_CACHE) $(dir $(TYPST)) $(CARGO)
 	@echo "$(MAKEX_COLOR)[MAKEX]$(NORMAL) $(TEXT_COLOR)install Typst$(NORMAL)"
 	@test -f $(@) \
 	|| \
-	$(CARGO) install --git https://github.com/typst/typst --tag $(TYPST_VERSION) --root $(realpath $(dir $@)/..)
+	$(CARGO) install --git https://github.com/typst/typst --tag v$(TYPST_VERSION) --root $(realpath $(dir $@)/..)
 
 endif
 
