@@ -1,5 +1,8 @@
 #!/usr/bin/env luax
 
+local F = require "F"
+local fs = require "fs"
+
 local result_file = arg[1]
 local N = tonumber(arg[2])
 
@@ -83,4 +86,4 @@ print("indices", F.show(indices))
 print("fizzbuzzes", F.show(fizzbuzzes))
 print("]]")
 
-print("return", F.show(tests, {indent = 4}))
+print("return", F.show(tests, {indent=4}))

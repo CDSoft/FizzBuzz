@@ -9,6 +9,7 @@ include makex.mk
 ###########################################################################
 
 BUILD = .build
+IMG = img
 DEPENDENCIES = $(BUILD)/dependencies
 
 .DEFAULT_GOAL := all
@@ -34,6 +35,7 @@ endif
 all: $(BUILD)/fizzbuzz.html
 all: $(BUILD)/fizzbuzz.pdf
 all: $(BUILD)/fizzbuzz_slideshow.pdf
+all: README.md
 
 ## Clean the build directory
 clean:
@@ -48,7 +50,7 @@ mrproper: clean makex-clean
 # Project directories
 ###########################################################################
 
-$(BUILD) $(BUILD)/tests $(DEPENDENCIES):
+$(IMG) $(BUILD) $(BUILD)/tests $(DEPENDENCIES):
 	@mkdir -p $@
 
 -include $(wildcard $(DEPENDENCIES)/*.d)
@@ -117,14 +119,19 @@ PDF_FLAGS += --number-sections
 PDF_FLAGS += --highlight-style tango
 PDF_FLAGS += --top-level-division=chapter
 
+MARKDOWN_FLAGS = $(PANDOC_FLAGS)
+MARKDOWN_FLAGS += --number-sections
+MARKDOWN_FLAGS += --highlight-style tango
+MARKDOWN_FLAGS += --top-level-division=chapter
+
 LOGO_PDF = $(BUILD)/logo.pdf
-LOGO_HTML = $(BUILD)/logo.svg
+LOGO_HTML = $(IMG)/logo.svg
 
 $(LOGO_PDF): logo.lua | $(LSVG) $(BUILD)
 	@echo '${MAKEX_COLOR}[LSVG]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
 	@$(LSVG) $^ $@
 
-$(LOGO_HTML): logo.lua | $(LSVG) $(BUILD)
+$(LOGO_HTML): logo.lua | $(LSVG) $(IMG)
 	@echo '${MAKEX_COLOR}[LSVG]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
 	@$(LSVG) $^ $@
 
@@ -149,6 +156,13 @@ $(BUILD)/%.pdf: $(BUILD)/%.md $(LOGO_PDF) | $(PANDA) $(DEPENDENCIES)
 	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
 	LOGO=$(LOGO_PDF) \
 	$(PANDA_PDF) $(PDF_FLAGS) $< -o $@
+
+README.md: $(BUILD)/fizzbuzz.md $(LOGO_HTML) | $(PANDA) $(DEPENDENCIES)
+	@echo '${MAKEX_COLOR}[PANDA]${NORMAL} ${TARGET_COLOR}$< -> $@${NORMAL}'
+	@PANDA_TARGET=$@ \
+	PANDA_DEP_FILE=$(DEPENDENCIES)/$(notdir $@).panda.d \
+	LOGO=$(LOGO_HTML) \
+	$(PANDA_GFM) $(MARKDOWN_FLAGS) $< -o $@
 
 ###########################################################################
 # Slideshow

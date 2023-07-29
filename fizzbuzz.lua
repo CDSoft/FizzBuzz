@@ -39,6 +39,8 @@ select -> fizzbuzz_n
 ```
 @@@]]
 
+local F = require "F"
+
 -- fizzbuzz {
 
 local function div(d, s, n)

@@ -40,9 +40,16 @@ background = os.getenv "BACKGROUND"
 
 # Disclaimer
 
-This document is not about Fizzbuzz. This document is a suggestion to simplify
-the build process of software projects. Fizzbuzz is just an application
-example.
+This document is not about [Fizzbuzz](https://en.wikipedia.org/wiki/Fizz_buzz).
+This document is a suggestion to simplify the build process of software
+projects, a demo of an **homogeneous and consistent** development and
+documentation environment. Fizzbuzz is just an application example.
+
+# Links
+
+- [fizzbuzz_slideshow.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz_slideshow.pdf): PDF slideshow
+- [fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf): PDF demonstration (specification, implementation, tests, test report, documentation generator, ...)
+- [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz): Sources
 
 ![]({{logo}}){width=50%}
 
@@ -786,14 +793,11 @@ The Haskell fizzbuzz function returns:
 @link "Panda" "https://github.com/CDSoft/panda"
 > Panda is a Pandoc Lua filter that works on internal Pandoc's AST.
 
+::::::{.if output_file=".build/fizzbuzz.pdf"}
+
 # Appendices
 
 This chapter contains the sources of this document.
-
-## README.md
-
-```{.markdown include=README.md}
-```
 
 ## LICENSE
 
@@ -844,3 +848,5 @@ This chapter contains the sources of this document.
 
 ```{.makefile include=makex.mk}
 ```
+
+::::::

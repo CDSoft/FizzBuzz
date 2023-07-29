@@ -1,0 +1,11 @@
+<svg font-size="256" height="2048" text-anchor="middle" version="1.1" width="2048" xmlns="http://www.w3.org/2000/svg">
+<rect fill="grey" height="1984" rx="128" stroke="#435488" stroke-width="64" width="1984" x="32" y="32"/>
+<text x="1024" y="512">Fizz Buzz</text>
+<rect fill="red" height="64" opacity="0.7" rx="32" width="1152" x="448" y="412"/>
+<rect fill="#435488" height="64" opacity="0.7" rx="32" width="1792" x="128" y="576"/>
+<text fill="white" x="512" y="896">LuaX</text>
+<text fill="white" x="832" y="1152">ypp</text>
+<text fill="white" x="1152" y="1408">Pandoc</text>
+<text fill="white" x="1472" y="1664">Panda</text>
+<text fill="white" x="1792" y="1920">...</text>
+</svg>
