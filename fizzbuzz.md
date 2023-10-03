@@ -35,7 +35,6 @@ code-block-font-size: "\\small"
 
 ```meta
 logo = os.getenv "LOGO"
-background = os.getenv "BACKGROUND"
 ```
 
 # Disclaimer
@@ -137,7 +136,7 @@ allowing the semantics to be extended in unconventional ways.
 
 **Lua is small**
 
-Adding Lua to an application does not bloat it. The tarball for Lua 5.4.4,
+Adding Lua to an application does not bloat it. The tarball for Lua 5.4,
 which contains source code and documentation, takes 353K compressed and 1.3M
 uncompressed. The source contains around 30000 lines of C. Under 64-bit Linux,
 the Lua interpreter built with all standard Lua libraries takes 281K and the
@@ -152,7 +151,7 @@ purposes, at absolutely no cost. Just download it and use it.
 # LuaX
 
 [LuaX](https://github.com/CDSoft/luax) is a Lua interpretor and REPL based on
-Lua 5.4.4, augmented with some useful packages. LuaX can also produce
+Lua 5.4, augmented with some useful packages. LuaX can also produce
 standalone executables from Lua scripts.
 
 LuaX runs on several platforms with no dependency:
@@ -205,6 +204,36 @@ Typical usages are:
     - tests results can be used to render documentation (tests reports) and compute a test coverage
 
 The next chapters present some tools written in Lua/LuaX or using Lua as a scripting engine.
+
+# Bang
+
+[Bang](https://github.com/CDSoft/bang) is a ninja file generator scriptable in
+LuaX, a Lua interpreter with a bunch of useful modules (file management,
+functional programming module, basic cryptography, ...). It takes a build
+description (a LuaX script) and generates a Ninja file.
+
+Bang provides functions to generate ninja primitives (variables, rules, build
+statements, ...) and some extra features:
+
+- rule/build statement pairs described in a single function call
+- file listing and filenames list management using LuaX modules (e.g. F and fs)
+- pipe simulation using rule composition
+- "clean", "install" and "help" targets
+
+Bang comes with an example that shows how to use bang and LuaX functions to:
+
+- discover source files actually present in the repository: no redundant hard
+  coded file lists (redundancy means painful maintenance)
+- cross-compile the same sources for multiple platforms: compilation for several
+  platforms without any dirty copy/paste
+- describe static libraries: in the `lib` directory, each sub-directory is
+  a library compiled and archived in its own `.a` file
+- describe executables: in the `bin` directory, each C source file is the main
+  file of a binary containing this C file as well as libraries from the `lib`
+  directory.
+
+Bang is currently used to build bang itself but also LuaX and some projects
+available on my [GitHub](https://github.com/CDSoft).
 
 # Ypp
 
@@ -366,7 +395,7 @@ _gnuplot = "{{gnuplot}}"
     }
     ```
 
-```{.dot render="{{dot}}" width=67%}
+```{.dot render="{{dot}}" name=example-graphviz width=67%}
 digraph {
     rankdir=LR;
     input -> pandoc -> output
@@ -382,33 +411,36 @@ digraph {
     plot sin(x) lw 4, cos(x) lw 4
     ```
 
-```{render="{{gnuplot}}" width=67%}
+```{render="{{gnuplot}}" name=example-gnuplot width=67%}
 set xrange [-pi:pi]
 set yrange [-1.5:1.5]
 plot sin(x) lw 4, cos(x) lw 4
 ```
 
-# MakeX
+# hey
 
-`makex.mk` is a Makefile. It is intended to be included in any Makefile to
-easily install some tools based on LuaX and Pandoc to pre-process files and
-generate documents, using Lua as a common, simple and powerful scripting
-language.
+`hey` is a shell script. It is intended to easily install some tools based on
+LuaX and Pandoc to pre-process files and generate documents, using Lua as a
+common, simple and powerful scripting language.
 
 ## Example
 
-Fizzbuzz itself is an example of makex usage.
-
-Easy installation, only `makex.mk` is needed:
+Easy installation, only `hey` is needed:
 
 ``` sh
-wget http://cdelord.fr/makex/makex.md
+wget https://raw.githubusercontent.com/CDSoft/hey/master/hey
 ```
 
-And easy usage with other Makefiles:
+Its usage is very similar to `apt` or `dnf`:
 
-``` makefile
-include makex.mk
+``` sh
+$ hey list
+@sh "hey list"
+```
+
+``` sh
+$ hey install all
+...
 ```
 
 # Fizzbuzz
@@ -723,7 +755,7 @@ The Haskell fizzbuzz function returns:
 
 @req.matrix "g"
 
-```{.dot render="{{dot}}"}
+```{.dot render="{{dot}}" name=coverage-matrix}
 @req.dot()
 ```
 
@@ -749,7 +781,7 @@ The Haskell fizzbuzz function returns:
 > The reference manual is the official definition of the Lua language.
 
 @link "LuaX" "https://github.com/CDSoft/luax"
-> LuaX is a Lua interpretor and REPL based on Lua 5.4.4, augmented with some
+> LuaX is a Lua interpretor and REPL based on Lua 5.4, augmented with some
 > useful packages. LuaX can also produce standalone executables from Lua
 > scripts.
 
@@ -839,14 +871,9 @@ This chapter contains the sources of this document.
 ```{.lua include=fizzbuzz_test.lua}
 ```
 
-## Makefile
+## build.lua
 
-```{.makefile include=Makefile}
-```
-
-## makex.mk
-
-```{.makefile include=makex.mk}
+```{.lua include=build.lua}
 ```
 
 ::::::

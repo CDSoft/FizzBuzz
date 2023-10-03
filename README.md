@@ -106,11 +106,11 @@ semantics to be extended in unconventional ways.
 
 **Lua is small**
 
-Adding Lua to an application does not bloat it. The tarball for Lua
-5.4.4, which contains source code and documentation, takes 353K
-compressed and 1.3M uncompressed. The source contains around 30000 lines
-of C. Under 64-bit Linux, the Lua interpreter built with all standard
-Lua libraries takes 281K and the Lua library takes 468K.
+Adding Lua to an application does not bloat it. The tarball for Lua 5.4,
+which contains source code and documentation, takes 353K compressed and
+1.3M uncompressed. The source contains around 30000 lines of C. Under
+64-bit Linux, the Lua interpreter built with all standard Lua libraries
+takes 281K and the Lua library takes 468K.
 
 **Lua is free**
 
@@ -122,7 +122,7 @@ and use it.
 # LuaX
 
 [LuaX](https://github.com/CDSoft/luax) is a Lua interpretor and REPL
-based on Lua 5.4.4, augmented with some useful packages. LuaX can also
+based on Lua 5.4, augmented with some useful packages. LuaX can also
 produce standalone executables from Lua scripts.
 
 LuaX runs on several platforms with no dependency:
@@ -197,6 +197,38 @@ Typical usages are:
 
 The next chapters present some tools written in Lua/LuaX or using Lua as
 a scripting engine.
+
+# Bang
+
+[Bang](https://github.com/CDSoft/bang) is a ninja file generator
+scriptable in LuaX, a Lua interpreter with a bunch of useful modules
+(file management, functional programming module, basic cryptography, …).
+It takes a build description (a LuaX script) and generates a Ninja file.
+
+Bang provides functions to generate ninja primitives (variables, rules,
+build statements, …) and some extra features:
+
+- rule/build statement pairs described in a single function call
+- file listing and filenames list management using LuaX modules (e.g. F
+  and fs)
+- pipe simulation using rule composition
+- “clean”, “install” and “help” targets
+
+Bang comes with an example that shows how to use bang and LuaX functions
+to:
+
+- discover source files actually present in the repository: no redundant
+  hard coded file lists (redundancy means painful maintenance)
+- cross-compile the same sources for multiple platforms: compilation for
+  several platforms without any dirty copy/paste
+- describe static libraries: in the `lib` directory, each sub-directory
+  is a library compiled and archived in its own `.a` file
+- describe executables: in the `bin` directory, each C source file is
+  the main file of a binary containing this C file as well as libraries
+  from the `lib` directory.
+
+Bang is currently used to build bang itself but also LuaX and some
+projects available on my [GitHub](https://github.com/CDSoft).
 
 # Ypp
 
@@ -358,8 +390,7 @@ code blocks and are replaced by an image by panda.
     }
     ```
 
-<img src="./img/fbc1d5fae695b3f059a6a177a655c3e6bd546640.svg"
-class="dot" style="width:67.0%" />
+<img src="./img/example-graphviz.svg" class="dot" style="width:67.0%" />
 
     ```{render="{{gnuplot}}" width=67%}
     set xrange [-pi:pi]
@@ -367,30 +398,53 @@ class="dot" style="width:67.0%" />
     plot sin(x) lw 4, cos(x) lw 4
     ```
 
-<img src="./img/011d4265ca7dd8d99c2959c1d7a2ccd1b5a8ec62.svg"
-style="width:67.0%" />
+<img src="./img/example-gnuplot.svg" style="width:67.0%" />
 
-# MakeX
+# hey
 
-`makex.mk` is a Makefile. It is intended to be included in any Makefile
-to easily install some tools based on LuaX and Pandoc to pre-process
-files and generate documents, using Lua as a common, simple and powerful
-scripting language.
+`hey` is a shell script. It is intended to easily install some tools
+based on LuaX and Pandoc to pre-process files and generate documents,
+using Lua as a common, simple and powerful scripting language.
 
 ## Example
 
-Fizzbuzz itself is an example of makex usage.
-
-Easy installation, only `makex.mk` is needed:
+Easy installation, only `hey` is needed:
 
 ``` sh
-wget http://cdelord.fr/makex/makex.md
+wget https://raw.githubusercontent.com/CDSoft/hey/master/hey
 ```
 
-And easy usage with other Makefiles:
+Its usage is very similar to `apt` or `dnf`:
 
-``` makefile
-include makex.mk
+``` sh
+$ hey list
+all     install all packets
+
+======== CDSoft softwares =====================================================
+bang    Ninja file generator scriptable in LuaX
+calculadoira
+        simple yet powerful calculator
+lsvg    LuaX interpreter specialized to generate SVG images
+luax    Lua eXtended, a Lua interpreter with a better REPL and useful libraries
+panda   Pandoc Lua filter that works on internal Pandoc’s AST
+tagref  Maintain cross-references in your code
+ypp     Yet another preprocessor, scriptable in LuaX
+
+======== Other softwares ======================================================
+ditaa   DIagrams Through Ascii Art
+pandoc  Swiss-army knife to convert from and to a bunch of document formats
+pandoc-latex-template
+        Clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX
+pandoc-panam-css
+        Pan Am: Simple CSS for Pandoc
+plantuml
+        PlantUML
+typst   Focus on your text and let Typst take care of layout and formatting
+```
+
+``` sh
+$ hey install all
+...
 ```
 
 # Fizzbuzz
@@ -485,8 +539,7 @@ function compositions.
 It computes the `"fizz"` and `"buzz"` parts and return them if at least
 one of them is not `nil`. Otherwise it returns its argument unchanged.
 
-<img src="./img/c37872b186927e4273ff93e3eceb16ac5840bb7c.svg"
-class="dot" style="width:100.0%" />
+<img src="./img/fizzbuzz-lua.svg" class="dot" style="width:100.0%" />
 
 ``` lua
 local function div(d, s, n)
@@ -1079,8 +1132,7 @@ values</li>
 </tbody>
 </table>
 
-<img src="./img/033b1439dfa5ee80917d05804ced3e2d80c784a4.svg"
-class="dot" />
+<img src="./img/coverage-matrix.svg" class="dot" />
 
 # References
 
@@ -1106,7 +1158,7 @@ class="dot" />
 [**LuaX**](https://github.com/CDSoft/luax):
 <https://github.com/CDSoft/luax>
 
-> LuaX is a Lua interpretor and REPL based on Lua 5.4.4, augmented with
+> LuaX is a Lua interpretor and REPL based on Lua 5.4, augmented with
 > some useful packages. LuaX can also produce standalone executables
 > from Lua scripts.
 

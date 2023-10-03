@@ -8,11 +8,11 @@ keywords:
     - Documentation
     - Tests
     - Build system
+fontsize: 10pt
 ---
 
 ```meta
 logo = os.getenv "LOGO"
-background = os.getenv "BACKGROUND"
 ```
 
 # Disclaimer
@@ -105,7 +105,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 ## Lua eXtended
 
 - Lua interpretor and REPL
-- based on Lua 5.4.4
+- based on Lua 5.4
 - more built-in packages
 - multiplatform Lua *compiler*
 - zero dependency
@@ -186,6 +186,48 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 ## Get LuaX
 
 <https://github.com/CDSoft/luax>
+
+::::::::::
+
+:::::::::::::::::::::::::::::
+
+# bang - Ninja file generator scriptable in LuaX
+
+::::::::::::::::::::::::::::: {.columns}
+
+:::::::::: {.column width=48%}
+
+## bang
+
+- Ninja file generator scriptable in LuaX
+- Lua/LuaX macros
+
+## LuaX
+
+- compiled with LuaX
+- all LuaX modules available in bang build scripts
+
+## How does bang work?
+
+- bang takes a build description (a LuaX script)
+- and generates a Ninja file
+
+::::::::::
+
+:::::::::: {.column width=48%}
+
+## Features
+
+- ninja primitives (variables, rules, build statements, ...)
+- rule/build statement pairs described in a single function call
+- file listing and filenames list management using LuaX modules
+- functional programming (LuaX `F` module)
+- pipe simulation using rule composition
+- "clean", "install" and "help" targets
+
+## Get bang
+
+<https://github.com/CDSoft/bang>
 
 ::::::::::
 
@@ -424,7 +466,7 @@ _gnuplot = "{{gnuplot}}"
 
 :::::::::: {.column width=48%}
 
-```{.dot render="{{dot}}"}
+```{.dot render="{{dot}}" name=slideshow-example-graphviz}
 digraph {
     rankdir=LR;
     input -> pandoc -> output
@@ -467,7 +509,7 @@ digraph {
 
 :::::::::: {.column width=48%}
 
-```{render="{{gnuplot}}"}
+```{render="{{gnuplot}}" name=example-slideshow-gnuplot}
 set xrange [-pi:pi]
 set yrange [-1.5:1.5]
 plot sin(x) lw 4, cos(x) lw 4
@@ -487,18 +529,17 @@ plot sin(x) lw 4, cos(x) lw 4
     ```
 ``````
 
-# MakeX
+# hey
 
-## `makex.mk`
+## `hey`
 
-- single Makefile
+- single shell script
 - install LuaX, ypp, pandoc, panda, ...
-- meant to be included in a Makefile
 
 ## Simple installation
 
 ``` sh
-wget http://cdelord.fr/makex/makex.mk
+git clone https://github.com/CDSoft/hey
 ```
 
 ::::::::::::::::::::::::::::: {.columns}
@@ -507,17 +548,17 @@ wget http://cdelord.fr/makex/makex.mk
 
 ## Simple usage
 
-``` makefile
-include makex.mk
+``` sh
+hey install all
 ```
 
 ::::::::::
 
 :::::::::: {.column width=48%}
 
-## Get makex
+## Get hey
 
-<https://github.com/CDSoft/makex>
+<https://github.com/CDSoft/hey>
 
 ::::::::::
 
@@ -535,7 +576,7 @@ include makex.mk
 - YPP
 - Pandoc
 - Panda
-- with a complete Makefile example using `makex.mk`
+- with a complete environment installed with `hey`
 
 ## using Lua tables everywhere
 
@@ -585,7 +626,7 @@ include makex.mk
     - @link "Pandoc manual" "https://pandoc.org/MANUAL.html"
     - @link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html"
 - @link "Panda" "https://github.com/CDSoft/panda"
-- @link "makex" "https://github.com/CDSoft/makex"
+- @link "hey" "https://github.com/CDSoft/hey"
 
 # Questions
 

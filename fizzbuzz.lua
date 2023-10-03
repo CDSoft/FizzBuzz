@@ -9,7 +9,7 @@ It computes the `"fizz"` and `"buzz"` parts and return them
 if at least one of them is not `nil`{.lua}.
 Otherwise it returns its argument unchanged.
 
-```{ .dot render="{{dot}}" width=100% }
+```{ .dot render="{{dot}}" name=fizzbuzz-lua width=100% }
 digraph {
 
 n [label="n" shape=oval]
@@ -65,4 +65,4 @@ assert(n, tostring(arg[1])..": not a number")
 
 F.range(n)
     : map(fizzbuzz)
-    : mapi(print)
+    : foreachi(print)
