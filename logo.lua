@@ -40,10 +40,11 @@ img:Rect {
 local function ix(i) return w/4 + (256+64)*(i-1) end
 local function iy(i) return 896 + 256*(i-1) end
 
-local names = string.words "LuaX ypp Panda Pandoc ..."
+local names = string.words "LuaX ypp Panda Pandoc ..." ---@diagnostic disable-line: undefined-field
 
 names:mapi(function(i, name)
-    img:Text(name) { x = ix(i), y = iy(i) } { fill = "white" }
+    img:Text(name) { x = ix(i), y = iy(i) } { fill = name=="Pandoc" and "darkgrey" or "white" }
 end)
 
-img:Text "bang" {transform=("translate(%d, %d) rotate(45)"):format(ix(1), iy(3.5))} { fill = "white" }
+img:Text "bang"  {transform=("translate(%d, %d) rotate(45)"):format(ix(1.0), iy(3.5))} { fill = "white" }
+img:Text "ninja" {transform=("translate(%d, %d) rotate(45)"):format(ix(0.5), iy(4.0))} { fill = "darkgrey" }

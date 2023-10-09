@@ -1162,6 +1162,11 @@ values</li>
 > some useful packages. LuaX can also produce standalone executables
 > from Lua scripts.
 
+[**bang**](https://github.com/CDSoft/bang):
+<https://github.com/CDSoft/bang>
+
+> Bang is a Ninja file generator scriptable in LuaX.
+
 [**ypp**](https://github.com/CDSoft/ypp):
 <https://github.com/CDSoft/ypp>
 

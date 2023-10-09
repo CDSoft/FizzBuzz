@@ -621,6 +621,7 @@ hey install all
 - @link "Lua" "https://www.lua.org"
     - @link "Lua documentation" "https://www.lua.org/manual/5.4/"
 - @link "LuaX" "https://github.com/CDSoft/luax"
+- @link "bang" "https://github.com/CDSoft/bang"
 - @link "ypp" "https://github.com/CDSoft/ypp"
 - @link "Pandoc" "https://pandoc.org"
     - @link "Pandoc manual" "https://pandoc.org/MANUAL.html"

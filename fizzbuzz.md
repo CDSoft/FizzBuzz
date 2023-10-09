@@ -785,6 +785,9 @@ The Haskell fizzbuzz function returns:
 > useful packages. LuaX can also produce standalone executables from Lua
 > scripts.
 
+@link "bang" "https://github.com/CDSoft/bang"
+> Bang is a Ninja file generator scriptable in LuaX.
+
 @link "ypp" "https://github.com/CDSoft/ypp"
 > Ypp is a minimalist and generic text preprocessor using Lua macros.
 
