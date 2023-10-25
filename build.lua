@@ -103,17 +103,10 @@ local pandoc_flags = {
     "--table-of-content",
 }
 
-local pandoc_user_data_directory = sh "pandoc -v"
-    : lines()
-    : filter(function(l) return l:match"^User data directory" end)
-    : head()
-    : split(": ")
-    : last()
-
 local html_flags = {
     pandoc_flags,
     "--to html5",
-    "--css", pandoc_user_data_directory/"panam.css",
+    "--css", "$$PANDOC_USER_DATA_DIRECTORY/panam.css",
     "--embed-resources --standalone",
     "--mathml",
 }
@@ -124,6 +117,7 @@ rule "panda_html" {
         "export PANDA_TARGET=$out;",
         "export PANDA_DEP_FILE=$depfile;",
         "export LOGO=$logo_html;",
+        "export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk '$$0 ~ /^User data directory:/ {print $$4}'`;",
         "panda", html_flags, "$in -o $out",
     },
     depfile = "$builddir/dependencies/$out.d",

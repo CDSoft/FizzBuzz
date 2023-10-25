@@ -68,7 +68,7 @@ rule ypp
   depfile = $builddir/dependencies/$out.d
 
 rule panda_html
-  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; panda --table-of-content --to html5 --css /home/christ/.local/share/pandoc/panam.css --embed-resources --standalone --mathml $in -o $out
+  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk '$$0 ~ /^User data directory:/ {print $$4}'`; panda --table-of-content --to html5 --css $$PANDOC_USER_DATA_DIRECTORY/panam.css --embed-resources --standalone --mathml $in -o $out
   depfile = $builddir/dependencies/$out.d
 
 rule panda_pdf
@@ -118,5 +118,15 @@ rule help
   command = echo "Fizzbuzz build system"; echo ""; echo "Targets:"; echo "  help    show this help message"; echo "  all     compile, test and document FizzBuzz"; echo "  clean   clean generated files";
 
 build help: help
+
+######################################################################
+# Regenerate build.ninja when build.lua changes
+######################################################################
+
+rule bang
+  command = bang $quiet $in -o $out -- $args
+  generator = true
+
+build build.ninja: bang build.lua
 
 default $builddir/tests/fizzbuzz_lua $builddir/tests/fizzbuzz_lua.txt $builddir/tests/fizzbuzz_c $builddir/tests/fizzbuzz_c.txt $builddir/tests/fizzbuzz_hs $builddir/tests/fizzbuzz_hs.txt $builddir/tests/result_lua.lua $builddir/tests/result_c.lua $builddir/tests/result_hs.lua $logo_pdf $logo_html $builddir/fizzbuzz.html $builddir/fizzbuzz.pdf README.md $builddir/fizzbuzz_slideshow.pdf
