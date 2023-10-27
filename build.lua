@@ -1,5 +1,4 @@
 local F = require "F"
-local sh = require "sh"
 
 ---------------------------------------------------------------------------
 section "Project directories"
