@@ -116,7 +116,7 @@ rule "panda_html" {
         "export PANDA_TARGET=$out;",
         "export PANDA_DEP_FILE=$depfile;",
         "export LOGO=$logo_html;",
-        "export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk '$$0 ~ /^User data directory:/ {print $$4}'`;",
+        "export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk -F': *' '$$1==\"User data directory\" {print $$2}'`;",
         "panda", html_flags, "$in -o $out",
     },
     depfile = "$builddir/dependencies/$out.d",

@@ -70,7 +70,7 @@ rule ypp
   depfile = $builddir/dependencies/$out.d
 
 rule panda_html
-  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk '$$0 ~ /^User data directory:/ {print $$4}'`; panda --table-of-content --to html5 --css $$PANDOC_USER_DATA_DIRECTORY/panam.css --embed-resources --standalone --mathml $in -o $out
+  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk -F': *' '$$1=="User data directory" {print $$2}'`; panda --table-of-content --to html5 --css $$PANDOC_USER_DATA_DIRECTORY/panam.css --embed-resources --standalone --mathml $in -o $out
   depfile = $builddir/dependencies/$out.d
 
 rule panda_pdf
