@@ -96,7 +96,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 :::::::::::::::::::::::::::::
 
-# LuaX - Extended Lua interpretor / compiler
+# LuaX - Extended Lua interpreter / compiler
 
 ::::::::::::::::::::::::::::: {.columns}
 
@@ -104,7 +104,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## Lua eXtended
 
-- Lua interpretor and REPL
+- Lua interpreter and REPL
 - based on Lua 5.4
 - more built-in packages
 - multiplatform Lua *compiler*
@@ -169,7 +169,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 - Lua tables
 - project configuration
 - software configuration
-- readable by any Lua interpretor
+- readable by any Lua interpreter
 
 ::::::::::
 
@@ -411,7 +411,7 @@ Pandoc uses Lua scripts:
 
 ## Based on Pandoc Lua
 
-- based on the Pandoc Lua interpretor
+- based on the Pandoc Lua interpreter
 - LuaX specific functions are available
 
 ## Get Panda

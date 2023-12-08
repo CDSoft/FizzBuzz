@@ -150,7 +150,7 @@ purposes, at absolutely no cost. Just download it and use it.
 
 # LuaX
 
-[LuaX](https://github.com/CDSoft/luax) is a Lua interpretor and REPL based on
+[LuaX](https://github.com/CDSoft/luax) is a Lua interpreter and REPL based on
 Lua 5.4, augmented with some useful packages. LuaX can also produce
 standalone executables from Lua scripts.
 
@@ -162,7 +162,7 @@ LuaX runs on several platforms with no dependency:
 
 LuaX can cross-compile scripts from and to any of these platforms.
 
-LuaX comes with a standard Lua interpretor and provides some libraries (embedded
+LuaX comes with a standard Lua interpreter and provides some libraries (embedded
 in a single executable, no external dependency required):
 
 - [LuaX interactive usage](https://github.com/CDSoft/luax/blob/master/doc/repl.md): improved Lua REPL
@@ -197,7 +197,7 @@ Typical usages are:
 
 - project/software configuration
     - a Lua table can be used to describe a project or a software configuration
-        - read by an embedded Lua interpretor
+        - read by an embedded Lua interpreter
         - used to generate documentation or source code
 - tests results
     - a test suite can generate test results as a Lua table
@@ -781,7 +781,7 @@ The Haskell fizzbuzz function returns:
 > The reference manual is the official definition of the Lua language.
 
 @link "LuaX" "https://github.com/CDSoft/luax"
-> LuaX is a Lua interpretor and REPL based on Lua 5.4, augmented with some
+> LuaX is a Lua interpreter and REPL based on Lua 5.4, augmented with some
 > useful packages. LuaX can also produce standalone executables from Lua
 > scripts.
 

@@ -121,7 +121,7 @@ and use it.
 
 # LuaX
 
-[LuaX](https://github.com/CDSoft/luax) is a Lua interpretor and REPL
+[LuaX](https://github.com/CDSoft/luax) is a Lua interpreter and REPL
 based on Lua 5.4, augmented with some useful packages. LuaX can also
 produce standalone executables from Lua scripts.
 
@@ -133,7 +133,7 @@ LuaX runs on several platforms with no dependency:
 
 LuaX can cross-compile scripts from and to any of these platforms.
 
-LuaX comes with a standard Lua interpretor and provides some libraries
+LuaX comes with a standard Lua interpreter and provides some libraries
 (embedded in a single executable, no external dependency required):
 
 - [LuaX interactive
@@ -188,7 +188,7 @@ Typical usages are:
 - project/software configuration
   - a Lua table can be used to describe a project or a software
     configuration
-    - read by an embedded Lua interpretor
+    - read by an embedded Lua interpreter
     - used to generate documentation or source code
 - tests results
   - a test suite can generate test results as a Lua table
@@ -1158,7 +1158,7 @@ values</li>
 [**LuaX**](https://github.com/CDSoft/luax):
 <https://github.com/CDSoft/luax>
 
-> LuaX is a Lua interpretor and REPL based on Lua 5.4, augmented with
+> LuaX is a Lua interpreter and REPL based on Lua 5.4, augmented with
 > some useful packages. LuaX can also produce standalone executables
 > from Lua scripts.
 
