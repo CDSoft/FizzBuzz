@@ -191,7 +191,10 @@ rule "panda_beamer" {
 var "logo_pdf" "$builddir/logo.pdf"
 var "logo_html" "$img/logo.svg"
 
-rule "lsvg" { command = "lsvg $in $out" }
+rule "lsvg" {
+    command = "lsvg $in -o $out --MF $depfile",
+    depfile = "$builddir/$out.d",
+}
 
 acc(all) {
     build "$logo_pdf"  { "lsvg", "logo.lua" },

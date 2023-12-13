@@ -89,7 +89,8 @@ logo_pdf = $builddir/logo.pdf
 logo_html = $img/logo.svg
 
 rule lsvg
-  command = lsvg $in $out
+  command = lsvg $in -o $out --MF $depfile
+  depfile = $builddir/$out.d
 
 build $logo_pdf: lsvg logo.lua
 build $logo_html: lsvg logo.lua
