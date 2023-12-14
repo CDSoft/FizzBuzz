@@ -100,6 +100,9 @@ build $builddir/fizzbuzz.pdf: panda_pdf $builddir/fizzbuzz.md | $logo_pdf
 build README.md: panda_gfm $builddir/fizzbuzz.md | $logo_html
 build $builddir/fizzbuzz_slideshow.md: ypp fizzbuzz_slideshow.md
 build $builddir/fizzbuzz_slideshow.pdf: panda_beamer $builddir/fizzbuzz_slideshow.md | $logo_pdf
+build all: phony $builddir/tests/fizzbuzz_lua $builddir/tests/fizzbuzz_lua.txt $builddir/tests/fizzbuzz_c $builddir/tests/fizzbuzz_c.txt $builddir/tests/fizzbuzz_hs $builddir/tests/fizzbuzz_hs.txt $builddir/tests/result_lua.lua $builddir/tests/result_c.lua $builddir/tests/result_hs.lua $logo_pdf $logo_html $builddir/fizzbuzz.html $builddir/fizzbuzz.pdf README.md $builddir/fizzbuzz_slideshow.pdf
+
+default all
 
 ######################################################################
 # Clean
@@ -131,5 +134,3 @@ rule bang
   generator = true
 
 build build.ninja: bang build.lua | ./test_config.lua
-
-default $builddir/tests/fizzbuzz_lua $builddir/tests/fizzbuzz_lua.txt $builddir/tests/fizzbuzz_c $builddir/tests/fizzbuzz_c.txt $builddir/tests/fizzbuzz_hs $builddir/tests/fizzbuzz_hs.txt $builddir/tests/result_lua.lua $builddir/tests/result_c.lua $builddir/tests/result_hs.lua $logo_pdf $logo_html $builddir/fizzbuzz.html $builddir/fizzbuzz.pdf README.md $builddir/fizzbuzz_slideshow.pdf

@@ -10,7 +10,10 @@ var "img" "img"
 clean "$builddir"
 
 local all = {}
-require "atexit"(function() default(all) end)
+require "atexit"(function()
+    phony "all" (all)
+    default "all"
+end)
 
 ---------------------------------------------------------------------------
 section "Help"
