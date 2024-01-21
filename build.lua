@@ -103,6 +103,7 @@ rule "ypp" {
 
 local pandoc_flags = {
     "--table-of-content",
+    "--fail-if-warnings",
 }
 
 local html_flags = {

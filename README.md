@@ -35,7 +35,7 @@ like Bash, Python, Javascript and make them communicate with plain text,
 YAML, JSON, XML, CSV, INI, TOML. Every script shall rely on specific
 (existing or not) libraries to read and write these data formats.
 
-This document presents a commun and powerful data format and some tools
+This document presents a common and powerful data format and some tools
 to script the build process of a project and generate documentation.
 
 To sum up the suggested solution is:
@@ -127,9 +127,9 @@ produce standalone executables from Lua scripts.
 
 LuaX runs on several platforms with no dependency:
 
-- Linux (x86_64, i386, aarch64)
+- Linux (x86_64, aarch64)
 - MacOS (x86_64, aarch64)
-- Windows (x86_64, i386)
+- Windows (x86_64)
 
 LuaX can cross-compile scripts from and to any of these platforms.
 
@@ -270,7 +270,7 @@ Macros can also define variables reusable later by other macros.
     local foo = 42
     N = foo * 23 + 34
     local function sq(x) return x*x end
-    function sumsq(n) return F.range(N):map(sq):sum() end
+    function sumsq(n) return F.range(n):map(sq):sum() end
 ]]
 ```
 
