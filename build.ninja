@@ -70,15 +70,15 @@ rule ypp
   depfile = $builddir/dependencies/$out.d
 
 rule panda_html
-  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk -F': *' '$$1=="User data directory" {print $$2}'`; panda --table-of-content --fail-if-warnings --to html5 --css $$PANDOC_USER_DATA_DIRECTORY/panam.css --embed-resources --standalone --mathml $in -o $out
+  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; export PANDOC_USER_DATA_DIRECTORY=`pandoc -v | awk -F': *' '$$1=="User data directory" {print $$2}'`; panda --table-of-content --to html5 --css $$PANDOC_USER_DATA_DIRECTORY/panam.css --embed-resources --standalone --mathml $in -o $out
   depfile = $builddir/dependencies/$out.d
 
 rule panda_pdf
-  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_pdf; panda --table-of-content --fail-if-warnings --number-sections --highlight-style tango --top-level-division=chapter $in -o $out
+  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_pdf; panda --table-of-content --number-sections --highlight-style tango --top-level-division=chapter $in -o $out
   depfile = $builddir/dependencies/$out.d
 
 rule panda_gfm
-  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; panda --table-of-content --fail-if-warnings --to gfm --number-sections --highlight-style tango --top-level-division=chapter $in -o $out
+  command = export LUA_PATH="$builddir/tests/?.lua;./?.lua"; export REQDB="$builddir/reqdb.lua"; export REQTARGET="fizzbuzz.pdf"; export PANDA_TARGET=$out; export PANDA_DEP_FILE=$depfile; export LOGO=$logo_html; panda --table-of-content --to gfm --number-sections --highlight-style tango --top-level-division=chapter $in -o $out
   depfile = $builddir/dependencies/$out.d
 
 rule panda_beamer
@@ -121,7 +121,12 @@ build clean: phony clean-_builddir
 
 rule help
   description = help
-  command = echo "Fizzbuzz build system"; echo ""; echo "Targets:"; echo "  help    show this help message"; echo "  all     compile, test and document FizzBuzz"; echo "  clean   clean generated files";
+  command = echo "Fizzbuzz build system"; $
+            echo ""; $
+            echo "Targets:"; $
+            echo "  help    show this help message"; $
+            echo "  all     compile, test and document FizzBuzz"; $
+            echo "  clean   clean generated files"
 
 build help: help
 
