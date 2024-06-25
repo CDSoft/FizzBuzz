@@ -25,7 +25,7 @@ rule run_test
 ######################################################################
 
 rule _builddir_tests_fizzbuzz_lua
-  command = luax -q -o $out $in
+  command = luax compile -q -o $out $in
 
 build $builddir/tests/fizzbuzz_lua: _builddir_tests_fizzbuzz_lua fizzbuzz.lua
 build $builddir/tests/fizzbuzz_lua.txt: run_test $builddir/tests/fizzbuzz_lua

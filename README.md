@@ -242,9 +242,9 @@ More information here: <http://cdelord.fr/ypp>
 Ypp is pretty simple. It searches for Lua expressions and replaces
 macros with their results.
 
-| Macro     | Result                                                                           |
-|:----------|:---------------------------------------------------------------------------------|
-| `@(...)`  | Evaluates the Lua expression `...` and replaces the macro by its result          |
+| Macro | Result |
+|:---|:---|
+| `@(...)` | Evaluates the Lua expression `...` and replaces the macro by its result |
 | `@@(...)` | Executes the Lua chunk `...` and replaces the macro by its result (if not `nil`) |
 
 Some expression do not require parentheses (function calls).

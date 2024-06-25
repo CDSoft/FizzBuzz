@@ -36,7 +36,7 @@ section "Lua test"
 
 acc(all) {
     build "$builddir/tests/fizzbuzz_lua" { "fizzbuzz.lua",
-        command = "luax -q -o $out $in",
+        command = "luax compile -q -o $out $in",
     },
     build "$builddir/tests/fizzbuzz_lua.txt" {
         "run_test", "$builddir/tests/fizzbuzz_lua",
