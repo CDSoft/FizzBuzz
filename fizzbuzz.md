@@ -246,7 +246,7 @@ More information here: <http://cdelord.fr/ypp>
 
 Ypp is pretty simple. It searches for Lua expressions and replaces macros with their results.
 
-?(false)
+@q[=====[
 
 Macro       Result
 ----------- -------------------------------------------------------------------------
@@ -255,11 +255,11 @@ Macro       Result
 
 Some expression do not require parentheses (function calls).
 
-?(true)
+]=====]
 
 ## Example
 
-?(false)
+@q[=====[
 
 ``````{.markdown}
 $$
@@ -267,7 +267,7 @@ $$
 $$
 ``````
 
-?(true)
+]=====]
 
 is rendered as
 
@@ -277,7 +277,7 @@ is rendered as
 
 Macros can also define variables reusable later by other macros.
 
-?(false)
+@q[=====[
 ``````{.markdown}
 @@[[
     local foo = 42
@@ -286,7 +286,7 @@ Macros can also define variables reusable later by other macros.
     function sumsq(n) return F.range(n):map(sq):sum() end
 ]]
 ``````
-?(true)
+]=====]
 
 @@[[
     local foo = 42
@@ -295,12 +295,12 @@ Macros can also define variables reusable later by other macros.
     function sumsq(n) return F.range(n):map(sq):sum() end
 ]]
 
-defines `N` ($N = @N$) which can be read in a Lua expression or with ?(false)`@N`?(true)
+defines `N` ($N = @N$) which can be read in a Lua expression or with @q"`@N`"
 and `sumsq` which computes the sum of squares.
 
 Then
 
-?(false)
+@q[=====[
 
 ``````{.markdown}
 $$
@@ -308,7 +308,7 @@ $$
 $$
 ``````
 
-?(true)
+]=====]
 
 becomes
 

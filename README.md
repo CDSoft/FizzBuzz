@@ -858,38 +858,38 @@ buzz, 29, fizz, 31, buzz, fizz, 34, 35, fizzbuzz, 37, 38, fizz, buzz,
 <col style="width: 66%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th><strong>File</strong></th>
 <th><strong><a
 href="fizzbuzz.pdf"><code>fizzbuzz.pdf</code></a></strong></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="#SPEC_API"><code>SPEC_API</code></a></td>
 <td>fizzbuzz command line argument</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#SPEC_OUT"><code>SPEC_OUT</code></a></td>
 <td>fizzbuzz output on stdout</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#SPEC_FIZZ"><code>SPEC_FIZZ</code></a></td>
 <td>fizz when n is a multiple of 3 but not 5</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#SPEC_BUZZ"><code>SPEC_BUZZ</code></a></td>
 <td>buzz when n is a multiple of 5 but not 3</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#SPEC_FIZZBUZZ"><code>SPEC_FIZZBUZZ</code></a></td>
 <td>fizzbuzz n is a when multiple of 3 and 5</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#SPEC_NUM"><code>SPEC_NUM</code></a></td>
 <td>n when n is a not a multiple of 3 and 5</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#TEST_API"><code>TEST_API</code></a></td>
 <td><p>number of fizzbuzz values</p>
 <blockquote>
@@ -899,7 +899,7 @@ command line argument</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#TEST_OUT"><code>TEST_OUT</code></a></td>
 <td><p>output on stdout</p>
 <blockquote>
@@ -909,7 +909,7 @@ output on stdout</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#TEST_FIZZ"><code>TEST_FIZZ</code></a></td>
 <td><p>“fizz” values</p>
 <blockquote>
@@ -919,7 +919,7 @@ n is a multiple of 3 but not 5</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#TEST_BUZZ"><code>TEST_BUZZ</code></a></td>
 <td><p>“buzz” values</p>
 <blockquote>
@@ -929,7 +929,7 @@ n is a multiple of 5 but not 3</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#TEST_FIZZBUZZ"><code>TEST_FIZZBUZZ</code></a></td>
 <td><p>“fizzbuzz” values</p>
 <blockquote>
@@ -939,7 +939,7 @@ fizzbuzz n is a when multiple of 3 and 5</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#TEST_NUM"><code>TEST_NUM</code></a></td>
 <td><p>integral values</p>
 <blockquote>
@@ -949,7 +949,7 @@ a not a multiple of 3 and 5</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_LUA_API"><code>RES_LUA_API</code></a></td>
 <td><p>number of fizzbuzz values [PASS]</p>
 <blockquote>
@@ -959,7 +959,7 @@ fizzbuzz values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_LUA_OUT"><code>RES_LUA_OUT</code></a></td>
 <td><p>output on stdout [PASS]</p>
 <blockquote>
@@ -969,7 +969,7 @@ stdout</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_LUA_FIZZ"><code>RES_LUA_FIZZ</code></a></td>
 <td><p>“fizz” values [PASS]</p>
 <blockquote>
@@ -979,7 +979,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_LUA_BUZZ"><code>RES_LUA_BUZZ</code></a></td>
 <td><p>“buzz” values [PASS]</p>
 <blockquote>
@@ -989,7 +989,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_LUA_FIZZBUZZ"><code>RES_LUA_FIZZBUZZ</code></a></td>
 <td><p>“fizzbuzz” values [PASS]</p>
 <blockquote>
@@ -999,7 +999,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_LUA_NUM"><code>RES_LUA_NUM</code></a></td>
 <td><p>integral values [PASS]</p>
 <blockquote>
@@ -1009,7 +1009,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_C_API"><code>RES_C_API</code></a></td>
 <td><p>number of fizzbuzz values [PASS]</p>
 <blockquote>
@@ -1019,7 +1019,7 @@ fizzbuzz values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_C_OUT"><code>RES_C_OUT</code></a></td>
 <td><p>output on stdout [PASS]</p>
 <blockquote>
@@ -1029,7 +1029,7 @@ stdout</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_C_FIZZ"><code>RES_C_FIZZ</code></a></td>
 <td><p>“fizz” values [PASS]</p>
 <blockquote>
@@ -1039,7 +1039,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_C_BUZZ"><code>RES_C_BUZZ</code></a></td>
 <td><p>“buzz” values [PASS]</p>
 <blockquote>
@@ -1049,7 +1049,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_C_FIZZBUZZ"><code>RES_C_FIZZBUZZ</code></a></td>
 <td><p>“fizzbuzz” values [PASS]</p>
 <blockquote>
@@ -1059,7 +1059,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_C_NUM"><code>RES_C_NUM</code></a></td>
 <td><p>integral values [PASS]</p>
 <blockquote>
@@ -1069,7 +1069,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_HS_API"><code>RES_HS_API</code></a></td>
 <td><p>number of fizzbuzz values [PASS]</p>
 <blockquote>
@@ -1079,7 +1079,7 @@ fizzbuzz values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_HS_OUT"><code>RES_HS_OUT</code></a></td>
 <td><p>output on stdout [PASS]</p>
 <blockquote>
@@ -1089,7 +1089,7 @@ stdout</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_HS_FIZZ"><code>RES_HS_FIZZ</code></a></td>
 <td><p>“fizz” values [FAIL]</p>
 <blockquote>
@@ -1099,7 +1099,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_HS_BUZZ"><code>RES_HS_BUZZ</code></a></td>
 <td><p>“buzz” values [FAIL]</p>
 <blockquote>
@@ -1109,7 +1109,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="#RES_HS_FIZZBUZZ"><code>RES_HS_FIZZBUZZ</code></a></td>
 <td><p>“fizzbuzz” values [FAIL]</p>
 <blockquote>
@@ -1119,7 +1119,7 @@ values</li>
 </ul>
 </blockquote></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="#RES_HS_NUM"><code>RES_HS_NUM</code></a></td>
 <td><p>integral values [FAIL]</p>
 <blockquote>

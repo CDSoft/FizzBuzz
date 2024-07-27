@@ -281,7 +281,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 :::::::::: {.column width=48%}
 
-?(false)
+@q[=====[
 
 ## File inclusion
 
@@ -306,7 +306,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 ]]
 ``````
 
-?(true)
+]=====]
 
 @@[[
     local foo = 42
@@ -327,7 +327,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## Lua macros
 
-?(false)
+@q[=====[
 
 ``````{.markdown}
 $$
@@ -336,7 +336,7 @@ $$
 $$
 ``````
 
-?(true)
+]=====]
 
 ## Example
 
