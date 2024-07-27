@@ -13,7 +13,6 @@ of the argument by 3 or 5.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 static const char *fizzbuzz(int i, char *s)
 {
