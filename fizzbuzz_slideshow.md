@@ -529,9 +529,9 @@ plot sin(x) lw 4, cos(x) lw 4
     ```
 ``````
 
-# hey
+# LuaX binaries
 
-## `hey`
+## [cdelord.fr/pub](https://cdelord.fr/pub)
 
 - single shell script
 - install LuaX, ypp, pandoc, panda, ...
@@ -539,30 +539,8 @@ plot sin(x) lw 4, cos(x) lw 4
 ## Simple installation
 
 ``` sh
-git clone https://github.com/CDSoft/hey
+curl https://cdelord.fr/pub/luax-full.sh | sh
 ```
-
-::::::::::::::::::::::::::::: {.columns}
-
-:::::::::: {.column width=48%}
-
-## Simple usage
-
-``` sh
-hey install all
-```
-
-::::::::::
-
-:::::::::: {.column width=48%}
-
-## Get hey
-
-<https://github.com/CDSoft/hey>
-
-::::::::::
-
-:::::::::::::::::::::::::::::
 
 # Fizzbuzz
 
@@ -576,7 +554,6 @@ hey install all
 - YPP
 - Pandoc
 - Panda
-- with a complete environment installed with `hey`
 
 ## using Lua tables everywhere
 
@@ -627,7 +604,7 @@ hey install all
     - @link "Pandoc manual" "https://pandoc.org/MANUAL.html"
     - @link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html"
 - @link "Panda" "https://github.com/CDSoft/panda"
-- @link "hey" "https://github.com/CDSoft/hey"
+- @link "LuaX binaries" "https://cdelord.fr/pub"
 
 # Questions
 

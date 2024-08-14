@@ -400,52 +400,23 @@ code blocks and are replaced by an image by panda.
 
 <img src="./img/example-gnuplot.svg" style="width:67.0%" />
 
-# hey
+# Precompiled LuaX binaries
 
-`hey` is a shell script. It is intended to easily install some tools
-based on LuaX and Pandoc to pre-process files and generate documents,
-using Lua as a common, simple and powerful scripting language.
+[cdelord.fr/pub](https://cdelord.fr/pub) provides LuaX binaries as well
+as some other useful softwares (LuaX based tools, Pandoc…).
 
-## Example
+These tools are used to pre-process files and generate documents, using
+Lua as a common, simple and powerful scripting language.
 
-Easy installation, only `hey` is needed:
-
-``` sh
-wget https://raw.githubusercontent.com/CDSoft/hey/master/hey
-```
-
-Its usage is very similar to `apt` or `dnf`:
+These tools can easily be installed with a single shell command:
 
 ``` sh
-$ hey list
-all     install all packets
-
-======== CDSoft softwares =====================================================
-bang    Ninja file generator scriptable in LuaX
-calculadoira
-        simple yet powerful calculator
-lsvg    LuaX interpreter specialized to generate SVG images
-luax    Lua eXtended, a Lua interpreter with a better REPL and useful libraries
-panda   Pandoc Lua filter that works on internal Pandoc’s AST
-tagref  Maintain cross-references in your code
-ypp     Yet another preprocessor, scriptable in LuaX
-
-======== Other softwares ======================================================
-ditaa   DIagrams Through Ascii Art
-pandoc  Swiss-army knife to convert from and to a bunch of document formats
-pandoc-latex-template
-        Clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX
-pandoc-panam-css
-        Pan Am: Simple CSS for Pandoc
-plantuml
-        PlantUML
-typst   Focus on your text and let Typst take care of layout and formatting
+curl https://cdelord.fr/pub/luax-full.sh | sh
 ```
 
-``` sh
-$ hey install all
-...
-```
+More details on [cdelord.fr/pub](https://cdelord.fr/pub), especially for
+Windows users who may need to download a Zip archive and decompress it
+manually.
 
 # Fizzbuzz
 

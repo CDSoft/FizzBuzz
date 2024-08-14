@@ -417,31 +417,23 @@ set yrange [-1.5:1.5]
 plot sin(x) lw 4, cos(x) lw 4
 ```
 
-# hey
+# Precompiled LuaX binaries
 
-`hey` is a shell script. It is intended to easily install some tools based on
-LuaX and Pandoc to pre-process files and generate documents, using Lua as a
-common, simple and powerful scripting language.
+[cdelord.fr/pub](https://cdelord.fr/pub) provides LuaX binaries
+as well as some other useful softwares (LuaX based tools, Pandoc...).
 
-## Example
+These tools are used to pre-process files and generate documents,
+using Lua as a common, simple and powerful scripting language.
 
-Easy installation, only `hey` is needed:
-
-``` sh
-wget https://raw.githubusercontent.com/CDSoft/hey/master/hey
-```
-
-Its usage is very similar to `apt` or `dnf`:
+These tools can easily be installed with a single shell command:
 
 ``` sh
-$ hey list
-@sh "hey list"
+curl https://cdelord.fr/pub/luax-full.sh | sh
 ```
 
-``` sh
-$ hey install all
-...
-```
+More details on [cdelord.fr/pub](https://cdelord.fr/pub),
+especially for Windows users who may need to download a Zip archive
+and decompress it manually.
 
 # Fizzbuzz
 

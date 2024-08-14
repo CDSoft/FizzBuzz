@@ -109,7 +109,7 @@ local pandoc_flags = {
 local html_flags = {
     pandoc_flags,
     "--to html5",
-    "--css", "$$PANDOC_USER_DATA_DIRECTORY/panam.css",
+    --"--css", "$$PANDOC_USER_DATA_DIRECTORY/panam.css",
     "--embed-resources --standalone",
     "--mathml",
 }
