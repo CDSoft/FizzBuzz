@@ -8,9 +8,9 @@ environment. Fizzbuzz is just an application example.
 
 # Links
 
-- [fizzbuzz_slideshow.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz_slideshow.pdf):
+- [fizzbuzz_slideshow.pdf](https://github.com/CDSoft/FizzBuzz/releases):
   PDF slideshow
-- [fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf): PDF
+- [fizzbuzz.pdf](https://github.com/CDSoft/FizzBuzz/releases): PDF
   demonstration (specification, implementation, tests, test report,
   documentation generator, …)
 - [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz):
@@ -170,13 +170,13 @@ LuaX comes with a standard Lua interpreter and provides some libraries
 - [inspect](https://github.com/CDSoft/luax/blob/master/doc/inspect.md):
   Human-readable representation of Lua tables
 
-More information here: <http://cdelord.fr/luax>
+More information here: <https://github.com/CDSoft/luax>
 
 # Scripting with LuaX
 
 LuaX can be used as a general programming language. There are plenty of
 [good documentations for Lua](https://www.lua.org/docs.html) and
-[LuaX](http://cdelord.fr/luax).
+[LuaX](https://github.com/CDSoft/luax).
 
 A big advantage of Lua is the usage of Lua tables as a common data
 format usable by various tools. It is Human-readable and structured. It
@@ -237,7 +237,7 @@ Ypp is a minimalist and generic text preprocessor using Lua macros.
 Ypp is compiled by LuaX, i.e. Lua and LuaX functions and modules are
 available in macros.
 
-More information here: <http://cdelord.fr/ypp>
+More information here: <https://github.com/CDSoft/ypp>
 
 Ypp is pretty simple. It searches for Lua expressions and replaces
 macros with their results.
@@ -259,9 +259,11 @@ $$
 
 is rendered as
 
-> $$
+> 
+> ``` math
+>
 > \sum_{i=1}^{100} i^2 = 338350
-> $$
+> ```
 
 Macros can also define variables reusable later by other macros.
 
@@ -274,7 +276,7 @@ Macros can also define variables reusable later by other macros.
 ]]
 ```
 
-defines `N` ($N = 1000$) which can be read in a Lua expression or with
+defines `N` ($`N = 1000`$) which can be read in a Lua expression or with
 `@N` and `sumsq` which computes the sum of squares.
 
 Then
@@ -287,9 +289,11 @@ $$
 
 becomes
 
-> $$
+> 
+> ``` math
+>
 > \sum_{i=1}^{1000} i^2 = 333833500
-> $$
+> ```
 
 # Pandoc
 
@@ -322,7 +326,7 @@ It provides several interesting features:
 - script execution (e.g. to include the result of a command)
 - diagrams (Graphviz, PlantUML, ditaa, Asymptote, blockdiag, mermaid…)
 
-The documentation of Panda is here: <http://cdelord.fr/panda>
+The documentation of Panda is here: <https://github.com/CDSoft/panda>
 
 ## Examples
 
@@ -400,24 +404,6 @@ code blocks and are replaced by an image by panda.
 
 <img src="./img/example-gnuplot.svg" style="width:67.0%" />
 
-# Precompiled LuaX binaries
-
-[cdelord.fr/pub](https://cdelord.fr/pub) provides LuaX binaries as well
-as some other useful softwares (LuaX based tools, Pandoc…).
-
-These tools are used to pre-process files and generate documents, using
-Lua as a common, simple and powerful scripting language.
-
-These tools can easily be installed with a single shell command:
-
-``` sh
-curl https://cdelord.fr/pub/luax-full.sh | sh
-```
-
-More details on [cdelord.fr/pub](https://cdelord.fr/pub), especially for
-Windows users who may need to download a Zip archive and decompress it
-manually.
-
 # Fizzbuzz
 
 Fizzbuzz is a concrete example of the usage of LuaX/ypp/pandoc/panda to
@@ -435,9 +421,12 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz):
 `fizzbuzz` is a function that returns `"fizz"`, `"buzz"`, `"fizzbuzz"`
 or `n` for any positive integer `n`.
 
-$$
+``` math
+
     fizzbuzz : \mathbb{N}^+ \to \{fizz, buzz, fizzbuzz\} \cup \mathbb{N}^+
-$$ $$
+```
+``` math
+
     fizzbuzz(n) =
         \begin{cases}
             \text{"fizzbuzz" }  & \text{if } (3|n) \land (5|n) \\
@@ -445,7 +434,7 @@ $$ $$
             \text{"buzz" }      & \text{if } (5|n) \land \lnot (3|n) \\
             n                   & \text{if } \lnot (3|n) \land \lnot (5|n) \\
         \end{cases}
-$$
+```
 
 ### Requirements
 
@@ -566,13 +555,14 @@ The functions `fizzbuzz` builds three infinite lists and combine them.
 | fizzes | .   | .   | fizz | .   | .    | fizz | .   | .   | fizz | .    | .   | fizz | .   | .   | fizz | …   |
 | buzzes | .   | .   | .    | .   | buzz | .    | .   | .   | .    | buzz | .   | .    | .   | .   | buzz | …   |
 
-$$
+``` math
+
 fizzbuzz(n) =
     \begin{cases}
         fizz + buzz     & \text{if } fizz \ne Nothing \lor buzz \ne Nothing \\
         n               & \text{if } fizz = buzz = Nothing \\
     \end{cases}
-$$
+```
 
 ``` hs
 fizzbuzz :: [String]

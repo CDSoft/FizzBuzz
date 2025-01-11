@@ -529,19 +529,6 @@ plot sin(x) lw 4, cos(x) lw 4
     ```
 ``````
 
-# LuaX binaries
-
-## [cdelord.fr/pub](https://cdelord.fr/pub)
-
-- single shell script
-- install LuaX, ypp, pandoc, panda, ...
-
-## Simple installation
-
-``` sh
-curl https://cdelord.fr/pub/luax-full.sh | sh
-```
-
 # Fizzbuzz
 
 ::::::::::::::::::::::::::::: {.columns}
@@ -578,9 +565,8 @@ curl https://cdelord.fr/pub/luax-full.sh | sh
 ## Complete Fizzbuzz example
 
 - [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz)
-- [cdelord.fr/fizzbuzz](http://cdelord.fr/fizzbuzz):
-    - [fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf)
-    - [fizzbuzz.html](http://cdelord.fr/fizzbuzz/fizzbuzz.html)
+- [fizzbuzz.pdf](https://github.com/CDSoft/FizzBuzz/releases)
+- [fizzbuzz.html](https://github.com/CDSoft/FizzBuzz/releasesl)
 
 ::::::::::
 
@@ -604,7 +590,7 @@ curl https://cdelord.fr/pub/luax-full.sh | sh
     - @link "Pandoc manual" "https://pandoc.org/MANUAL.html"
     - @link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html"
 - @link "Panda" "https://github.com/CDSoft/panda"
-- @link "LuaX binaries" "https://cdelord.fr/pub"
+- @link "LuaX binaries" "https://github.com/CDSoft/pub"
 
 # Questions
 
@@ -614,7 +600,7 @@ curl https://cdelord.fr/pub/luax-full.sh | sh
 
 ## Web / email
 
-[cdelord.fr](http://cdelord.fr)
+[CDSoft.github.io](https://CDSoft.github.io)
 
 ## Github
 
@@ -628,8 +614,7 @@ curl https://cdelord.fr/pub/luax-full.sh | sh
 
 [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz)
 
-[cdelord.fr/fizzbuzz](http://cdelord.fr/fizzbuzz)
-[cdelord.fr/fizzbuzz/fizzbuzz.pdf](http://cdelord.fr/fizzbuzz/fizzbuzz.pdf)
+[fizzbuzz.pdf](https://github.com/CDSoft/fizzbuzz/releases)
 
 ## LinkdIn
 
