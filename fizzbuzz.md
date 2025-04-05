@@ -46,9 +46,9 @@ documentation environment. Fizzbuzz is just an application example.
 
 # Links
 
-- [fizzbuzz_slideshow.pdf](https://github.com/CDSoft/FizzBuzz/releases): PDF slideshow
-- [fizzbuzz.pdf](https://github.com/CDSoft/FizzBuzz/releases): PDF demonstration (specification, implementation, tests, test report, documentation generator, ...)
-- [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz): Sources
+- [fizzbuzz_slideshow.pdf](https://codeberg.org/cdsoft/FizzBuzz/releases): PDF slideshow
+- [fizzbuzz.pdf](https://codeberg.org/cdsoft/FizzBuzz/releases): PDF demonstration (specification, implementation, tests, test report, documentation generator, ...)
+- [codeberg.org/cdsoft/fizzbuzz](https://codeberg.org/cdsoft/fizzbuzz): Sources
 
 ![]({{logo}}){width=50%}
 
@@ -150,7 +150,7 @@ purposes, at absolutely no cost. Just download it and use it.
 
 # LuaX
 
-[LuaX](https://github.com/CDSoft/luax) is a Lua interpreter and REPL based on
+[LuaX](https://codeberg.org/cdsoft/luax) is a Lua interpreter and REPL based on
 Lua 5.4, augmented with some useful packages. LuaX can also produce
 standalone executables from Lua scripts.
 
@@ -165,30 +165,30 @@ LuaX can cross-compile scripts from and to any of these platforms.
 LuaX comes with a standard Lua interpreter and provides some libraries (embedded
 in a single executable, no external dependency required):
 
-- [LuaX interactive usage](https://github.com/CDSoft/luax/blob/master/doc/repl.md): improved Lua REPL
-- [F](https://github.com/CDSoft/luax/blob/master/doc/F.md): functional programming inspired functions
-- [fs](https://github.com/CDSoft/luax/blob/master/doc/fs.md): file system management
-- [sh](https://github.com/CDSoft/luax/blob/master/doc/sh.md): shell command execution
-- [mathx](https://github.com/CDSoft/luax/blob/master/doc/mathx.md): complete math library for Lua
-- [imath](https://github.com/CDSoft/luax/blob/master/doc/imath.md): arbitrary precision integer and rational arithmetic library
-- [qmath](https://github.com/CDSoft/luax/blob/master/doc/qmath.md): rational number library
-- [complex](https://github.com/CDSoft/luax/blob/master/doc/complex.md): math library for complex numbers based on C99
-- [ps](https://github.com/CDSoft/luax/blob/master/doc/ps.md): Process management module
-- [sys](https://github.com/CDSoft/luax/blob/master/doc/sys.md): System module
-- [crypt](https://github.com/CDSoft/luax/blob/master/doc/crypt.md): cryptography module
-- [lz4](https://github.com/CDSoft/luax/blob/master/doc/lz4.md): Extremely Fast Compression algorithm
-- [lpeg](https://github.com/CDSoft/luax/blob/master/doc/lpeg.md): Parsing Expression Grammars For Lua
-- [linenoise](https://github.com/CDSoft/luax/blob/master/doc/linenoise.md): light readline alternative
-- [luasocket](https://github.com/CDSoft/luax/blob/master/doc/luasocket.md): Network support for the Lua language
-- [inspect](https://github.com/CDSoft/luax/blob/master/doc/inspect.md): Human-readable representation of Lua tables
+- [LuaX interactive usage](https://codeberg.org/cdsoft/luax/blob/master/doc/repl.md): improved Lua REPL
+- [F](https://codeberg.org/cdsoft/luax/blob/master/doc/F.md): functional programming inspired functions
+- [fs](https://codeberg.org/cdsoft/luax/blob/master/doc/fs.md): file system management
+- [sh](https://codeberg.org/cdsoft/luax/blob/master/doc/sh.md): shell command execution
+- [mathx](https://codeberg.org/cdsoft/luax/blob/master/doc/mathx.md): complete math library for Lua
+- [imath](https://codeberg.org/cdsoft/luax/blob/master/doc/imath.md): arbitrary precision integer and rational arithmetic library
+- [qmath](https://codeberg.org/cdsoft/luax/blob/master/doc/qmath.md): rational number library
+- [complex](https://codeberg.org/cdsoft/luax/blob/master/doc/complex.md): math library for complex numbers based on C99
+- [ps](https://codeberg.org/cdsoft/luax/blob/master/doc/ps.md): Process management module
+- [sys](https://codeberg.org/cdsoft/luax/blob/master/doc/sys.md): System module
+- [crypt](https://codeberg.org/cdsoft/luax/blob/master/doc/crypt.md): cryptography module
+- [lz4](https://codeberg.org/cdsoft/luax/blob/master/doc/lz4.md): Extremely Fast Compression algorithm
+- [lpeg](https://codeberg.org/cdsoft/luax/blob/master/doc/lpeg.md): Parsing Expression Grammars For Lua
+- [linenoise](https://codeberg.org/cdsoft/luax/blob/master/doc/linenoise.md): light readline alternative
+- [luasocket](https://codeberg.org/cdsoft/luax/blob/master/doc/luasocket.md): Network support for the Lua language
+- [inspect](https://codeberg.org/cdsoft/luax/blob/master/doc/inspect.md): Human-readable representation of Lua tables
 
-More information here: <https://github.com/CDSoft/luax>
+More information here: <https://codeberg.org/cdsoft/luax>
 
 # Scripting with LuaX
 
 LuaX can be used as a general programming language.
 There are plenty of [good documentations for Lua](https://www.lua.org/docs.html)
-and [LuaX](https://github.com/CDSoft/luax).
+and [LuaX](https://codeberg.org/cdsoft/luax).
 
 A big advantage of Lua is the usage of Lua tables as a common data format usable by various tools.
 It is Human-readable and structured. It can be generated by Lua scripts but also by any software producing text files.
@@ -207,7 +207,7 @@ The next chapters present some tools written in Lua/LuaX or using Lua as a scrip
 
 # Bang
 
-[Bang](https://github.com/CDSoft/bang) is a ninja file generator scriptable in
+[Bang](https://codeberg.org/cdsoft/bang) is a ninja file generator scriptable in
 LuaX, a Lua interpreter with a bunch of useful modules (file management,
 functional programming module, basic cryptography, ...). It takes a build
 description (a LuaX script) and generates a Ninja file.
@@ -233,7 +233,7 @@ Bang comes with an example that shows how to use bang and LuaX functions to:
   directory.
 
 Bang is currently used to build bang itself but also LuaX and some projects
-available on my [GitHub](https://github.com/CDSoft).
+available on [Codeberg](https://codeberg.org/cdsoft).
 
 # Ypp
 
@@ -242,7 +242,7 @@ Ypp is a minimalist and generic text preprocessor using Lua macros.
 Ypp is compiled by LuaX, i.e. Lua and LuaX functions and modules are available
 in macros.
 
-More information here: <https://github.com/CDSoft/ypp>
+More information here: <https://codeberg.org/cdsoft/ypp>
 
 Ypp is pretty simple. It searches for Lua expressions and replaces macros with their results.
 
@@ -347,7 +347,7 @@ It provides several interesting features:
 - script execution (e.g. to include the result of a command)
 - diagrams (Graphviz, PlantUML, ditaa, Asymptote, blockdiag, mermaid…)
 
-The documentation of Panda is here: <https://github.com/CDSoft/panda>
+The documentation of Panda is here: <https://codeberg.org/cdsoft/panda>
 
 ## Examples
 
@@ -741,7 +741,7 @@ The Haskell fizzbuzz function returns:
     end)
 ]]
 
-@link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz"
+@link "Fizzbuzz repository" "https://codeberg.org/cdsoft/fizzbuzz"
 > This document is not about Fizzbuzz. This document is a suggestion to
 > simplify the build process of software projects. Fizzbuzz is just an
 > application example.
@@ -754,15 +754,15 @@ The Haskell fizzbuzz function returns:
 @link "Lua documentation" "https://www.lua.org/manual/5.4/"
 > The reference manual is the official definition of the Lua language.
 
-@link "LuaX" "https://github.com/CDSoft/luax"
+@link "LuaX" "https://codeberg.org/cdsoft/luax"
 > LuaX is a Lua interpreter and REPL based on Lua 5.4, augmented with some
 > useful packages. LuaX can also produce standalone executables from Lua
 > scripts.
 
-@link "bang" "https://github.com/CDSoft/bang"
+@link "bang" "https://codeberg.org/cdsoft/bang"
 > Bang is a Ninja file generator scriptable in LuaX.
 
-@link "ypp" "https://github.com/CDSoft/ypp"
+@link "ypp" "https://codeberg.org/cdsoft/ypp"
 > Ypp is a minimalist and generic text preprocessor using Lua macros.
 
 @link "Pandoc" "https://pandoc.org"
@@ -799,7 +799,7 @@ The Haskell fizzbuzz function returns:
 > executable. Pandoc data types are marshaled to Lua directly, avoiding the
 > overhead of writing JSON to stdout and reading it from stdin.
 
-@link "Panda" "https://github.com/CDSoft/panda"
+@link "Panda" "https://codeberg.org/cdsoft/panda"
 > Panda is a Pandoc Lua filter that works on internal Pandoc's AST.
 
 ::::::{.if output_file=".build/fizzbuzz.pdf"}

@@ -142,7 +142,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## Get LuaX
 
-<https://github.com/CDSoft/luax>
+<https://codeberg.org/cdsoft/luax>
 
 ::::::::::
 
@@ -185,7 +185,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## Get LuaX
 
-<https://github.com/CDSoft/luax>
+<https://codeberg.org/cdsoft/luax>
 
 ::::::::::
 
@@ -227,7 +227,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## Get bang
 
-<https://github.com/CDSoft/bang>
+<https://codeberg.org/cdsoft/bang>
 
 ::::::::::
 
@@ -269,7 +269,7 @@ e.g.: Bash, Python, Javascript, plain text, YAML, JSON, XML, CSV, INI, TOML, ...
 
 ## Get ypp
 
-<https://github.com/CDSoft/ypp>
+<https://codeberg.org/cdsoft/ypp>
 
 ::::::::::
 
@@ -416,7 +416,7 @@ Pandoc uses Lua scripts:
 
 ## Get Panda
 
-<https://github.com/CDSoft/panda>
+<https://codeberg.org/cdsoft/panda>
 
 ::::::::::
 
@@ -564,9 +564,9 @@ plot sin(x) lw 4, cos(x) lw 4
 
 ## Complete Fizzbuzz example
 
-- [github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz)
-- [fizzbuzz.pdf](https://github.com/CDSoft/FizzBuzz/releases)
-- [fizzbuzz.html](https://github.com/CDSoft/FizzBuzz/releasesl)
+- [codeberg.org/cdsoft/fizzbuzz](https://codeberg.org/cdsoft/fizzbuzz)
+- [fizzbuzz.pdf](https://codeberg.org/cdsoft/FizzBuzz/releases)
+- [fizzbuzz.html](https://codeberg.org/cdsoft/FizzBuzz/releasesl)
 
 ::::::::::
 
@@ -580,17 +580,17 @@ plot sin(x) lw 4, cos(x) lw 4
     end)
 ]]
 
-- @link "Fizzbuzz repository" "https://github.com/CDSoft/fizzbuzz"
+- @link "Fizzbuzz repository" "https://codeberg.org/cdsoft/fizzbuzz"
 - @link "Lua" "https://www.lua.org"
     - @link "Lua documentation" "https://www.lua.org/manual/5.4/"
-- @link "LuaX" "https://github.com/CDSoft/luax"
-- @link "bang" "https://github.com/CDSoft/bang"
-- @link "ypp" "https://github.com/CDSoft/ypp"
+- @link "LuaX" "https://codeberg.org/cdsoft/luax"
+- @link "bang" "https://codeberg.org/cdsoft/bang"
+- @link "ypp" "https://codeberg.org/cdsoft/ypp"
 - @link "Pandoc" "https://pandoc.org"
     - @link "Pandoc manual" "https://pandoc.org/MANUAL.html"
     - @link "Pandoc Lua filters" "https://pandoc.org/lua-filters.html"
-- @link "Panda" "https://github.com/CDSoft/panda"
-- @link "LuaX binaries" "https://github.com/CDSoft/pub"
+- @link "Panda" "https://codeberg.org/cdsoft/panda"
+- @link "LuaX binaries" "https://codeberg.org/cdsoft/pub"
 
 # Questions
 
@@ -600,11 +600,11 @@ plot sin(x) lw 4, cos(x) lw 4
 
 ## Web / email
 
-[CDSoft.github.io](https://CDSoft.github.io)
+[cdsoft.codeberg.page](https://cdsoft.codeberg.page)
 
 ## Github
 
-[github.com/CDSoft](https://github.com/CDSoft)
+[codeberg.org/cdsoft](https://codeberg.org/cdsoft)
 
 ::::::::::
 
@@ -612,9 +612,9 @@ plot sin(x) lw 4, cos(x) lw 4
 
 ## Fizzbuzz
 
-[github.com/CDSoft/fizzbuzz](https://github.com/CDSoft/fizzbuzz)
+[codeberg.org/cdsoft/fizzbuzz](https://codeberg.org/cdsoft/fizzbuzz)
 
-[fizzbuzz.pdf](https://github.com/CDSoft/fizzbuzz/releases)
+[fizzbuzz.pdf](https://codeberg.org/cdsoft/fizzbuzz/releases)
 
 ## LinkdIn
 
