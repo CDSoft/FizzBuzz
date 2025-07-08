@@ -158,7 +158,7 @@ LuaX runs on several platforms with no dependency:
 
 - Linux (x86_64, aarch64)
 - MacOS (x86_64, aarch64)
-- Windows (x86_64)
+- Windows (x86_64, aarch64)
 
 LuaX can cross-compile scripts from and to any of these platforms.
 
@@ -175,12 +175,17 @@ in a single executable, no external dependency required):
 - [complex](https://codeberg.org/cdsoft/luax/blob/master/doc/complex.md): math library for complex numbers based on C99
 - [ps](https://codeberg.org/cdsoft/luax/blob/master/doc/ps.md): Process management module
 - [sys](https://codeberg.org/cdsoft/luax/blob/master/doc/sys.md): System module
+- [term](https://codeberg.org/cdsoft/luax/blob/master/doc/term.md): Terminal manipulation module
 - [crypt](https://codeberg.org/cdsoft/luax/blob/master/doc/crypt.md): cryptography module
-- [lz4](https://codeberg.org/cdsoft/luax/blob/master/doc/lz4.md): Extremely Fast Compression algorithm
+- [lzip](https://codeberg.org/cdsoft/luax/blob/master/doc/lzip.md): A compression library for the lzip format
+- [tar](https://codeberg.org/cdsoft/luax/blob/master/doc/tar.md): A minimalistic tar archiving library
 - [lpeg](https://codeberg.org/cdsoft/luax/blob/master/doc/lpeg.md): Parsing Expression Grammars For Lua
 - [linenoise](https://codeberg.org/cdsoft/luax/blob/master/doc/linenoise.md): light readline alternative
 - [luasocket](https://codeberg.org/cdsoft/luax/blob/master/doc/luasocket.md): Network support for the Lua language
-- [inspect](https://codeberg.org/cdsoft/luax/blob/master/doc/inspect.md): Human-readable representation of Lua tables
+- [argparse](https://codeberg.org/cdsoft/luax/blob/master/doc/argparse.md): Feature-rich command line parser for Lua
+- [serpent](https://codeberg.org/cdsoft/luax/blob/master/doc/serpent.md): Lua serializer and pretty printer
+- [cbor](https://codeberg.org/cdsoft/luax/blob/master/doc/cbor.md): pure Lua implementation of the CBOR
+- [json](https://codeberg.org/cdsoft/luax/blob/master/doc/json.md): JSON Module for Lua
 
 More information here: <https://codeberg.org/cdsoft/luax>
 
@@ -315,6 +320,69 @@ becomes
 > $$
 > \sum_{i=1}^{@N} i^2 = @sumsq(N)
 > $$
+
+# Yreq
+
+Yreq is a minimalist requirement plugin for ypp.
+It helps to define requirements (named *tags*) and references in documents, source code, tests...
+and generates traceability matrices.
+
+More information here: <https://codeberg.org/cdsoft/yreq>
+
+Yreq is pretty simple.
+Just configure the tags and refs names, add tags and refs in the documents
+and generate a traceability matrix in a final output document.
+It will contain links between the tags and inside the coverage matrix.
+
+Tag names are nouns that describe the nature of the tag (a specification, a source code, a test...)
+and ref names are verbs that define the relation between tags.
+
+## Configuration example
+
+`config.lua`:
+
+``` lua
+yreq.tags {
+    "spec",
+    "code",
+    "test",
+}
+
+yreq.refs {
+    "implements",
+    "tests",
+}
+```
+
+## Document example with tags and refs
+
+@q[===[
++-----------------------------------+-----------------------------------+
+| Upstream document                 | Current document                  |
++-----------------------------------+-----------------------------------+
+| ``` lua                           | ``` lua                           |
+|                                   |                                   |
+| @spec "UPSTREAM_TAG_ID"           | @code "CURRENT_TAG_ID"            |
+|                                   |                                   |
+| Lorem ipsum ...                   | Lorem ipsum ...                   |
+|                                   |                                   |
+|                                   | @refines "UPSTREAM_TAG_ID"        |
+|                                   |                                   |
+| ```                               | ```                               |
++-----------------------------------+-----------------------------------+
+]===]
+
+## Usage
+
+Yeq is a ypp plugin. It can be loaded by ypp with the `-l`.
+If `$PREFIX/lib` is not in `LUA_PATH`, the library path can be given to ypp with the `-p` option.
+E.g.:
+
+``` sh
+$ ypp -p $PREFIX/lib -l yreq -l config file.md -o output.md
+```
+
+Bang may also be a nice option to write a more complex build system.
 
 # Pandoc
 
@@ -457,12 +525,12 @@ $$
 
 ### Requirements
 
-@req "SPEC_API: fizzbuzz command line argument"
+@spec "SPEC_API" "fizzbuzz command line argument"
 
 The fizzbuzz program takes one argument that specify the number for fizzbuzz
 values to generate.
 
-@req "SPEC_OUT: fizzbuzz output on stdout"
+@spec "SPEC_OUT" "fizzbuzz output on stdout"
 
 The fizzbuzz program emits fizzbuzz values on the standard output.
 Each line contains `n` and `fizzbuzz(n)`.
@@ -474,19 +542,19 @@ $ fizzbuzz 6
 @F.range(6):map(function(n) return F{n, fizzbuzz(n)}:str "\t" end)
 ```
 
-@req "SPEC_FIZZ: fizz when n is a multiple of 3 but not 5"
+@spec "SPEC_FIZZ" "fizz when n is a multiple of 3 but not 5"
 
 If `n` is a multiple of 3 but not 5, then `fizzbuzz(n)` is `"fizz"`.
 
-@req "SPEC_BUZZ: buzz when n is a multiple of 5 but not 3"
+@spec "SPEC_BUZZ" "buzz when n is a multiple of 5 but not 3"
 
 If `n` is a multiple of 5 but not 3, then `fizzbuzz(n)` is `"buzz"`.
 
-@req "SPEC_FIZZBUZZ: fizzbuzz n is a when multiple of 3 and 5"
+@spec "SPEC_FIZZBUZZ" "fizzbuzz n is a when multiple of 3 and 5"
 
 If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
-@req "SPEC_NUM: n when n is a not a multiple of 3 and 5"
+@spec "SPEC_NUM" "n when n is a not a multiple of 3 and 5"
 
 If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
@@ -540,53 +608,43 @@ checked by `fizzbuzz_test.lua` and stored in a Lua table.
 
 The fizzbuzz values are recorded in the `fizzbuzz` field of the test result table.
 
-@req "TEST_API: number of fizzbuzz values" {
-    refs = "SPEC_API",
-}
+@testplan "TEST_API" "number of fizzbuzz values" @tests "SPEC_API"
 
 The fizzbuzz list contains @test_cfg.N values.
 
 The result of this test is recorded in the `valid_number_of_lines` field of the test result table.
 
-@req "TEST_OUT: output on stdout" {
-    refs = "SPEC_OUT",
-}
+@testplan "TEST_OUT" "output on stdout" @tests "SPEC_OUT"
 
 The fizzbuzz list is emitted on stdout.
 
-@req "TEST_FIZZ: \"fizz\" values" {
-    refs = "SPEC_FIZZ",
-}
+@testplan "TEST_FIZZ" "\"fizz\" values" @tests "SPEC_FIZZ"
 
 All multiples of 3 but not 5 are `"fizz"`.
 
 The result of this test is recorded in the `valid_fizz` field of the test result table.
 
-@req "TEST_BUZZ: \"buzz\" values" {
-    refs = "SPEC_BUZZ",
-}
+@testplan "TEST_BUZZ" "\"buzz\" values" @tests "SPEC_BUZZ"
 
 All multiples of 5 but not 3 are `"buzz"`.
 
 The result of this test is recorded in the `valid_buzz` field of the test result table.
 
-@req "TEST_FIZZBUZZ: \"fizzbuzz\" values" {
-    refs = "SPEC_FIZZBUZZ",
-}
+@testplan "TEST_FIZZBUZZ" "\"fizzbuzz\" values" @tests "SPEC_FIZZBUZZ"
 
 All multiples of 3 and 5 are `"fizzbuzz"`.
 
 The result of this test is recorded in the `valid_fizzbuzz` field of the test result table.
 
-@req "TEST_NUM: integral values" {
-    refs = "SPEC_NUM",
-}
+@testplan "TEST_NUM" "integral values" @tests "SPEC_NUM"
 
 All non multiples of 3 and 5 are themselves.
 
 The result of this test is recorded in the `valid_numbers` field of the test result table.
 
 ## Test reports
+
+@@(result = function(ok) return ok and "PASSED" or "**FAILED**" end)
 
 ### Lua implementation
 
@@ -596,35 +654,14 @@ The Lua fizzbuzz function returns:
 
 @F.str(lua_tests.fizzbuzz, ", ")
 
-@req.test "RES_LUA_API: number of fizzbuzz values" {
-    refs = "TEST_API",
-    status = lua_tests.valid_number_of_lines,
-}
-
-@req.test "RES_LUA_OUT: output on stdout" {
-    refs = "TEST_OUT",
-    status = lua_tests.valid_number_of_lines,
-}
-
-@req.test "RES_LUA_FIZZ: \"fizz\" values" {
-    refs = "TEST_FIZZ",
-    status = lua_tests.valid_fizz,
-}
-
-@req.test "RES_LUA_BUZZ: \"buzz\" values" {
-    refs = "TEST_BUZZ",
-    status = lua_tests.valid_buzz,
-}
-
-@req.test "RES_LUA_FIZZBUZZ: \"fizzbuzz\" values" {
-    refs = "TEST_FIZZBUZZ",
-    status = lua_tests.valid_fizzbuzz,
-}
-
-@req.test "RES_LUA_NUM: integral values" {
-    refs = "TEST_NUM",
-    status = lua_tests.valid_numbers,
-}
+| Test                               | Result |
+| ---------------------------------- | ------ |
+| @test "RES_LUA_API" "number of fizzbuzz values" @runs "TEST_API" | @result(lua_tests.valid_number_of_lines) |
+| @test "RES_LUA_OUT" "output on stdout" @runs "TEST_OUT" | @result(lua_tests.valid_number_of_lines) |
+| @test "RES_LUA_FIZZ" "\"fizz\" values" @runs "TEST_FIZZ" | @result(lua_tests.valid_fizz) |
+| @test "RES_LUA_BUZZ" "\"buzz\" values" @runs "TEST_BUZZ" | @result(lua_tests.valid_buzz) |
+| @test "RES_LUA_FIZZBUZZ" "\"fizzbuzz\" values" @runs "TEST_FIZZBUZZ" | @result(lua_tests.valid_fizzbuzz) |
+| @test "RES_LUA_NUM" "integral values" @runs "TEST_NUM" | @result(lua_tests.valid_numbers) |
 
 **Summary**: @lua_tests.nb_pass / @lua_tests.nb tests passed
 
@@ -636,35 +673,14 @@ The C fizzbuzz function returns:
 
 @F.str(c_tests.fizzbuzz, ", ")
 
-@req.test "RES_C_API: number of fizzbuzz values" {
-    refs = "TEST_API",
-    status = c_tests.valid_number_of_lines,
-}
-
-@req.test "RES_C_OUT: output on stdout" {
-    refs = "TEST_OUT",
-    status = c_tests.valid_number_of_lines,
-}
-
-@req.test "RES_C_FIZZ: \"fizz\" values" {
-    refs = "TEST_FIZZ",
-    status = c_tests.valid_fizz,
-}
-
-@req.test "RES_C_BUZZ: \"buzz\" values" {
-    refs = "TEST_BUZZ",
-    status = c_tests.valid_buzz,
-}
-
-@req.test "RES_C_FIZZBUZZ: \"fizzbuzz\" values" {
-    refs = "TEST_FIZZBUZZ",
-    status = c_tests.valid_fizzbuzz,
-}
-
-@req.test "RES_C_NUM: integral values" {
-    refs = "TEST_NUM",
-    status = c_tests.valid_numbers,
-}
+| Test                               | Result |
+| ---------------------------------- | ------ |
+| @test "RES_C_API" "number of fizzbuzz values" @runs "TEST_API" | @result(c_tests.valid_number_of_lines) |
+| @test "RES_C_OUT" "output on stdout" @runs "TEST_OUT" | @result(c_tests.valid_number_of_lines) |
+| @test "RES_C_FIZZ" "\"fizz\" values" @runs "TEST_FIZZ" | @result(c_tests.valid_fizz) |
+| @test "RES_C_BUZZ" "\"buzz\" values" @runs "TEST_BUZZ" | @result(c_tests.valid_buzz) |
+| @test "RES_C_FIZZBUZZ" "\"fizzbuzz\" values" @runs "TEST_FIZZBUZZ" | @result(c_tests.valid_fizzbuzz) |
+| @test "RES_C_NUM" "integral values" @runs "TEST_NUM" | @result(c_tests.valid_numbers) |
 
 **Summary**: @c_tests.nb_pass / @c_tests.nb tests passed
 
@@ -676,35 +692,14 @@ The Haskell fizzbuzz function returns:
 
 @F.str(hs_tests.fizzbuzz, ", ")
 
-@req.test "RES_HS_API: number of fizzbuzz values" {
-    refs = "TEST_API",
-    status = hs_tests.valid_number_of_lines,
-}
-
-@req.test "RES_HS_OUT: output on stdout" {
-    refs = "TEST_OUT",
-    status = hs_tests.valid_number_of_lines,
-}
-
-@req.test "RES_HS_FIZZ: \"fizz\" values" {
-    refs = "TEST_FIZZ",
-    status = hs_tests.valid_fizz,
-}
-
-@req.test "RES_HS_BUZZ: \"buzz\" values" {
-    refs = "TEST_BUZZ",
-    status = hs_tests.valid_buzz,
-}
-
-@req.test "RES_HS_FIZZBUZZ: \"fizzbuzz\" values" {
-    refs = "TEST_FIZZBUZZ",
-    status = hs_tests.valid_fizzbuzz,
-}
-
-@req.test "RES_HS_NUM: integral values" {
-    refs = "TEST_NUM",
-    status = hs_tests.valid_numbers,
-}
+| Test                               | Result |
+| ---------------------------------- | ------ |
+| @test "RES_HS_API" "number of fizzbuzz values" @runs "TEST_API" | @result(hs_tests.valid_number_of_lines) |
+| @test "RES_HS_OUT" "output on stdout" @runs "TEST_OUT" | @result(hs_tests.valid_number_of_lines) |
+| @test "RES_HS_FIZZ" "\"fizz\" values" @runs "TEST_FIZZ" | @result(hs_tests.valid_fizz) |
+| @test "RES_HS_BUZZ" "\"buzz\" values" @runs "TEST_BUZZ" | @result(hs_tests.valid_buzz) |
+| @test "RES_HS_FIZZBUZZ" "\"fizzbuzz\" values" @runs "TEST_FIZZBUZZ" | @result(hs_tests.valid_fizzbuzz) |
+| @test "RES_HS_NUM" "integral values" @runs "TEST_NUM" | @result(hs_tests.valid_numbers) |
 
 **Summary**: @hs_tests.nb_pass / @hs_tests.nb tests passed
 
@@ -727,11 +722,7 @@ The Haskell fizzbuzz function returns:
 
 ## Coverage matrix
 
-@req.matrix "g"
-
-```{.dot render="{{dot}}" name=coverage-matrix}
-@req.dot()
-```
+@yreq.coverage()
 
 # References
 
@@ -764,6 +755,9 @@ The Haskell fizzbuzz function returns:
 
 @link "ypp" "https://codeberg.org/cdsoft/ypp"
 > Ypp is a minimalist and generic text preprocessor using Lua macros.
+
+@link "yreq" "https://codeberg.org/cdsoft/yreq"
+> Yreq is a minimalist requirement management plugin for ypp.
 
 @link "Pandoc" "https://pandoc.org"
 > Pandoc is a universal document converter. If you need to convert files from

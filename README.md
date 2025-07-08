@@ -129,7 +129,7 @@ LuaX runs on several platforms with no dependency:
 
 - Linux (x86_64, aarch64)
 - MacOS (x86_64, aarch64)
-- Windows (x86_64)
+- Windows (x86_64, aarch64)
 
 LuaX can cross-compile scripts from and to any of these platforms.
 
@@ -157,18 +157,28 @@ LuaX comes with a standard Lua interpreter and provides some libraries
   management module
 - [sys](https://codeberg.org/cdsoft/luax/blob/master/doc/sys.md): System
   module
+- [term](https://codeberg.org/cdsoft/luax/blob/master/doc/term.md):
+  Terminal manipulation module
 - [crypt](https://codeberg.org/cdsoft/luax/blob/master/doc/crypt.md):
   cryptography module
-- [lz4](https://codeberg.org/cdsoft/luax/blob/master/doc/lz4.md):
-  Extremely Fast Compression algorithm
+- [lzip](https://codeberg.org/cdsoft/luax/blob/master/doc/lzip.md): A
+  compression library for the lzip format
+- [tar](https://codeberg.org/cdsoft/luax/blob/master/doc/tar.md): A
+  minimalistic tar archiving library
 - [lpeg](https://codeberg.org/cdsoft/luax/blob/master/doc/lpeg.md):
   Parsing Expression Grammars For Lua
 - [linenoise](https://codeberg.org/cdsoft/luax/blob/master/doc/linenoise.md):
   light readline alternative
 - [luasocket](https://codeberg.org/cdsoft/luax/blob/master/doc/luasocket.md):
   Network support for the Lua language
-- [inspect](https://codeberg.org/cdsoft/luax/blob/master/doc/inspect.md):
-  Human-readable representation of Lua tables
+- [argparse](https://codeberg.org/cdsoft/luax/blob/master/doc/argparse.md):
+  Feature-rich command line parser for Lua
+- [serpent](https://codeberg.org/cdsoft/luax/blob/master/doc/serpent.md):
+  Lua serializer and pretty printer
+- [cbor](https://codeberg.org/cdsoft/luax/blob/master/doc/cbor.md): pure
+  Lua implementation of the CBOR
+- [json](https://codeberg.org/cdsoft/luax/blob/master/doc/json.md): JSON
+  Module for Lua
 
 More information here: <https://codeberg.org/cdsoft/luax>
 
@@ -261,7 +271,6 @@ is rendered as
 
 > 
 > ``` math
->
 > \sum_{i=1}^{100} i^2 = 338350
 > ```
 
@@ -291,9 +300,85 @@ becomes
 
 > 
 > ``` math
->
 > \sum_{i=1}^{1000} i^2 = 333833500
 > ```
+
+# Yreq
+
+Yreq is a minimalist requirement plugin for ypp. It helps to define
+requirements (named *tags*) and references in documents, source code,
+tests… and generates traceability matrices.
+
+More information here: <https://codeberg.org/cdsoft/yreq>
+
+Yreq is pretty simple. Just configure the tags and refs names, add tags
+and refs in the documents and generate a traceability matrix in a final
+output document. It will contain links between the tags and inside the
+coverage matrix.
+
+Tag names are nouns that describe the nature of the tag (a
+specification, a source code, a test…) and ref names are verbs that
+define the relation between tags.
+
+## Configuration example
+
+`config.lua`:
+
+``` lua
+yreq.tags {
+    "spec",
+    "code",
+    "test",
+}
+
+yreq.refs {
+    "implements",
+    "tests",
+}
+```
+
+## Document example with tags and refs
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>Upstream document</td>
+<td>Current document</td>
+</tr>
+<tr>
+<td><div class="sourceCode" id="cb1"><pre
+class="sourceCode lua"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>@spec <span class="st">&quot;UPSTREAM_TAG_ID&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">Lorem</span> <span class="va">ipsum</span> <span class="op">...</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span></code></pre></div></td>
+<td><div class="sourceCode" id="cb2"><pre
+class="sourceCode lua"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>@code <span class="st">&quot;CURRENT_TAG_ID&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">Lorem</span> <span class="va">ipsum</span> <span class="op">...</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>@refines <span class="st">&quot;UPSTREAM_TAG_ID&quot;</span></span></code></pre></div></td>
+</tr>
+</tbody>
+</table>
+
+## Usage
+
+Yeq is a ypp plugin. It can be loaded by ypp with the `-l`. If
+`$PREFIX/lib` is not in `LUA_PATH`, the library path can be given to ypp
+with the `-p` option. E.g.:
+
+``` sh
+$ ypp -p $PREFIX/lib -l yreq -l config file.md -o output.md
+```
+
+Bang may also be a nice option to write a more complex build system.
 
 # Pandoc
 
@@ -422,11 +507,9 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz):
 or `n` for any positive integer `n`.
 
 ``` math
-
     fizzbuzz : \mathbb{N}^+ \to \{fizz, buzz, fizzbuzz\} \cup \mathbb{N}^+
 ```
 ``` math
-
     fizzbuzz(n) =
         \begin{cases}
             \text{"fizzbuzz" }  & \text{if } (3|n) \land (5|n) \\
@@ -438,13 +521,14 @@ or `n` for any positive integer `n`.
 
 ### Requirements
 
-<span class="req">**`SPEC_API`**</span>: **fizzbuzz command line
-argument**
+[<span id="tag-SPEC_API">\[*spec*: SPEC_API\]</span>](#cov-tag-SPEC_API)
+fizzbuzz command line argument
 
 The fizzbuzz program takes one argument that specify the number for
 fizzbuzz values to generate.
 
-<span class="req">**`SPEC_OUT`**</span>: **fizzbuzz output on stdout**
+[<span id="tag-SPEC_OUT">\[*spec*: SPEC_OUT\]</span>](#cov-tag-SPEC_OUT)
+fizzbuzz output on stdout
 
 The fizzbuzz program emits fizzbuzz values on the standard output. Each
 line contains `n` and `fizzbuzz(n)`.
@@ -459,23 +543,26 @@ e.g.:
     5   buzz
     6   fizz
 
-<span class="req">**`SPEC_FIZZ`**</span>: **fizz when n is a multiple of
-3 but not 5**
+[<span id="tag-SPEC_FIZZ">\[*spec*:
+SPEC_FIZZ\]</span>](#cov-tag-SPEC_FIZZ) fizz when n is a multiple of 3
+but not 5
 
 If `n` is a multiple of 3 but not 5, then `fizzbuzz(n)` is `"fizz"`.
 
-<span class="req">**`SPEC_BUZZ`**</span>: **buzz when n is a multiple of
-5 but not 3**
+[<span id="tag-SPEC_BUZZ">\[*spec*:
+SPEC_BUZZ\]</span>](#cov-tag-SPEC_BUZZ) buzz when n is a multiple of 5
+but not 3
 
 If `n` is a multiple of 5 but not 3, then `fizzbuzz(n)` is `"buzz"`.
 
-<span class="req">**`SPEC_FIZZBUZZ`**</span>: **fizzbuzz n is a when
-multiple of 3 and 5**
+[<span id="tag-SPEC_FIZZBUZZ">\[*spec*:
+SPEC_FIZZBUZZ\]</span>](#cov-tag-SPEC_FIZZBUZZ) fizzbuzz n is a when
+multiple of 3 and 5
 
 If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
-<span class="req">**`SPEC_NUM`**</span>: **n when n is a not a multiple
-of 3 and 5**
+[<span id="tag-SPEC_NUM">\[*spec*: SPEC_NUM\]</span>](#cov-tag-SPEC_NUM)
+n when n is a not a multiple of 3 and 5
 
 If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
@@ -556,7 +643,6 @@ The functions `fizzbuzz` builds three infinite lists and combine them.
 | buzzes | .   | .   | .    | .   | buzz | .    | .   | .   | .    | buzz | .   | .    | .   | .   | buzz | …   |
 
 ``` math
-
 fizzbuzz(n) =
     \begin{cases}
         fizz + buzz     & \text{if } fizz \ne Nothing \lor buzz \ne Nothing \\
@@ -590,52 +676,51 @@ are checked by `fizzbuzz_test.lua` and stored in a Lua table.
 The fizzbuzz values are recorded in the `fizzbuzz` field of the test
 result table.
 
-<span class="req">**`TEST_API`**</span>: **number of fizzbuzz values**
-
-> *[`SPEC_API`](#SPEC_API)*: fizzbuzz command line argument
+[<span id="tag-TEST_API">\[*testplan*:
+TEST_API\]</span>](#cov-tag-TEST_API) number of fizzbuzz values
+[\[*tests*: SPEC_API\]](#tag-SPEC_API)
 
 The fizzbuzz list contains 50 values.
 
 The result of this test is recorded in the `valid_number_of_lines` field
 of the test result table.
 
-<span class="req">**`TEST_OUT`**</span>: **output on stdout**
-
-> *[`SPEC_OUT`](#SPEC_OUT)*: fizzbuzz output on stdout
+[<span id="tag-TEST_OUT">\[*testplan*:
+TEST_OUT\]</span>](#cov-tag-TEST_OUT) output on stdout [\[*tests*:
+SPEC_OUT\]](#tag-SPEC_OUT)
 
 The fizzbuzz list is emitted on stdout.
 
-<span class="req">**`TEST_FIZZ`**</span>: **“fizz” values**
-
-> *[`SPEC_FIZZ`](#SPEC_FIZZ)*: fizz when n is a multiple of 3 but not 5
+[<span id="tag-TEST_FIZZ">\[*testplan*:
+TEST_FIZZ\]</span>](#cov-tag-TEST_FIZZ) “fizz” values [\[*tests*:
+SPEC_FIZZ\]](#tag-SPEC_FIZZ)
 
 All multiples of 3 but not 5 are `"fizz"`.
 
 The result of this test is recorded in the `valid_fizz` field of the
 test result table.
 
-<span class="req">**`TEST_BUZZ`**</span>: **“buzz” values**
-
-> *[`SPEC_BUZZ`](#SPEC_BUZZ)*: buzz when n is a multiple of 5 but not 3
+[<span id="tag-TEST_BUZZ">\[*testplan*:
+TEST_BUZZ\]</span>](#cov-tag-TEST_BUZZ) “buzz” values [\[*tests*:
+SPEC_BUZZ\]](#tag-SPEC_BUZZ)
 
 All multiples of 5 but not 3 are `"buzz"`.
 
 The result of this test is recorded in the `valid_buzz` field of the
 test result table.
 
-<span class="req">**`TEST_FIZZBUZZ`**</span>: **“fizzbuzz” values**
-
-> *[`SPEC_FIZZBUZZ`](#SPEC_FIZZBUZZ)*: fizzbuzz n is a when multiple of
-> 3 and 5
+[<span id="tag-TEST_FIZZBUZZ">\[*testplan*:
+TEST_FIZZBUZZ\]</span>](#cov-tag-TEST_FIZZBUZZ) “fizzbuzz” values
+[\[*tests*: SPEC_FIZZBUZZ\]](#tag-SPEC_FIZZBUZZ)
 
 All multiples of 3 and 5 are `"fizzbuzz"`.
 
 The result of this test is recorded in the `valid_fizzbuzz` field of the
 test result table.
 
-<span class="req">**`TEST_NUM`**</span>: **integral values**
-
-> *[`SPEC_NUM`](#SPEC_NUM)*: n when n is a not a multiple of 3 and 5
+[<span id="tag-TEST_NUM">\[*testplan*:
+TEST_NUM\]</span>](#cov-tag-TEST_NUM) integral values [\[*tests*:
+SPEC_NUM\]](#tag-SPEC_NUM)
 
 All non multiples of 3 and 5 are themselves.
 
@@ -653,32 +738,14 @@ The Lua fizzbuzz function returns:
 fizzbuzz, 31, 32, fizz, 34, buzz, fizz, 37, 38, fizz, buzz, 41, fizz,
 43, 44, fizzbuzz, 46, 47, fizz, 49, buzz
 
-<span class="req">**`RES_LUA_API`**</span>: **number of fizzbuzz
-values** \[PASS\]
-
-> *[`TEST_API`](#TEST_API)*: number of fizzbuzz values
-
-<span class="req">**`RES_LUA_OUT`**</span>: **output on stdout**
-\[PASS\]
-
-> *[`TEST_OUT`](#TEST_OUT)*: output on stdout
-
-<span class="req">**`RES_LUA_FIZZ`**</span>: **“fizz” values** \[PASS\]
-
-> *[`TEST_FIZZ`](#TEST_FIZZ)*: “fizz” values
-
-<span class="req">**`RES_LUA_BUZZ`**</span>: **“buzz” values** \[PASS\]
-
-> *[`TEST_BUZZ`](#TEST_BUZZ)*: “buzz” values
-
-<span class="req">**`RES_LUA_FIZZBUZZ`**</span>: **“fizzbuzz” values**
-\[PASS\]
-
-> *[`TEST_FIZZBUZZ`](#TEST_FIZZBUZZ)*: “fizzbuzz” values
-
-<span class="req">**`RES_LUA_NUM`**</span>: **integral values** \[PASS\]
-
-> *[`TEST_NUM`](#TEST_NUM)*: integral values
+| Test | Result |
+|----|----|
+| [<span id="tag-RES_LUA_API">\[*test*: RES_LUA_API\]</span>](#cov-tag-RES_LUA_API) number of fizzbuzz values [\[*runs*: TEST_API\]](#tag-TEST_API) | PASSED |
+| [<span id="tag-RES_LUA_OUT">\[*test*: RES_LUA_OUT\]</span>](#cov-tag-RES_LUA_OUT) output on stdout [\[*runs*: TEST_OUT\]](#tag-TEST_OUT) | PASSED |
+| [<span id="tag-RES_LUA_FIZZ">\[*test*: RES_LUA_FIZZ\]</span>](#cov-tag-RES_LUA_FIZZ) “fizz” values [\[*runs*: TEST_FIZZ\]](#tag-TEST_FIZZ) | PASSED |
+| [<span id="tag-RES_LUA_BUZZ">\[*test*: RES_LUA_BUZZ\]</span>](#cov-tag-RES_LUA_BUZZ) “buzz” values [\[*runs*: TEST_BUZZ\]](#tag-TEST_BUZZ) | PASSED |
+| [<span id="tag-RES_LUA_FIZZBUZZ">\[*test*: RES_LUA_FIZZBUZZ\]</span>](#cov-tag-RES_LUA_FIZZBUZZ) “fizzbuzz” values [\[*runs*: TEST_FIZZBUZZ\]](#tag-TEST_FIZZBUZZ) | PASSED |
+| [<span id="tag-RES_LUA_NUM">\[*test*: RES_LUA_NUM\]</span>](#cov-tag-RES_LUA_NUM) integral values [\[*runs*: TEST_NUM\]](#tag-TEST_NUM) | PASSED |
 
 **Summary**: 5 / 5 tests passed
 
@@ -691,31 +758,14 @@ The C fizzbuzz function returns:
 fizzbuzz, 31, 32, fizz, 34, buzz, fizz, 37, 38, fizz, buzz, 41, fizz,
 43, 44, fizzbuzz, 46, 47, fizz, 49, buzz
 
-<span class="req">**`RES_C_API`**</span>: **number of fizzbuzz values**
-\[PASS\]
-
-> *[`TEST_API`](#TEST_API)*: number of fizzbuzz values
-
-<span class="req">**`RES_C_OUT`**</span>: **output on stdout** \[PASS\]
-
-> *[`TEST_OUT`](#TEST_OUT)*: output on stdout
-
-<span class="req">**`RES_C_FIZZ`**</span>: **“fizz” values** \[PASS\]
-
-> *[`TEST_FIZZ`](#TEST_FIZZ)*: “fizz” values
-
-<span class="req">**`RES_C_BUZZ`**</span>: **“buzz” values** \[PASS\]
-
-> *[`TEST_BUZZ`](#TEST_BUZZ)*: “buzz” values
-
-<span class="req">**`RES_C_FIZZBUZZ`**</span>: **“fizzbuzz” values**
-\[PASS\]
-
-> *[`TEST_FIZZBUZZ`](#TEST_FIZZBUZZ)*: “fizzbuzz” values
-
-<span class="req">**`RES_C_NUM`**</span>: **integral values** \[PASS\]
-
-> *[`TEST_NUM`](#TEST_NUM)*: integral values
+| Test | Result |
+|----|----|
+| [<span id="tag-RES_C_API">\[*test*: RES_C_API\]</span>](#cov-tag-RES_C_API) number of fizzbuzz values [\[*runs*: TEST_API\]](#tag-TEST_API) | PASSED |
+| [<span id="tag-RES_C_OUT">\[*test*: RES_C_OUT\]</span>](#cov-tag-RES_C_OUT) output on stdout [\[*runs*: TEST_OUT\]](#tag-TEST_OUT) | PASSED |
+| [<span id="tag-RES_C_FIZZ">\[*test*: RES_C_FIZZ\]</span>](#cov-tag-RES_C_FIZZ) “fizz” values [\[*runs*: TEST_FIZZ\]](#tag-TEST_FIZZ) | PASSED |
+| [<span id="tag-RES_C_BUZZ">\[*test*: RES_C_BUZZ\]</span>](#cov-tag-RES_C_BUZZ) “buzz” values [\[*runs*: TEST_BUZZ\]](#tag-TEST_BUZZ) | PASSED |
+| [<span id="tag-RES_C_FIZZBUZZ">\[*test*: RES_C_FIZZBUZZ\]</span>](#cov-tag-RES_C_FIZZBUZZ) “fizzbuzz” values [\[*runs*: TEST_FIZZBUZZ\]](#tag-TEST_FIZZBUZZ) | PASSED |
+| [<span id="tag-RES_C_NUM">\[*test*: RES_C_NUM\]</span>](#cov-tag-RES_C_NUM) integral values [\[*runs*: TEST_NUM\]](#tag-TEST_NUM) | PASSED |
 
 **Summary**: 5 / 5 tests passed
 
@@ -728,31 +778,14 @@ fizz, buzz, 17, fizz, 19, buzz, fizz, 22, 23, fizzbuzz, 25, 26, fizz,
 buzz, 29, fizz, 31, buzz, fizz, 34, 35, fizzbuzz, 37, 38, fizz, buzz,
 41, fizz, 43, buzz, fizz, 46, 47, fizzbuzz, 49, 50
 
-<span class="req">**`RES_HS_API`**</span>: **number of fizzbuzz values**
-\[PASS\]
-
-> *[`TEST_API`](#TEST_API)*: number of fizzbuzz values
-
-<span class="req">**`RES_HS_OUT`**</span>: **output on stdout** \[PASS\]
-
-> *[`TEST_OUT`](#TEST_OUT)*: output on stdout
-
-<span class="req">**`RES_HS_FIZZ`**</span>: **“fizz” values** \[FAIL\]
-
-> *[`TEST_FIZZ`](#TEST_FIZZ)*: “fizz” values
-
-<span class="req">**`RES_HS_BUZZ`**</span>: **“buzz” values** \[FAIL\]
-
-> *[`TEST_BUZZ`](#TEST_BUZZ)*: “buzz” values
-
-<span class="req">**`RES_HS_FIZZBUZZ`**</span>: **“fizzbuzz” values**
-\[FAIL\]
-
-> *[`TEST_FIZZBUZZ`](#TEST_FIZZBUZZ)*: “fizzbuzz” values
-
-<span class="req">**`RES_HS_NUM`**</span>: **integral values** \[FAIL\]
-
-> *[`TEST_NUM`](#TEST_NUM)*: integral values
+| Test | Result |
+|----|----|
+| [<span id="tag-RES_HS_API">\[*test*: RES_HS_API\]</span>](#cov-tag-RES_HS_API) number of fizzbuzz values [\[*runs*: TEST_API\]](#tag-TEST_API) | PASSED |
+| [<span id="tag-RES_HS_OUT">\[*test*: RES_HS_OUT\]</span>](#cov-tag-RES_HS_OUT) output on stdout [\[*runs*: TEST_OUT\]](#tag-TEST_OUT) | PASSED |
+| [<span id="tag-RES_HS_FIZZ">\[*test*: RES_HS_FIZZ\]</span>](#cov-tag-RES_HS_FIZZ) “fizz” values [\[*runs*: TEST_FIZZ\]](#tag-TEST_FIZZ) | **FAILED** |
+| [<span id="tag-RES_HS_BUZZ">\[*test*: RES_HS_BUZZ\]</span>](#cov-tag-RES_HS_BUZZ) “buzz” values [\[*runs*: TEST_BUZZ\]](#tag-TEST_BUZZ) | **FAILED** |
+| [<span id="tag-RES_HS_FIZZBUZZ">\[*test*: RES_HS_FIZZBUZZ\]</span>](#cov-tag-RES_HS_FIZZBUZZ) “fizzbuzz” values [\[*runs*: TEST_FIZZBUZZ\]](#tag-TEST_FIZZBUZZ) | **FAILED** |
+| [<span id="tag-RES_HS_NUM">\[*test*: RES_HS_NUM\]</span>](#cov-tag-RES_HS_NUM) integral values [\[*runs*: TEST_NUM\]](#tag-TEST_NUM) | **FAILED** |
 
 **Summary**: 1 / 5 tests passed
 
@@ -813,287 +846,340 @@ buzz, 29, fizz, 31, buzz, fizz, 34, 35, fizzbuzz, 37, 38, fizz, buzz,
 
 ## Coverage matrix
 
-<table>
+<table style="width:100%;">
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 66%" />
+<col style="width: 26%" />
+<col style="width: 44%" />
+<col style="width: 28%" />
 </colgroup>
 <thead>
 <tr>
-<th><strong>File</strong></th>
-<th><strong><a
-href="fizzbuzz.pdf"><code>fizzbuzz.pdf</code></a></strong></th>
+<th>Upstream</th>
+<th>Tags</th>
+<th>Downstream</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="#SPEC_API"><code>SPEC_API</code></a></td>
-<td>fizzbuzz command line argument</td>
+<td></td>
+<td><div class="line-block"><a href="#tag-SPEC_API"><span
+id="cov-tag-SPEC_API"><strong>[<em>spec</em>:SPEC_API]</strong></span></a><br />
+fizzbuzz command line argument</div></td>
+<td><div class="line-block"><a
+href="#tag-TEST_API"><strong>[<em>tests</em>:TEST_API]</strong></a><br />
+number of fizzbuzz values</div></td>
 </tr>
 <tr>
-<td><a href="#SPEC_OUT"><code>SPEC_OUT</code></a></td>
-<td>fizzbuzz output on stdout</td>
+<td></td>
+<td><div class="line-block"><a href="#tag-SPEC_OUT"><span
+id="cov-tag-SPEC_OUT"><strong>[<em>spec</em>:SPEC_OUT]</strong></span></a><br />
+fizzbuzz output on stdout</div></td>
+<td><div class="line-block"><a
+href="#tag-TEST_OUT"><strong>[<em>tests</em>:TEST_OUT]</strong></a><br />
+output on stdout</div></td>
 </tr>
 <tr>
-<td><a href="#SPEC_FIZZ"><code>SPEC_FIZZ</code></a></td>
-<td>fizz when n is a multiple of 3 but not 5</td>
+<td></td>
+<td><div class="line-block"><a href="#tag-SPEC_FIZZ"><span
+id="cov-tag-SPEC_FIZZ"><strong>[<em>spec</em>:SPEC_FIZZ]</strong></span></a><br />
+fizz when n is a multiple of 3 but not 5</div></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZ"><strong>[<em>tests</em>:TEST_FIZZ]</strong></a><br />
+“fizz” values</div></td>
 </tr>
 <tr>
-<td><a href="#SPEC_BUZZ"><code>SPEC_BUZZ</code></a></td>
-<td>buzz when n is a multiple of 5 but not 3</td>
+<td></td>
+<td><div class="line-block"><a href="#tag-SPEC_BUZZ"><span
+id="cov-tag-SPEC_BUZZ"><strong>[<em>spec</em>:SPEC_BUZZ]</strong></span></a><br />
+buzz when n is a multiple of 5 but not 3</div></td>
+<td><div class="line-block"><a
+href="#tag-TEST_BUZZ"><strong>[<em>tests</em>:TEST_BUZZ]</strong></a><br />
+“buzz” values</div></td>
 </tr>
 <tr>
-<td><a href="#SPEC_FIZZBUZZ"><code>SPEC_FIZZBUZZ</code></a></td>
-<td>fizzbuzz n is a when multiple of 3 and 5</td>
+<td></td>
+<td><div class="line-block"><a href="#tag-SPEC_FIZZBUZZ"><span
+id="cov-tag-SPEC_FIZZBUZZ"><strong>[<em>spec</em>:SPEC_FIZZBUZZ]</strong></span></a><br />
+fizzbuzz n is a when multiple of 3 and 5</div></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZBUZZ"><strong>[<em>tests</em>:TEST_FIZZBUZZ]</strong></a><br />
+“fizzbuzz” values</div></td>
 </tr>
 <tr>
-<td><a href="#SPEC_NUM"><code>SPEC_NUM</code></a></td>
-<td>n when n is a not a multiple of 3 and 5</td>
+<td></td>
+<td><div class="line-block"><a href="#tag-SPEC_NUM"><span
+id="cov-tag-SPEC_NUM"><strong>[<em>spec</em>:SPEC_NUM]</strong></span></a><br />
+n when n is a not a multiple of 3 and 5</div></td>
+<td><div class="line-block"><a
+href="#tag-TEST_NUM"><strong>[<em>tests</em>:TEST_NUM]</strong></a><br />
+integral values</div></td>
 </tr>
 <tr>
-<td><a href="#TEST_API"><code>TEST_API</code></a></td>
-<td><p>number of fizzbuzz values</p>
-<blockquote>
-<ul>
-<li><em><a href="#SPEC_API"><code>SPEC_API</code></a></em>: fizzbuzz
-command line argument</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-SPEC_API"><strong>[<em>tests</em>:SPEC_API]</strong></a><br />
+fizzbuzz command line argument</div></td>
+<td><div class="line-block"><a href="#tag-TEST_API"><span
+id="cov-tag-TEST_API"><strong>[<em>testplan</em>:TEST_API]</strong></span></a><br />
+number of fizzbuzz values</div></td>
+<td><div class="line-block"><a
+href="#tag-RES_LUA_API"><strong>[<em>runs</em>:RES_LUA_API]</strong></a><br />
+number of fizzbuzz values<br />
+<a
+href="#tag-RES_C_API"><strong>[<em>runs</em>:RES_C_API]</strong></a><br />
+number of fizzbuzz values<br />
+<a
+href="#tag-RES_HS_API"><strong>[<em>runs</em>:RES_HS_API]</strong></a><br />
+number of fizzbuzz values</div></td>
 </tr>
 <tr>
-<td><a href="#TEST_OUT"><code>TEST_OUT</code></a></td>
-<td><p>output on stdout</p>
-<blockquote>
-<ul>
-<li><em><a href="#SPEC_OUT"><code>SPEC_OUT</code></a></em>: fizzbuzz
-output on stdout</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-SPEC_OUT"><strong>[<em>tests</em>:SPEC_OUT]</strong></a><br />
+fizzbuzz output on stdout</div></td>
+<td><div class="line-block"><a href="#tag-TEST_OUT"><span
+id="cov-tag-TEST_OUT"><strong>[<em>testplan</em>:TEST_OUT]</strong></span></a><br />
+output on stdout</div></td>
+<td><div class="line-block"><a
+href="#tag-RES_LUA_OUT"><strong>[<em>runs</em>:RES_LUA_OUT]</strong></a><br />
+output on stdout<br />
+<a
+href="#tag-RES_C_OUT"><strong>[<em>runs</em>:RES_C_OUT]</strong></a><br />
+output on stdout<br />
+<a
+href="#tag-RES_HS_OUT"><strong>[<em>runs</em>:RES_HS_OUT]</strong></a><br />
+output on stdout</div></td>
 </tr>
 <tr>
-<td><a href="#TEST_FIZZ"><code>TEST_FIZZ</code></a></td>
-<td><p>“fizz” values</p>
-<blockquote>
-<ul>
-<li><em><a href="#SPEC_FIZZ"><code>SPEC_FIZZ</code></a></em>: fizz when
-n is a multiple of 3 but not 5</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-SPEC_FIZZ"><strong>[<em>tests</em>:SPEC_FIZZ]</strong></a><br />
+fizz when n is a multiple of 3 but not 5</div></td>
+<td><div class="line-block"><a href="#tag-TEST_FIZZ"><span
+id="cov-tag-TEST_FIZZ"><strong>[<em>testplan</em>:TEST_FIZZ]</strong></span></a><br />
+“fizz” values</div></td>
+<td><div class="line-block"><a
+href="#tag-RES_LUA_FIZZ"><strong>[<em>runs</em>:RES_LUA_FIZZ]</strong></a><br />
+“fizz” values<br />
+<a
+href="#tag-RES_C_FIZZ"><strong>[<em>runs</em>:RES_C_FIZZ]</strong></a><br />
+“fizz” values<br />
+<a
+href="#tag-RES_HS_FIZZ"><strong>[<em>runs</em>:RES_HS_FIZZ]</strong></a><br />
+“fizz” values</div></td>
 </tr>
 <tr>
-<td><a href="#TEST_BUZZ"><code>TEST_BUZZ</code></a></td>
-<td><p>“buzz” values</p>
-<blockquote>
-<ul>
-<li><em><a href="#SPEC_BUZZ"><code>SPEC_BUZZ</code></a></em>: buzz when
-n is a multiple of 5 but not 3</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-SPEC_BUZZ"><strong>[<em>tests</em>:SPEC_BUZZ]</strong></a><br />
+buzz when n is a multiple of 5 but not 3</div></td>
+<td><div class="line-block"><a href="#tag-TEST_BUZZ"><span
+id="cov-tag-TEST_BUZZ"><strong>[<em>testplan</em>:TEST_BUZZ]</strong></span></a><br />
+“buzz” values</div></td>
+<td><div class="line-block"><a
+href="#tag-RES_LUA_BUZZ"><strong>[<em>runs</em>:RES_LUA_BUZZ]</strong></a><br />
+“buzz” values<br />
+<a
+href="#tag-RES_C_BUZZ"><strong>[<em>runs</em>:RES_C_BUZZ]</strong></a><br />
+“buzz” values<br />
+<a
+href="#tag-RES_HS_BUZZ"><strong>[<em>runs</em>:RES_HS_BUZZ]</strong></a><br />
+“buzz” values</div></td>
 </tr>
 <tr>
-<td><a href="#TEST_FIZZBUZZ"><code>TEST_FIZZBUZZ</code></a></td>
-<td><p>“fizzbuzz” values</p>
-<blockquote>
-<ul>
-<li><em><a href="#SPEC_FIZZBUZZ"><code>SPEC_FIZZBUZZ</code></a></em>:
-fizzbuzz n is a when multiple of 3 and 5</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-SPEC_FIZZBUZZ"><strong>[<em>tests</em>:SPEC_FIZZBUZZ]</strong></a><br />
+fizzbuzz n is a when multiple of 3 and 5</div></td>
+<td><div class="line-block"><a href="#tag-TEST_FIZZBUZZ"><span
+id="cov-tag-TEST_FIZZBUZZ"><strong>[<em>testplan</em>:TEST_FIZZBUZZ]</strong></span></a><br />
+“fizzbuzz” values</div></td>
+<td><div class="line-block"><a
+href="#tag-RES_LUA_FIZZBUZZ"><strong>[<em>runs</em>:RES_LUA_FIZZBUZZ]</strong></a><br />
+“fizzbuzz” values<br />
+<a
+href="#tag-RES_C_FIZZBUZZ"><strong>[<em>runs</em>:RES_C_FIZZBUZZ]</strong></a><br />
+“fizzbuzz” values<br />
+<a
+href="#tag-RES_HS_FIZZBUZZ"><strong>[<em>runs</em>:RES_HS_FIZZBUZZ]</strong></a><br />
+“fizzbuzz” values</div></td>
 </tr>
 <tr>
-<td><a href="#TEST_NUM"><code>TEST_NUM</code></a></td>
-<td><p>integral values</p>
-<blockquote>
-<ul>
-<li><em><a href="#SPEC_NUM"><code>SPEC_NUM</code></a></em>: n when n is
-a not a multiple of 3 and 5</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-SPEC_NUM"><strong>[<em>tests</em>:SPEC_NUM]</strong></a><br />
+n when n is a not a multiple of 3 and 5</div></td>
+<td><div class="line-block"><a href="#tag-TEST_NUM"><span
+id="cov-tag-TEST_NUM"><strong>[<em>testplan</em>:TEST_NUM]</strong></span></a><br />
+integral values</div></td>
+<td><div class="line-block"><a
+href="#tag-RES_LUA_NUM"><strong>[<em>runs</em>:RES_LUA_NUM]</strong></a><br />
+integral values<br />
+<a
+href="#tag-RES_C_NUM"><strong>[<em>runs</em>:RES_C_NUM]</strong></a><br />
+integral values<br />
+<a
+href="#tag-RES_HS_NUM"><strong>[<em>runs</em>:RES_HS_NUM]</strong></a><br />
+integral values</div></td>
 </tr>
 <tr>
-<td><a href="#RES_LUA_API"><code>RES_LUA_API</code></a></td>
-<td><p>number of fizzbuzz values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_API"><code>TEST_API</code></a></em>: number of
-fizzbuzz values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_API"><strong>[<em>runs</em>:TEST_API]</strong></a><br />
+number of fizzbuzz values</div></td>
+<td><div class="line-block"><a href="#tag-RES_LUA_API"><span
+id="cov-tag-RES_LUA_API"><strong>[<em>test</em>:RES_LUA_API]</strong></span></a><br />
+number of fizzbuzz values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_LUA_OUT"><code>RES_LUA_OUT</code></a></td>
-<td><p>output on stdout [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_OUT"><code>TEST_OUT</code></a></em>: output on
-stdout</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_OUT"><strong>[<em>runs</em>:TEST_OUT]</strong></a><br />
+output on stdout</div></td>
+<td><div class="line-block"><a href="#tag-RES_LUA_OUT"><span
+id="cov-tag-RES_LUA_OUT"><strong>[<em>test</em>:RES_LUA_OUT]</strong></span></a><br />
+output on stdout</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_LUA_FIZZ"><code>RES_LUA_FIZZ</code></a></td>
-<td><p>“fizz” values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_FIZZ"><code>TEST_FIZZ</code></a></em>: “fizz”
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZ"><strong>[<em>runs</em>:TEST_FIZZ]</strong></a><br />
+“fizz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_LUA_FIZZ"><span
+id="cov-tag-RES_LUA_FIZZ"><strong>[<em>test</em>:RES_LUA_FIZZ]</strong></span></a><br />
+“fizz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_LUA_BUZZ"><code>RES_LUA_BUZZ</code></a></td>
-<td><p>“buzz” values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_BUZZ"><code>TEST_BUZZ</code></a></em>: “buzz”
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_BUZZ"><strong>[<em>runs</em>:TEST_BUZZ]</strong></a><br />
+“buzz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_LUA_BUZZ"><span
+id="cov-tag-RES_LUA_BUZZ"><strong>[<em>test</em>:RES_LUA_BUZZ]</strong></span></a><br />
+“buzz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_LUA_FIZZBUZZ"><code>RES_LUA_FIZZBUZZ</code></a></td>
-<td><p>“fizzbuzz” values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_FIZZBUZZ"><code>TEST_FIZZBUZZ</code></a></em>:
-“fizzbuzz” values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZBUZZ"><strong>[<em>runs</em>:TEST_FIZZBUZZ]</strong></a><br />
+“fizzbuzz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_LUA_FIZZBUZZ"><span
+id="cov-tag-RES_LUA_FIZZBUZZ"><strong>[<em>test</em>:RES_LUA_FIZZBUZZ]</strong></span></a><br />
+“fizzbuzz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_LUA_NUM"><code>RES_LUA_NUM</code></a></td>
-<td><p>integral values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_NUM"><code>TEST_NUM</code></a></em>: integral
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_NUM"><strong>[<em>runs</em>:TEST_NUM]</strong></a><br />
+integral values</div></td>
+<td><div class="line-block"><a href="#tag-RES_LUA_NUM"><span
+id="cov-tag-RES_LUA_NUM"><strong>[<em>test</em>:RES_LUA_NUM]</strong></span></a><br />
+integral values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_C_API"><code>RES_C_API</code></a></td>
-<td><p>number of fizzbuzz values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_API"><code>TEST_API</code></a></em>: number of
-fizzbuzz values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_API"><strong>[<em>runs</em>:TEST_API]</strong></a><br />
+number of fizzbuzz values</div></td>
+<td><div class="line-block"><a href="#tag-RES_C_API"><span
+id="cov-tag-RES_C_API"><strong>[<em>test</em>:RES_C_API]</strong></span></a><br />
+number of fizzbuzz values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_C_OUT"><code>RES_C_OUT</code></a></td>
-<td><p>output on stdout [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_OUT"><code>TEST_OUT</code></a></em>: output on
-stdout</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_OUT"><strong>[<em>runs</em>:TEST_OUT]</strong></a><br />
+output on stdout</div></td>
+<td><div class="line-block"><a href="#tag-RES_C_OUT"><span
+id="cov-tag-RES_C_OUT"><strong>[<em>test</em>:RES_C_OUT]</strong></span></a><br />
+output on stdout</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_C_FIZZ"><code>RES_C_FIZZ</code></a></td>
-<td><p>“fizz” values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_FIZZ"><code>TEST_FIZZ</code></a></em>: “fizz”
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZ"><strong>[<em>runs</em>:TEST_FIZZ]</strong></a><br />
+“fizz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_C_FIZZ"><span
+id="cov-tag-RES_C_FIZZ"><strong>[<em>test</em>:RES_C_FIZZ]</strong></span></a><br />
+“fizz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_C_BUZZ"><code>RES_C_BUZZ</code></a></td>
-<td><p>“buzz” values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_BUZZ"><code>TEST_BUZZ</code></a></em>: “buzz”
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_BUZZ"><strong>[<em>runs</em>:TEST_BUZZ]</strong></a><br />
+“buzz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_C_BUZZ"><span
+id="cov-tag-RES_C_BUZZ"><strong>[<em>test</em>:RES_C_BUZZ]</strong></span></a><br />
+“buzz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_C_FIZZBUZZ"><code>RES_C_FIZZBUZZ</code></a></td>
-<td><p>“fizzbuzz” values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_FIZZBUZZ"><code>TEST_FIZZBUZZ</code></a></em>:
-“fizzbuzz” values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZBUZZ"><strong>[<em>runs</em>:TEST_FIZZBUZZ]</strong></a><br />
+“fizzbuzz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_C_FIZZBUZZ"><span
+id="cov-tag-RES_C_FIZZBUZZ"><strong>[<em>test</em>:RES_C_FIZZBUZZ]</strong></span></a><br />
+“fizzbuzz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_C_NUM"><code>RES_C_NUM</code></a></td>
-<td><p>integral values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_NUM"><code>TEST_NUM</code></a></em>: integral
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_NUM"><strong>[<em>runs</em>:TEST_NUM]</strong></a><br />
+integral values</div></td>
+<td><div class="line-block"><a href="#tag-RES_C_NUM"><span
+id="cov-tag-RES_C_NUM"><strong>[<em>test</em>:RES_C_NUM]</strong></span></a><br />
+integral values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_HS_API"><code>RES_HS_API</code></a></td>
-<td><p>number of fizzbuzz values [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_API"><code>TEST_API</code></a></em>: number of
-fizzbuzz values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_API"><strong>[<em>runs</em>:TEST_API]</strong></a><br />
+number of fizzbuzz values</div></td>
+<td><div class="line-block"><a href="#tag-RES_HS_API"><span
+id="cov-tag-RES_HS_API"><strong>[<em>test</em>:RES_HS_API]</strong></span></a><br />
+number of fizzbuzz values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_HS_OUT"><code>RES_HS_OUT</code></a></td>
-<td><p>output on stdout [PASS]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_OUT"><code>TEST_OUT</code></a></em>: output on
-stdout</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_OUT"><strong>[<em>runs</em>:TEST_OUT]</strong></a><br />
+output on stdout</div></td>
+<td><div class="line-block"><a href="#tag-RES_HS_OUT"><span
+id="cov-tag-RES_HS_OUT"><strong>[<em>test</em>:RES_HS_OUT]</strong></span></a><br />
+output on stdout</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_HS_FIZZ"><code>RES_HS_FIZZ</code></a></td>
-<td><p>“fizz” values [FAIL]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_FIZZ"><code>TEST_FIZZ</code></a></em>: “fizz”
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZ"><strong>[<em>runs</em>:TEST_FIZZ]</strong></a><br />
+“fizz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_HS_FIZZ"><span
+id="cov-tag-RES_HS_FIZZ"><strong>[<em>test</em>:RES_HS_FIZZ]</strong></span></a><br />
+“fizz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_HS_BUZZ"><code>RES_HS_BUZZ</code></a></td>
-<td><p>“buzz” values [FAIL]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_BUZZ"><code>TEST_BUZZ</code></a></em>: “buzz”
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_BUZZ"><strong>[<em>runs</em>:TEST_BUZZ]</strong></a><br />
+“buzz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_HS_BUZZ"><span
+id="cov-tag-RES_HS_BUZZ"><strong>[<em>test</em>:RES_HS_BUZZ]</strong></span></a><br />
+“buzz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_HS_FIZZBUZZ"><code>RES_HS_FIZZBUZZ</code></a></td>
-<td><p>“fizzbuzz” values [FAIL]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_FIZZBUZZ"><code>TEST_FIZZBUZZ</code></a></em>:
-“fizzbuzz” values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_FIZZBUZZ"><strong>[<em>runs</em>:TEST_FIZZBUZZ]</strong></a><br />
+“fizzbuzz” values</div></td>
+<td><div class="line-block"><a href="#tag-RES_HS_FIZZBUZZ"><span
+id="cov-tag-RES_HS_FIZZBUZZ"><strong>[<em>test</em>:RES_HS_FIZZBUZZ]</strong></span></a><br />
+“fizzbuzz” values</div></td>
+<td></td>
 </tr>
 <tr>
-<td><a href="#RES_HS_NUM"><code>RES_HS_NUM</code></a></td>
-<td><p>integral values [FAIL]</p>
-<blockquote>
-<ul>
-<li><em><a href="#TEST_NUM"><code>TEST_NUM</code></a></em>: integral
-values</li>
-</ul>
-</blockquote></td>
+<td><div class="line-block"><a
+href="#tag-TEST_NUM"><strong>[<em>runs</em>:TEST_NUM]</strong></a><br />
+integral values</div></td>
+<td><div class="line-block"><a href="#tag-RES_HS_NUM"><span
+id="cov-tag-RES_HS_NUM"><strong>[<em>test</em>:RES_HS_NUM]</strong></span></a><br />
+integral values</div></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
-<img src="./img/coverage-matrix.svg" class="dot" />
 
 # References
 
@@ -1132,6 +1218,11 @@ values</li>
 <https://codeberg.org/cdsoft/ypp>
 
 > Ypp is a minimalist and generic text preprocessor using Lua macros.
+
+[**yreq**](https://codeberg.org/cdsoft/yreq):
+<https://codeberg.org/cdsoft/yreq>
+
+> Yreq is a minimalist requirement management plugin for ypp.
 
 [**Pandoc**](https://pandoc.org): <https://pandoc.org>
 

@@ -42,16 +42,17 @@ img:Rect {
 local function ix(i) return w/4 + (256+64)*(i-1) end
 local function iy(i) return 896 + 256*(i-1) end
 
-local names = string.words "LuaX ypp Panda Pandoc ..." ---@diagnostic disable-line: undefined-field
+local names = string.words "LuaX ypp Panda Pandoc ..."
 
 names:mapi(function(i, name)
     img:Text(name) { x = ix(i), y = iy(i) } {
         fill = F.case(name) {
             Pandoc = "darkgrey",
-            otherwise = "white",
+            [F.Nil] = "white",
         },
     }
 end)
+img:Text "yreq" { x=ix(2+2.1), y=iy(2), fill="white" }
 
 img:Text "bang"  {transform=("translate(%d, %d) rotate(45)"):format(ix(1.0), iy(3.5))} { fill = "white" }
 img:Text "ninja" {transform=("translate(%d, %d) rotate(45)"):format(ix(0.5), iy(4.0))} { fill = "darkgrey" }

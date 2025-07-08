@@ -4,7 +4,6 @@ local F = require "F"
 section "Project directories"
 ---------------------------------------------------------------------------
 
-var "builddir" ".build"
 var "img" "img"
 
 clean "$builddir"
@@ -86,14 +85,13 @@ section "Documentation"
 
 local env = {
     'export LUA_PATH="$builddir/tests/?.lua;./?.lua";',
-    'export REQDB="$builddir/reqdb.lua";',
-    'export REQTARGET="fizzbuzz.pdf";',
+    "eval $$(luax env);",
 }
 
 local ypp_flags = {
     "-p .",
+    "-l yreq",
     "-l project_data",
-    "-l req",
 }
 
 rule "ypp" {

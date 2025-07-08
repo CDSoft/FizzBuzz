@@ -1,3 +1,12 @@
+--[[ WARNING
+
+    This module is deprecated and replaced with yreq.
+    Some functions of req may eventually land to yreq.
+
+--]]
+
+error "req.lua is deprecated and shall not be used."
+
 --[[
     Basic requirement management for ypp
     ====================================
