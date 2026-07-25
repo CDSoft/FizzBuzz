@@ -600,9 +600,9 @@ plot sin(x) lw 4, cos(x) lw 4
 
 ## Web / email
 
-[cdsoft.codeberg.page](https://cdsoft.codeberg.page)
+[cdelord.fr](https://cdelord.fr)
 
-## Github
+## Codeberg
 
 [codeberg.org/cdsoft](https://codeberg.org/cdsoft)
 

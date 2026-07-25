@@ -210,7 +210,7 @@ a scripting engine.
 
 # Bang
 
-[Bang](https://codeberg.org/cdsoft/bang) is a ninja file generator
+[Bang](https://codeberg.org/cdsoft/luax) is a ninja file generator
 scriptable in LuaX, a Lua interpreter with a bunch of useful modules
 (file management, functional programming module, basic cryptography, …).
 It takes a build description (a LuaX script) and generates a Ninja file.
@@ -247,7 +247,7 @@ Ypp is a minimalist and generic text preprocessor using Lua macros.
 Ypp is compiled by LuaX, i.e. Lua and LuaX functions and modules are
 available in macros.
 
-More information here: <https://codeberg.org/cdsoft/ypp>
+More information here: <https://codeberg.org/cdsoft/luax>
 
 Ypp is pretty simple. It searches for Lua expressions and replaces
 macros with their results.
@@ -375,7 +375,7 @@ Yeq is a ypp plugin. It can be loaded by ypp with the `-l`. If
 with the `-p` option. E.g.:
 
 ``` sh
-$ ypp -p $PREFIX/lib -l yreq -l config file.md -o output.md
+ypp -p $PREFIX/lib -l yreq -l config file.md -o output.md
 ```
 
 Bang may also be a nice option to write a more complex build system.
@@ -469,23 +469,23 @@ will be replaced by:
 Diagrams can be embedded in Pandoc documents. Diagrams are specified as
 code blocks and are replaced by an image by panda.
 
-    ```{.dot render="{{dot}}" width=67%}
-    digraph {
-        rankdir=LR;
-        input -> pandoc -> output
-        pandoc -> panda -> {pandoc, diagrams}
-        { rank=same; pandoc, panda }
-        { rank=same; diagrams, output }
-    }
-    ```
+        ```{.dot render="{{dot}}" width=67%}
+        digraph {
+            rankdir=LR;
+            input -> pandoc -> output
+            pandoc -> panda -> {pandoc, diagrams}
+            { rank=same; pandoc, panda }
+            { rank=same; diagrams, output }
+        }
+        ```
 
 <img src="./img/example-graphviz.svg" class="dot" style="width:67.0%" />
 
-    ```{render="{{gnuplot}}" width=67%}
-    set xrange [-pi:pi]
-    set yrange [-1.5:1.5]
-    plot sin(x) lw 4, cos(x) lw 4
-    ```
+        ```{render="{{gnuplot}}" width=67%}
+        set xrange [-pi:pi]
+        set yrange [-1.5:1.5]
+        plot sin(x) lw 4, cos(x) lw 4
+        ```
 
 <img src="./img/example-gnuplot.svg" style="width:67.0%" />
 
@@ -1197,8 +1197,8 @@ integral values</div></td>
 > programming, functional programming, data-driven programming, and data
 > description.
 
-[**Lua documentation**](https://www.lua.org/manual/5.4/):
-<https://www.lua.org/manual/5.4/>
+[**Lua documentation**](https://www.lua.org/manual/5.5/):
+<https://www.lua.org/manual/5.5/>
 
 > The reference manual is the official definition of the Lua language.
 
@@ -1209,13 +1209,13 @@ integral values</div></td>
 > some useful packages. LuaX can also produce standalone executables
 > from Lua scripts.
 
-[**bang**](https://codeberg.org/cdsoft/bang):
-<https://codeberg.org/cdsoft/bang>
+[**bang**](https://codeberg.org/cdsoft/luax):
+<https://codeberg.org/cdsoft/luax>
 
 > Bang is a Ninja file generator scriptable in LuaX.
 
-[**ypp**](https://codeberg.org/cdsoft/ypp):
-<https://codeberg.org/cdsoft/ypp>
+[**ypp**](https://codeberg.org/cdsoft/luax):
+<https://codeberg.org/cdsoft/luax>
 
 > Ypp is a minimalist and generic text preprocessor using Lua macros.
 

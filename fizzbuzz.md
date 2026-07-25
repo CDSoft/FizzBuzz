@@ -1,5 +1,5 @@
 ---
-title: Fizz buzz - LuaX demo
+title: Fizz Buzz - LuaX demo
 date: @DATE
 author: @AUTHOR
 keywords:
@@ -212,7 +212,7 @@ The next chapters present some tools written in Lua/LuaX or using Lua as a scrip
 
 # Bang
 
-[Bang](https://codeberg.org/cdsoft/bang) is a ninja file generator scriptable in
+[Bang](https://codeberg.org/cdsoft/luax) is a ninja file generator scriptable in
 LuaX, a Lua interpreter with a bunch of useful modules (file management,
 functional programming module, basic cryptography, ...). It takes a build
 description (a LuaX script) and generates a Ninja file.
@@ -247,7 +247,7 @@ Ypp is a minimalist and generic text preprocessor using Lua macros.
 Ypp is compiled by LuaX, i.e. Lua and LuaX functions and modules are available
 in macros.
 
-More information here: <https://codeberg.org/cdsoft/ypp>
+More information here: <https://codeberg.org/cdsoft/luax>
 
 Ypp is pretty simple. It searches for Lua expressions and replaces macros with their results.
 
@@ -379,7 +379,7 @@ If `$PREFIX/lib` is not in `LUA_PATH`, the library path can be given to ypp with
 E.g.:
 
 ``` sh
-$ ypp -p $PREFIX/lib -l yreq -l config file.md -o output.md
+ypp -p $PREFIX/lib -l yreq -l config file.md -o output.md
 ```
 
 Bang may also be a nice option to write a more complex build system.
@@ -453,6 +453,7 @@ _dot = "{{dot}}"
 _gnuplot = "{{gnuplot}}"
 ```
 
+```
     ```{.dot render="{{_dot}}" width=67%}
     digraph {
         rankdir=LR;
@@ -462,6 +463,7 @@ _gnuplot = "{{gnuplot}}"
         { rank=same; diagrams, output }
     }
     ```
+```
 
 ```{.dot render="{{dot}}" name=example-graphviz width=67%}
 digraph {
@@ -473,11 +475,13 @@ digraph {
 }
 ```
 
+```
     ```{render="{{_gnuplot}}" width=67%}
     set xrange [-pi:pi]
     set yrange [-1.5:1.5]
     plot sin(x) lw 4, cos(x) lw 4
     ```
+```
 
 ```{render="{{gnuplot}}" name=example-gnuplot width=67%}
 set xrange [-pi:pi]
@@ -742,7 +746,7 @@ The Haskell fizzbuzz function returns:
 > supports procedural programming, object-oriented programming, functional
 > programming, data-driven programming, and data description.
 
-@link "Lua documentation" "https://www.lua.org/manual/5.4/"
+@link "Lua documentation" "https://www.lua.org/manual/5.5/"
 > The reference manual is the official definition of the Lua language.
 
 @link "LuaX" "https://codeberg.org/cdsoft/luax"
@@ -750,10 +754,10 @@ The Haskell fizzbuzz function returns:
 > useful packages. LuaX can also produce standalone executables from Lua
 > scripts.
 
-@link "bang" "https://codeberg.org/cdsoft/bang"
+@link "bang" "https://codeberg.org/cdsoft/luax"
 > Bang is a Ninja file generator scriptable in LuaX.
 
-@link "ypp" "https://codeberg.org/cdsoft/ypp"
+@link "ypp" "https://codeberg.org/cdsoft/luax"
 > Ypp is a minimalist and generic text preprocessor using Lua macros.
 
 @link "yreq" "https://codeberg.org/cdsoft/yreq"
