@@ -163,10 +163,12 @@ rule "panda_gfm" {
         "export PANDA_DEP_FILE=$depfile;",
         "export LOGO=$logo_html;",
         "panda", markdown_flags, "$in -o $out",
+        "-L one_h1.lua",
     },
     depfile = "$builddir/dependencies/$out.d",
     implicit_in = {
         "$logo_html",
+        "one_h1.lua",
     },
 }
 
@@ -193,14 +195,9 @@ rule "panda_beamer" {
 var "logo_pdf" "$builddir/logo.pdf"
 var "logo_html" "$img/logo.svg"
 
-rule "lsvg" {
-    command = "lsvg $in -o $out --MF $depfile",
-    depfile = "$builddir/$out.d",
-}
-
 acc(all) {
-    build "$logo_pdf"  { "lsvg", "logo.lua" },
-    build "$logo_html" { "lsvg", "logo.lua" },
+    build.figure.pdf "$logo_pdf"  { "logo.lua" },
+    build.figure.svg "$logo_html" { "logo.lua" },
 }
 
 local fizzbuzz_md = build "$builddir/fizzbuzz.md" { "ypp", "fizzbuzz.md",

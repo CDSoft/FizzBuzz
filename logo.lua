@@ -2,41 +2,40 @@ local w, h = 2048, 2048
 
 local F = require "F"
 
-img {
-    width = w,
-    height = h,
+fig { w, h,
     font_size=h/8, text_anchor="middle",
 }
 
 local border_size = 64
 
-img:Rect {
-    x = border_size/2,
-    y = border_size/2,
-    width = w-2*border_size/2,
-    height = h-2*border_size/2,
-    rx = 2*border_size,
-    stroke = "#435488", stroke_width = border_size,
-    fill = "grey",
-}
-
-img:Text "Fizz Buzz" {
-    x = w/2,
-    y = h/4,
-}
-img:Rect {
-    x = w/4-64, width = w/2+2*64,
-    y = h/4-100, height = 64,
-    rx = 32,
-    fill = "red",
-    opacity = 0.7,
-}
-img:Rect {
-    x = 128, width = w-2*128,
-    y = h/4+64, height = 64,
-    rx = 32,
-    fill = "#435488",
-    opacity = 0.7,
+fig {
+    rect {
+        x = border_size/2,
+        y = border_size/2,
+        width = w-2*border_size/2,
+        height = h-2*border_size/2,
+        rx = 2*border_size,
+        stroke = "#435488", stroke_width = border_size,
+        fill = "grey",
+    },
+    text "Fizz Buzz" {
+        x = w/2,
+        y = h/4,
+    },
+    rect {
+        x = w/4-64, width = w/2+2*64,
+        y = h/4-100, height = 64,
+        rx = 32,
+        fill = "red",
+        opacity = 0.7,
+    },
+    rect {
+        x = 128, width = w-2*128,
+        y = h/4+64, height = 64,
+        rx = 32,
+        fill = "#435488",
+        opacity = 0.7,
+    },
 }
 
 local function ix(i) return w/4 + (256+64)*(i-1) end
@@ -45,14 +44,18 @@ local function iy(i) return 896 + 256*(i-1) end
 local names = string.words "LuaX ypp Panda Pandoc ..."
 
 names:mapi(function(i, name)
-    img:Text(name) { x = ix(i), y = iy(i) } {
-        fill = F.case(name) {
-            Pandoc = "darkgrey",
-            [F.Nil] = "white",
+    fig {
+        text(name) { x = ix(i), y = iy(i) } {
+            fill = F.case(name) {
+                Pandoc = "darkgrey",
+                [F.Nil] = "white",
+            },
         },
     }
 end)
-img:Text "yreq" { x=ix(2+2.1), y=iy(2), fill="white" }
 
-img:Text "bang"  {transform=("translate(%d, %d) rotate(45)"):format(ix(1.0), iy(3.5))} { fill = "white" }
-img:Text "ninja" {transform=("translate(%d, %d) rotate(45)"):format(ix(0.5), iy(4.0))} { fill = "darkgrey" }
+fig {
+    text "yreq" { x=ix(2+2.1), y=iy(2), fill="white" },
+    text "bang"  {transform=("translate(%d, %d) rotate(45)"):format(ix(1.0), iy(3.5))} { fill = "white" },
+    text "ninja" {transform=("translate(%d, %d) rotate(45)"):format(ix(0.5), iy(4.0))} { fill = "darkgrey" },
+}

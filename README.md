@@ -1,4 +1,6 @@
-# Disclaimer
+# Fizz Buzz - LuaX demo
+
+## Disclaimer
 
 This document is not about
 [Fizzbuzz](https://en.wikipedia.org/wiki/Fizz_buzz). This document is a
@@ -6,7 +8,7 @@ suggestion to simplify the build process of software projects, a demo of
 an **homogeneous and consistent** development and documentation
 environment. Fizzbuzz is just an application example.
 
-# Links
+## Links
 
 - [fizzbuzz_slideshow.pdf](https://codeberg.org/cdsoft/FizzBuzz/releases):
   PDF slideshow
@@ -18,7 +20,7 @@ environment. Fizzbuzz is just an application example.
 
 <img src="img/logo.svg" style="width:50.0%" />
 
-# Introduction
+## Introduction
 
 Lots of software projects involve various tools, free as well as
 commercial, to build the software, run the tests, produce the
@@ -43,12 +45,12 @@ To sum up the suggested solution is:
 - a **single data format**
 - and a **reduced set of highly configurable tools**.
 
-# Lua[^1]
+## Lua[^1]
 
 [Lua](https://www.lua.org) is the perfect candidate for both a common
 data format and a script language.
 
-## What is Lua?
+### What is Lua?
 
 Lua is a powerful, efficient, lightweight, embeddable scripting
 language. It supports procedural programming, object-oriented
@@ -62,7 +64,7 @@ virtual machine, and has automatic memory management with incremental
 garbage collection, making it ideal for configuration, scripting, and
 rapid prototyping.
 
-## Why choose Lua?
+### Why choose Lua?
 
 **Lua is a proven, robust language**
 
@@ -119,7 +121,7 @@ license (the well-known MIT license). It may be used for any purpose,
 including commercial purposes, at absolutely no cost. Just download it
 and use it.
 
-# LuaX
+## LuaX
 
 [LuaX](https://codeberg.org/cdsoft/luax) is a Lua interpreter and REPL
 based on Lua 5.4, augmented with some useful packages. LuaX can also
@@ -182,7 +184,7 @@ LuaX comes with a standard Lua interpreter and provides some libraries
 
 More information here: <https://codeberg.org/cdsoft/luax>
 
-# Scripting with LuaX
+## Scripting with LuaX
 
 LuaX can be used as a general programming language. There are plenty of
 [good documentations for Lua](https://www.lua.org/docs.html) and
@@ -208,7 +210,7 @@ Typical usages are:
 The next chapters present some tools written in Lua/LuaX or using Lua as
 a scripting engine.
 
-# Bang
+## Bang
 
 [Bang](https://codeberg.org/cdsoft/luax) is a ninja file generator
 scriptable in LuaX, a Lua interpreter with a bunch of useful modules
@@ -240,7 +242,7 @@ to:
 Bang is currently used to build bang itself but also LuaX and some
 projects available on [Codeberg](https://codeberg.org/cdsoft).
 
-# Ypp
+## Ypp
 
 Ypp is a minimalist and generic text preprocessor using Lua macros.
 
@@ -259,7 +261,7 @@ macros with their results.
 
 Some expression do not require parentheses (function calls).
 
-## Example
+### Example
 
 ``` markdown
 $$
@@ -303,7 +305,7 @@ becomes
 > \sum_{i=1}^{1000} i^2 = 333833500
 > ```
 
-# Yreq
+## Yreq
 
 Yreq is a minimalist requirement plugin for ypp. It helps to define
 requirements (named *tags*) and references in documents, source code,
@@ -320,7 +322,7 @@ Tag names are nouns that describe the nature of the tag (a
 specification, a source code, a test…) and ref names are verbs that
 define the relation between tags.
 
-## Configuration example
+### Configuration example
 
 `config.lua`:
 
@@ -337,7 +339,7 @@ yreq.refs {
 }
 ```
 
-## Document example with tags and refs
+### Document example with tags and refs
 
 <table>
 <colgroup>
@@ -368,7 +370,7 @@ class="sourceCode lua"><code class="sourceCode lua"><span id="cb2-1"><a href="#c
 </tbody>
 </table>
 
-## Usage
+### Usage
 
 Yeq is a ypp plugin. It can be loaded by ypp with the `-l`. If
 `$PREFIX/lib` is not in `LUA_PATH`, the library path can be given to ypp
@@ -380,7 +382,7 @@ ypp -p $PREFIX/lib -l yreq -l config file.md -o output.md
 
 Bang may also be a nice option to write a more complex build system.
 
-# Pandoc
+## Pandoc
 
 [Pandoc](https://pandoc.org/) is a swiss-army knife to convert from and
 to a bunch of document formats.
@@ -398,7 +400,7 @@ Pandoc has an excellent documentation:
 Fizzbuzz uses pandoc Lua filters with Panda (see next chapter) which
 bundles some useful filters in a single script.
 
-# Panda
+## Panda
 
 Panda is a [Pandoc Lua filter](https://pandoc.org/lua-filters.html) that
 works on internal Pandoc’s AST.
@@ -413,7 +415,7 @@ It provides several interesting features:
 
 The documentation of Panda is here: <https://codeberg.org/cdsoft/panda>
 
-## Examples
+### Examples
 
 There are lots of examples in the documentation of panda. We will see
 here two of them.
@@ -489,12 +491,12 @@ code blocks and are replaced by an image by panda.
 
 <img src="./img/example-gnuplot.svg" style="width:67.0%" />
 
-# Fizzbuzz
+## Fizzbuzz
 
 Fizzbuzz is a concrete example of the usage of LuaX/ypp/pandoc/panda to
 specify and test a software.
 
-## Specification
+### Specification
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz):
 
@@ -519,7 +521,7 @@ or `n` for any positive integer `n`.
         \end{cases}
 ```
 
-### Requirements
+#### Requirements
 
 [<span id="tag-SPEC_API">\[*spec*: SPEC_API\]</span>](#cov-tag-SPEC_API)
 fizzbuzz command line argument
@@ -566,7 +568,7 @@ n when n is a not a multiple of 3 and 5
 
 If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 
-### Examples
+#### Examples
 
 | n   | fizzbuzz(n) | n   | fizzbuzz(n) | n   | fizzbuzz(n) | n   | fizzbuzz(n) |
 |-----|-------------|-----|-------------|-----|-------------|-----|-------------|
@@ -576,9 +578,9 @@ If `n` is a multiple of 3 and 5, then `fizzbuzz(n)` is `"fizzbuzz"`.
 | 4   | 4           | 9   | fizz        | 14  | 14          | 19  | 19          |
 | 5   | buzz        | 10  | buzz        | 15  | fizzbuzz    | 20  | buzz        |
 
-## Implementation
+### Implementation
 
-### Lua implementation
+#### Lua implementation
 
 The Lua implementation of Fizzbuzz is based on a functional style, using
 function compositions.
@@ -605,7 +607,7 @@ local function fizzbuzz(n)
 end
 ```
 
-### C implementation
+#### C implementation
 
 The C implementation of Fizzbuzz uses an array of string formats used by
 `sprintf` to produce `"fizz"`, `"buzz"`, `"fizzbuzz"` or the function
@@ -630,7 +632,7 @@ const char *fizzbuzz(int i, char *s)
 }
 ```
 
-### Haskell implementation
+#### Haskell implementation
 
 The Haskell implementation of Fizzbuzz builds infinite lists of fizzes,
 buzzes and integers.
@@ -661,14 +663,14 @@ fizzbuzz = zipWith3 combine fizzes buzzes ns
         combine f b n = fromMaybe n (f<>b)
 ```
 
-## Tests
+### Tests
 
 The results of the Fizzbuzz executables are checked by the test script
 `fizzbuzz_test.lua`. This script check the fizzbuzz results and produces
 a Lua table with the test results. This script will later be used to
 build the test reports.
 
-### Test plan
+#### Test plan
 
 Each fizzbuzz implementation is executed (with 50 values). The results
 are checked by `fizzbuzz_test.lua` and stored in a Lua table.
@@ -727,9 +729,9 @@ All non multiples of 3 and 5 are themselves.
 The result of this test is recorded in the `valid_numbers` field of the
 test result table.
 
-## Test reports
+### Test reports
 
-### Lua implementation
+#### Lua implementation
 
 The Lua fizzbuzz function returns:
 
@@ -749,7 +751,7 @@ fizzbuzz, 31, 32, fizz, 34, buzz, fizz, 37, 38, fizz, buzz, 41, fizz,
 
 **Summary**: 5 / 5 tests passed
 
-### C implementation
+#### C implementation
 
 The C fizzbuzz function returns:
 
@@ -769,7 +771,7 @@ fizzbuzz, 31, 32, fizz, 34, buzz, fizz, 37, 38, fizz, buzz, 41, fizz,
 
 **Summary**: 5 / 5 tests passed
 
-### Haskell implementation
+#### Haskell implementation
 
 The Haskell fizzbuzz function returns:
 
@@ -789,7 +791,7 @@ buzz, 29, fizz, 31, buzz, fizz, 34, 35, fizzbuzz, 37, 38, fizz, buzz,
 
 **Summary**: 1 / 5 tests passed
 
-### Lua / C / Haskell comparison
+#### Lua / C / Haskell comparison
 
 | n   | Lua      | C        | Haskell  | Comparison |
 |-----|----------|----------|----------|------------|
@@ -844,7 +846,7 @@ buzz, 29, fizz, 31, buzz, fizz, 34, 35, fizzbuzz, 37, 38, fizz, buzz,
 | 49  | 49       | 49       | 49       | *OK*       |
 | 50  | buzz     | buzz     | 50       | **FAIL**   |
 
-## Coverage matrix
+### Coverage matrix
 
 <table style="width:100%;">
 <colgroup>
@@ -1181,7 +1183,7 @@ integral values</div></td>
 </tbody>
 </table>
 
-# References
+## References
 
 [**Fizzbuzz repository**](https://codeberg.org/cdsoft/fizzbuzz):
 <https://codeberg.org/cdsoft/fizzbuzz>
