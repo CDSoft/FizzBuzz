@@ -287,7 +287,7 @@ Macros can also define variables reusable later by other macros.
 ]]
 ```
 
-defines `N` ($`N = 1000`$) which can be read in a Lua expression or with
+defines `N` (N = 1000) which can be read in a Lua expression or with
 `@N` and `sumsq` which computes the sum of squares.
 
 Then

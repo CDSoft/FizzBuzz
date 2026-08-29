@@ -109,7 +109,7 @@ local html_flags = {
     "--to html5",
     --"--css", "$$PANDOC_USER_DATA_DIRECTORY/panam.css",
     "--embed-resources --standalone",
-    "--mathml",
+    "--math-method=mathml",
 }
 
 rule "panda_html" {
@@ -130,7 +130,7 @@ rule "panda_html" {
 local pdf_flags = {
     pandoc_flags,
     "--number-sections",
-    "--highlight-style tango",
+    "--syntax-highlighting tango",
     "--top-level-division=chapter",
 }
 
@@ -152,7 +152,7 @@ local markdown_flags = {
     pandoc_flags,
     "--to gfm",
     "--number-sections",
-    "--highlight-style tango",
+    "--syntax-highlighting tango",
     "--top-level-division=chapter",
 }
 

@@ -300,7 +300,7 @@ Macros can also define variables reusable later by other macros.
     function sumsq(n) return F.range(n):map(sq):sum() end
 ]]
 
-defines `N` ($N = @N$) which can be read in a Lua expression or with @q"`@N`"
+defines `N` (N = @N) which can be read in a Lua expression or with `@q"@N"`
 and `sumsq` which computes the sum of squares.
 
 Then
